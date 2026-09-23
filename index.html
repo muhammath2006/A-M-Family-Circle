@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -23,230 +24,739 @@
       --node-stroke: #cbd5e1;
     }
 
-    [data-theme="dark"] {
-      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
-      --bg-radial-1: rgba(14, 165, 233, 0.15);
-      --bg-radial-2: rgba(168, 85, 247, 0.15);
-      --card-bg: rgba(30, 41, 59, 0.75);
-      --card-border: #334155;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --canvas-bg: #0b1329;
-      --canvas-dot: #1e293b;
-      --node-bg: #1e293b;
-      --node-stroke: #475569;
-    }
+```
+[data-theme="dark"] {
+  --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+  --bg-radial-1: rgba(14, 165, 233, 0.15);
+  --bg-radial-2: rgba(168, 85, 247, 0.15);
+  --card-bg: rgba(30, 41, 59, 0.75);
+  --card-border: #334155;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --canvas-bg: #0b1329;
+  --canvas-dot: #1e293b;
+  --node-bg: #1e293b;
+  --node-stroke: #475569;
+}
 
-    * { box-sizing: border-box; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+* {
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
 
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--text-main);
-      background-image: 
-        radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
-        radial-gradient(circle at 90% 15%, var(--bg-radial-2) 0%, transparent 45%),
-        var(--bg-gradient);
-      background-attachment: fixed;
-      color: var(--text-main);
-      margin: 0;
-      padding: 32px 16px 48px 16px;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--text-main);
+  background-image:
+    radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
+    radial-gradient(circle at 90% 15%, var(--bg-radial-2) 0%, transparent 45%),
+    var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-main);
+  margin: 0;
+  padding: 32px 16px 48px 16px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
 
-    .app-container { width: 100%; max-width: 580px; margin: 0 auto; padding: 12px 0; }
+.app-container {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 12px 0;
+}
 
-    .header { text-align: center; margin-bottom: 20px; }
-    .header h2 { 
-      font-size: 1.8rem; font-weight: 800; margin: 0 0 6px 0; letter-spacing: -0.02em;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .header p { color: var(--text-muted); font-size: 0.95rem; margin: 0 0 16px 0; }
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-    .admin-bar { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-    
-    .btn-theme-toggle, .btn-admin, .btn-nav-toggle, .btn-download {
-      background: var(--card-bg); color: var(--text-main); border: 1.5px solid var(--card-border);
-      padding: 6px 14px; border-radius: 30px; font-size: 0.82rem; font-weight: 700;
-      cursor: pointer; backdrop-filter: blur(8px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 6px; font-family: inherit;
-    }
-    .btn-theme-toggle:hover, .btn-nav-toggle:hover, .btn-download:hover { border-color: #0ea5e9; color: #0ea5e9; transform: translateY(-1px); }
-    .btn-admin { color: #0ea5e9; border-color: #0ea5e9; }
-    .btn-admin.unlocked { background: var(--success-color); border-color: var(--success-color); color: #ffffff; }
+.header h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.02em;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    .stats-bar { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-    .stat-badge {
-      background: var(--card-bg); padding: 6px 12px; border-radius: 14px;
-      font-size: 0.8rem; font-weight: 600; color: var(--text-main);
-      border: 1px solid var(--card-border); backdrop-filter: blur(8px); display: flex; align-items: center; gap: 6px;
-    }
-    .stat-badge .count { background: rgba(14, 165, 233, 0.15); color: #0ea5e9; padding: 2px 8px; border-radius: 8px; font-weight: 800; }
+.header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0 0 16px 0;
+}
 
-    .search-box { width: 100%; margin-bottom: 10px; position: relative; }
-    .search-input {
-      width: 100%; padding: 12px 16px; border-radius: 14px; border: 1px solid var(--card-border);
-      font-size: 0.9rem; font-family: inherit; background: var(--card-bg); color: var(--text-main);
-      backdrop-filter: blur(10px); box-shadow: 0 4px 12px rgba(0,0,0,0.03); outline: none; transition: border-color 0.2s ease;
-    }
+.admin-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
 
-    .dropdown-filters { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-    .filter-select {
-      flex: 1; min-width: 110px; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--card-border);
-      font-size: 0.78rem; font-weight: 600; color: var(--text-main); background: var(--card-bg);
-      backdrop-filter: blur(10px); outline: none; font-family: inherit; cursor: pointer; text-overflow: ellipsis;
-    }
+.btn-theme-toggle,
+.btn-admin,
+.btn-nav-toggle,
+.btn-download {
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1.5px solid var(--card-border);
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+}
 
-    .status-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
-    .badge-living { background: rgba(14, 165, 233, 0.1); color: #0284c7; border: 1px solid rgba(14, 165, 233, 0.2); }
-    .badge-deceased { background: rgba(100, 116, 139, 0.15); color: var(--text-muted); border: 1px solid rgba(100, 116, 139, 0.2); }
-    .badge-family-count { background: rgba(99, 102, 241, 0.12); color: #6366f1; border: 1px solid rgba(99, 102, 241, 0.2); font-weight: 700; }
+.btn-theme-toggle:hover,
+.btn-nav-toggle:hover,
+.btn-download:hover {
+  border-color: #0ea5e9;
+  color: #0ea5e9;
+  transform: translateY(-1px);
+}
 
-    .card-actions { display: none; gap: 6px; margin-top: 12px; justify-content: center; flex-wrap: wrap; width: 100%; }
-    .btn-action { background: var(--card-bg); color: var(--text-muted); border: 1px solid var(--card-border); padding: 6px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 600; cursor: pointer; font-family: inherit; }
-    .btn-action:hover { background: #0ea5e9; color: #ffffff; border-color: #0ea5e9; }
-    .btn-delete:hover { background: var(--danger-color) !important; border-color: var(--danger-color) !important; color: #ffffff !important; }
+.btn-admin {
+  color: #0ea5e9;
+  border-color: #0ea5e9;
+}
 
-    .avatar-circle {
-      width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 0.95rem; color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1); flex-shrink: 0; margin: 0 auto;
-    }
+.btn-admin.unlocked {
+  background: var(--success-color);
+  border-color: var(--success-color);
+  color: #ffffff;
+}
 
-    .cards-view { display: none; }
-    .cards-view.active { display: block; }
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
 
-    .breadcrumb-wrapper {
-      background: var(--card-bg); backdrop-filter: blur(12px);
-      border: 1px solid var(--card-border); border-radius: 16px; padding: 10px 14px;
-      margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-      display: flex; align-items: center; gap: 6px; overflow-x: auto; white-space: nowrap;
-      scrollbar-width: none; -ms-overflow-style: none;
-    }
-    .breadcrumb-wrapper::-webkit-scrollbar { display: none; }
+.stat-badge {
+  background: var(--card-bg);
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
-    .crumb {
-      font-size: 0.85rem; font-weight: 700; color: #0ea5e9; cursor: pointer;
-      padding: 4px 8px; border-radius: 8px; transition: background 0.2s ease;
-    }
-    .crumb-separator { color: var(--text-muted); font-weight: 700; font-size: 0.8rem; }
-    .crumb.active { color: var(--text-main); cursor: default; }
+.stat-badge .count {
+  background: rgba(14, 165, 233, 0.15);
+  color: #0ea5e9;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 800;
+}
 
-    .focus-card-wrapper {
-      background: var(--accent-gradient); padding: 3px; border-radius: 22px;
-      box-shadow: 0 15px 35px -10px rgba(14, 165, 233, 0.3); margin-bottom: 20px;
-    }
-    .focus-card-main { background: var(--card-bg); backdrop-filter: blur(16px); border-radius: 19px; padding: 16px; text-align: center; }
-    .focus-header-badge { display: flex; justify-content: center; margin-bottom: 14px; }
-    
-    .partners-container { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; align-items: stretch; }
-    .partner-col {
-      flex: 1; min-width: 220px; background: rgba(255,255,255,0.03); border: 1px solid var(--card-border);
-      border-radius: 16px; padding: 16px; text-align: center; display: flex;
-      flex-direction: column; justify-content: space-between; align-items: center;
-    }
-    .partner-top-section { width: 100%; display: flex; flex-direction: column; align-items: center; }
-    .partner-col.empty-spouse {
-      border: 2px dashed var(--card-border); background: transparent;
-      display: flex; align-items: center; justify-content: center; min-height: 160px;
-    }
-    .partner-col .p-name { font-size: 1.15rem; font-weight: 800; color: var(--text-main); margin: 8px 0 4px 0; }
+.search-box {
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+}
 
-    .detail-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; text-align: left; width: 100%; }
-    .detail-item { font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; background: var(--card-bg); padding: 6px 10px; border-radius: 8px; border: 1px solid var(--card-border); }
-    .hidden-check-badge { color: var(--success-color); font-weight: 800; display: inline-flex; align-items: center; gap: 2px; }
+.search-input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: var(--card-bg);
+  color: var(--text-main);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
 
-    .rel-section { margin-top: 24px; padding-bottom: 12px; }
-    .section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; justify-content: space-between; align-items: center; }
+.dropdown-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
 
-    .member-card {
-      background: var(--card-bg); backdrop-filter: blur(10px); border: 1px solid var(--card-border); border-radius: 16px;
-      padding: 12px 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; gap: 12px;
-      cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-    .member-card:hover { transform: translateY(-3px) scale(1.01); border-color: #0ea5e9; box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15); }
-    .member-info { flex: 1; }
-    .member-info .c-name { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
-    .member-info .c-sub { font-size: 0.78rem; color: var(--text-muted); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filter-select {
+  flex: 1;
+  min-width: 110px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  outline: none;
+  font-family: inherit;
+  cursor: pointer;
+  text-overflow: ellipsis;
+}
 
-    .canvas-view { display: none; }
-    .canvas-view.active { display: block; }
-    
-    .canvas-wrapper {
-      width: 100%; height: 620px; background: var(--canvas-bg);
-      background-image: radial-gradient(var(--canvas-dot) 1.2px, transparent 1.2px);
-      background-size: 24px 24px; border: 1px solid var(--card-border);
-      border-radius: 20px; position: relative; overflow: hidden;
-      box-shadow: inset 0 2px 12px rgba(0,0,0,0.06); touch-action: none; margin-bottom: 16px;
-      cursor: grab;
-    }
-    .canvas-wrapper:active { cursor: grabbing; }
-    
-    .canvas-controls { position: absolute; bottom: 16px; right: 16px; display: flex; gap: 8px; z-index: 10; flex-wrap: wrap; justify-content: flex-end; }
-    
-    .btn-zoom {
-      padding: 0 12px; height: 38px; border-radius: 12px; background: var(--card-bg);
-      border: 1px solid var(--card-border); font-weight: 800; font-size: 0.9rem; color: var(--text-main);
-      cursor: pointer; backdrop-filter: blur(8px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; font-family: inherit;
-    }
-    .btn-zoom:hover { background: #0ea5e9; border-color: #0ea5e9; color: #ffffff; }
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
 
-    .svg-node-group { cursor: pointer; }
-    .svg-node-rect {
-      fill: var(--node-bg); stroke: var(--node-stroke); stroke-width: 1.5px; rx: 14px; ry: 14px;
-      filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.06));
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .svg-node-group:hover .svg-node-rect {
-      stroke: #0ea5e9 !important; stroke-width: 2.5px;
-      filter: drop-shadow(0px 8px 22px rgba(14, 165, 233, 0.3));
-    }
-    .svg-node-rect.is-expanded { stroke: #6366f1; stroke-width: 2px; }
+.badge-living {
+  background: rgba(14, 165, 233, 0.1);
+  color: #0284c7;
+  border: 1px solid rgba(14, 165, 233, 0.2);
+}
 
-    .svg-line {
-      stroke: #94a3b8; stroke-width: 2px; fill: none; opacity: 0.6;
-      transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
-    }
-    
-    .svg-node-group:hover ~ .svg-line,
-    .svg-node-group:hover .svg-line {
-      stroke: #0ea5e9; stroke-width: 3px; opacity: 1;
-    }
+.badge-deceased {
+  background: rgba(100, 116, 139, 0.15);
+  color: var(--text-muted);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
 
-    .svg-avatar-bg { font-weight: 800; font-size: 11px; fill: #ffffff; text-anchor: middle; dominant-baseline: central; }
-    .svg-text-name { font-size: 12px; font-weight: 800; fill: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; }
-    .svg-text-sub { font-size: 10px; font-weight: 600; fill: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif; }
+.badge-family-count {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  font-weight: 700;
+}
 
-    .search-results-view { display: none; }
-    .search-results-view.active { display: block; }
+.card-actions {
+  display: none;
+  gap: 6px;
+  margin-top: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
 
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(6px); align-items: center; justify-content: center; z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
-    .modal-overlay.show { display: flex; opacity: 1; }
-    .modal-box { background: var(--node-bg); color: var(--text-main); padding: 24px; border-radius: 20px; width: 90%; max-width: 420px; border: 1px solid var(--card-border); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4); max-height: 90vh; overflow-y: auto; }
-    .modal-box h3 { margin: 0 0 16px 0; color: var(--text-main); font-size: 1.15rem; font-weight: 700; }
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
-    .form-group input, .form-group select { width: 100%; padding: 10px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--card-border); border-radius: 8px; font-size: 0.9rem; font-family: inherit; }
-    .field-error { color: var(--danger-color); font-size: 0.75rem; display: none; margin-top: 4px; }
-    .modal-buttons { display: flex; gap: 10px; margin-top: 18px; }
-    .btn-submit { flex: 1; background: var(--accent-gradient); color: #ffffff; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-    .btn-cancel { background: var(--card-bg); color: var(--text-muted); border: 1px solid var(--card-border); padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; }
-    
-    .duplicate-prompt {
-      display: none; background: rgba(14, 165, 233, 0.1); border: 1px solid rgba(14, 165, 233, 0.3); border-radius: 12px;
-      padding: 12px; margin-top: 10px; font-size: 0.85rem; color: #0ea5e9;
-    }
+.btn-action {
+  background: var(--card-bg);
+  color: var(--text-muted);
+  border: 1px solid var(--card-border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
 
-    .image-preview-modal { text-align: center; max-width: 500px; }
-    .image-preview-modal img { max-width: 100%; height: auto; border-radius: 12px; margin: 12px 0; border: 1px solid var(--card-border); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-action:hover {
+  background: #0ea5e9;
+  color: #ffffff;
+  border-color: #0ea5e9;
+}
+
+.btn-delete:hover {
+  background: var(--danger-color) !important;
+  border-color: var(--danger-color) !important;
+  color: #ffffff !important;
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+  margin: 0 auto;
+}
+
+.cards-view {
+  display: none;
+}
+
+.cards-view.active {
+  display: block;
+}
+
+.breadcrumb-wrapper {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.breadcrumb-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.crumb {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0ea5e9;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.crumb-separator {
+  color: var(--text-muted);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.crumb.active {
+  color: var(--text-main);
+  cursor: default;
+}
+
+.focus-card-wrapper {
+  background: var(--accent-gradient);
+  padding: 3px;
+  border-radius: 22px;
+  box-shadow: 0 15px 35px -10px rgba(14, 165, 233, 0.3);
+  margin-bottom: 20px;
+}
+
+.focus-card-main {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border-radius: 19px;
+  padding: 16px;
+  text-align: center;
+}
+
+.focus-header-badge {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.partners-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.partner-col {
+  flex: 1;
+  min-width: 220px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.partner-top-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.partner-col.empty-spouse {
+  border: 2px dashed var(--card-border);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+.partner-col .p-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 8px 0 4px 0;
+}
+
+.detail-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  width: 100%;
+}
+
+.detail-item {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card-bg);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+}
+
+.hidden-check-badge {
+  color: var(--success-color);
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rel-section {
+  margin-top: 24px;
+  padding-bottom: 12px;
+}
+
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.member-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.member-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: #0ea5e9;
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
+}
+
+.member-info {
+  flex: 1;
+}
+
+.member-info .c-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.member-info .c-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.canvas-view {
+  display: none;
+}
+
+.canvas-view.active {
+  display: block;
+}
+
+.canvas-wrapper {
+  width: 100%;
+  height: 620px;
+  background: var(--canvas-bg);
+  background-image: radial-gradient(var(--canvas-dot) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 12px rgba(0,0,0,0.06);
+  touch-action: none;
+  margin-bottom: 16px;
+  cursor: grab;
+}
+
+.canvas-wrapper:active {
+  cursor: grabbing;
+}
+
+.canvas-controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.btn-zoom {
+  padding: 0 12px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-zoom:hover {
+  background: #0ea5e9;
+  border-color: #0ea5e9;
+  color: #ffffff;
+}
+
+.svg-node-group {
+  cursor: pointer;
+}
+
+.svg-node-rect {
+  fill: var(--node-bg);
+  stroke: var(--node-stroke);
+  stroke-width: 1.5px;
+  rx: 14px;
+  ry: 14px;
+  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.06));
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.svg-node-group:hover .svg-node-rect {
+  stroke: #0ea5e9 !important;
+  stroke-width: 2.5px;
+  filter: drop-shadow(0px 8px 22px rgba(14, 165, 233, 0.3));
+}
+
+.svg-node-rect.is-expanded {
+  stroke: #6366f1;
+  stroke-width: 2px;
+}
+
+.svg-line {
+  stroke: #94a3b8;
+  stroke-width: 2px;
+  fill: none;
+  opacity: 0.6;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+}
+
+.svg-node-group:hover ~ .svg-line,
+.svg-node-group:hover .svg-line {
+  stroke: #0ea5e9;
+  stroke-width: 3px;
+  opacity: 1;
+}
+
+.svg-avatar-bg {
+  font-weight: 800;
+  font-size: 11px;
+  fill: #ffffff;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.svg-text-name {
+  font-size: 12px;
+  font-weight: 800;
+  fill: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.svg-text-sub {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--text-muted);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.search-results-view {
+  display: none;
+}
+
+.search-results-view.active {
+  display: block;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-box {
+  background: var(--node-bg);
+  color: var(--text-main);
+  padding: 24px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-box h3 {
+  margin: 0 0 16px 0;
+  color: var(--text-main);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.field-error {
+  color: var(--danger-color);
+  font-size: 0.75rem;
+  display: none;
+  margin-top: 4px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-submit {
+  flex: 1;
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: var(--card-bg);
+  color: var(--text-muted);
+  border: 1px solid var(--card-border);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.duplicate-prompt {
+  display: none;
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #0ea5e9;
+}
+
+.image-preview-modal {
+  text-align: center;
+  max-width: 500px;
+}
+
+.image-preview-modal img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 12px 0;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+```
+
   </style>
 </head>
+
 <body>
 
 <div class="app-container">
@@ -254,465 +764,484 @@
   <div class="header">
     <h2>💛 A&amp;M Family Circle</h2>
     <p>Mobile Family Directory</p>
-    
-    <div class="admin-bar">
-      <button class="btn-theme-toggle" onclick="toggleTheme()">
-        <span id="themeIcon">🌙</span> Dark Mode
-      </button>
-      <button class="btn-nav-toggle" id="viewToggleBtn" onclick="toggleViewMode()">🌐 Canvas View</button>
-      <button id="adminToggleBtn" class="btn-admin" onclick="triggerPinModal()">
-        🔒 Unlock
-      </button>
-    </div>
 
-    <div id="statsContainer" class="stats-bar"></div>
+```
+<div class="admin-bar">
+  <button class="btn-theme-toggle" onclick="toggleTheme()">
+    <span id="themeIcon">🌙</span> Dark Mode
+  </button>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search member, city, profession, or age..." oninput="handleSearch(this.value)">
-    </div>
+  <button class="btn-nav-toggle" id="viewToggleBtn" onclick="toggleViewMode()">
+    🌐 Canvas View
+  </button>
 
-    <div class="dropdown-filters">
-      <select id="statusFilter" class="filter-select" onchange="handleDropdownFilter()">
-        <option value="ALL">⚪ All Statuses</option>
-        <option value="LIVING">🟢 Living</option>
-        <option value="DECEASED">🕊️ Deceased</option>
-      </select>
-      <select id="locationFilter" class="filter-select" onchange="handleDropdownFilter()">
-        <option value="ALL">📍 All Locations</option>
-      </select>
-      <select id="professionFilter" class="filter-select" onchange="handleDropdownFilter()">
-        <option value="ALL">💼 All Professions</option>
-      </select>
-    </div>
+  <button id="adminToggleBtn" class="btn-admin" onclick="triggerPinModal()">
+    🔒 Unlock
+  </button>
+</div>
+
+<div id="statsContainer" class="stats-bar"></div>
+
+<div class="search-box">
+  <input
+    type="text"
+    id="searchInput"
+    class="search-input"
+    placeholder="🔍 Search member, city, profession, or age..."
+    oninput="handleSearch(this.value)"
+  >
+</div>
+
+<div class="dropdown-filters">
+  <select id="statusFilter" class="filter-select" onchange="handleDropdownFilter()">
+    <option value="ALL">⚪ All Statuses</option>
+    <option value="LIVING">🟢 Living</option>
+    <option value="DECEASED">🕊️ Deceased</option>
+  </select>
+
+  <select id="locationFilter" class="filter-select" onchange="handleDropdownFilter()">
+    <option value="ALL">📍 All Locations</option>
+  </select>
+
+  <select id="professionFilter" class="filter-select" onchange="handleDropdownFilter()">
+    <option value="ALL">💼 All Professions</option>
+  </select>
+</div>
+```
+
   </div>
 
   <div id="searchResultsView" class="search-results-view">
     <div id="searchResultsContainer"></div>
   </div>
 
-  <!-- VIEW 1: PROFILE CARDS & BREADCRUMBS -->
   <div id="cardsView" class="cards-view active">
     <div class="breadcrumb-wrapper" id="breadcrumbContainer"></div>
-    <div id="focusContainer"></div>
 
-    <div class="rel-section">
-      <div class="section-title">
-        <span>Children / Next Gen</span>
-        <button id="addChildBtn" class="btn-action" style="display:none; background: #0ea5e9; color:#fff;" onclick="openAddModal('Child')">+ Add Child</button>
-      </div>
-      <div id="childrenContainer"></div>
-    </div>
+```
+<div id="focusContainer"></div>
+
+<div class="rel-section">
+  <div class="section-title">
+    <span>Children / Next Gen</span>
+
+    <button
+      id="addChildBtn"
+      class="btn-action"
+      style="display:none; background:#0ea5e9; color:#fff;"
+      onclick="openAddModal('Child')"
+    >
+      + Add Child
+    </button>
   </div>
 
-  <!-- VIEW 2: STYLED HORIZONTAL EXPANDABLE SVG CANVAS -->
+  <div id="childrenContainer"></div>
+</div>
+```
+
+  </div>
+
   <div id="canvasView" class="canvas-view">
     <div class="canvas-wrapper" id="canvasContainer">
-      <div class="canvas-controls">
-        <button class="btn-zoom" onclick="downloadTreeAsImage()">🖼️ Download Image</button>
-        <button class="btn-zoom" id="compactToggleBtn" onclick="toggleCompactCanvas()">🎛️ Compact Mode</button>
-        <button class="btn-zoom" onclick="zoomCanvas(1.2)">+</button>
-        <button class="btn-zoom" onclick="zoomCanvas(0.8)">-</button>
-        <button class="btn-zoom" onclick="resetCanvasTransform()">🎯</button>
-      </div>
-      <svg id="svgTree" width="100%" height="100%">
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#0ea5e9" />
-            <stop offset="100%" stop-color="#6366f1" />
-          </linearGradient>
-        </defs>
-        <g id="svgGroup"></g>
-      </svg>
-    </div>
+
+```
+  <div class="canvas-controls">
+    <button class="btn-zoom" onclick="downloadTreeAsImage()">🖼️ Download Image</button>
+    <button class="btn-zoom" id="compactToggleBtn" onclick="toggleCompactCanvas()">🎛️ Compact Mode</button>
+    <button class="btn-zoom" onclick="zoomCanvas(1.2)">+</button>
+    <button class="btn-zoom" onclick="zoomCanvas(0.8)">-</button>
+    <button class="btn-zoom" onclick="resetCanvasTransform()">🎯</button>
+  </div>
+
+  <svg id="svgTree" width="100%" height="100%">
+    <defs>
+      <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#0ea5e9" />
+        <stop offset="100%" stop-color="#6366f1" />
+      </linearGradient>
+    </defs>
+
+    <g id="svgGroup"></g>
+  </svg>
+</div>
+```
+
   </div>
 
 </div>
 
-<!-- Mobile Image Preview Fallback Modal -->
 <div class="modal-overlay" id="mobilePreviewModal">
   <div class="modal-box image-preview-modal">
     <h3>🖼️ Family Tree Ready</h3>
-    <p style="font-size:0.82rem; color:var(--text-muted); margin: 0 0 8px 0;">Press and hold the image below to save it to your photos or files:</p>
-    <div id="previewImageContainer"></div>
-    <div class="modal-buttons" style="margin-top:12px;">
-      <button type="button" class="btn-submit" onclick="closeMobilePreviewModal()">Done</button>
-    </div>
+
+```
+<p style="font-size:0.82rem; color:var(--text-muted); margin:0 0 8px 0;">
+  Press and hold the image below to save it to your photos or files:
+</p>
+
+<div id="previewImageContainer"></div>
+
+<div class="modal-buttons" style="margin-top:12px;">
+  <button
+    type="button"
+    class="btn-submit"
+    onclick="closeMobilePreviewModal()"
+  >
+    Done
+  </button>
+</div>
+```
+
   </div>
 </div>
 
-<!-- PIN Modal -->
 <div class="modal-overlay" id="pinModal">
   <div class="modal-box">
     <h3>🔒 Security Check</h3>
-    <div class="form-group">
-      <input type="password" id="pinInput" placeholder="Enter PIN" autocomplete="off" onkeypress="handlePinKeyPress(event)">
-      <div id="pinError" style="color:var(--danger-color); font-size:0.8rem; display:none; margin-top:4px;">❌ Incorrect PIN</div>
-    </div>
-    <div class="modal-buttons">
-      <button type="button" class="btn-cancel" onclick="closePinModal()">Cancel</button>
-      <button type="button" class="btn-submit" onclick="submitPin()">Unlock</button>
-    </div>
+
+```
+<div class="form-group">
+  <input
+    type="password"
+    id="pinInput"
+    placeholder="Enter PIN"
+    autocomplete="off"
+    onkeypress="handlePinKeyPress(event)"
+  >
+
+  <div
+    id="pinError"
+    style="color:var(--danger-color); font-size:0.8rem; display:none; margin-top:4px;"
+  >
+    ❌ Incorrect PIN
   </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
+<div class="modal-buttons">
+  <button type="button" class="btn-cancel" onclick="closePinModal()">
+    Cancel
+  </button>
+
+  <button type="button" class="btn-submit" onclick="submitPin()">
+    Unlock
+  </button>
+</div>
+```
+
+  </div>
+</div>
+
 <div class="modal-overlay" id="confirmModal">
-  <div class="modal-box" style="text-align: center;">
-    <h3 id="confirmTitle">Delete Profile?</h3>
-    <p id="confirmMessage" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;"></p>
-    <div class="modal-buttons">
-      <button type="button" class="btn-cancel" onclick="closeConfirmModal()">Cancel</button>
-      <button type="button" class="btn-submit" style="background: var(--danger-color);" onclick="executeDelete()">Delete</button>
-    </div>
+  <div class="modal-box" style="text-align:center;">
+
+```
+<h3 id="confirmTitle">Delete Profile?</h3>
+
+<p
+  id="confirmMessage"
+  style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;"
+></p>
+
+<div class="modal-buttons">
+  <button type="button" class="btn-cancel" onclick="closeConfirmModal()">
+    Cancel
+  </button>
+
+  <button
+    type="button"
+    class="btn-submit"
+    style="background:var(--danger-color);"
+    onclick="executeDelete()"
+  >
+    Delete
+  </button>
+</div>
+```
+
   </div>
 </div>
 
-<!-- Add/Edit Modal -->
 <div class="modal-overlay" id="addModal">
   <div class="modal-box">
-    <h3 id="modalTitle">Add Family Member</h3>
-    <form id="familyForm" onsubmit="handleFormSubmit(event)">
-      <input type="hidden" id="modalAction">
-      <input type="hidden" id="targetId">
-      <input type="hidden" id="editNodeId">
-      <input type="hidden" id="linkedExistingMemberId" value="">
 
-      <div class="form-group">
-        <label>Full Name *</label>
-        <input type="text" id="fullName" required placeholder="e.g. Ahmed Omer" oninput="checkForDuplicateName(this.value)">
-      </div>
+```
+<h3 id="modalTitle">Add Family Member</h3>
 
-      <div id="duplicatePrompt" class="duplicate-prompt">
-        <div style="font-weight:700; margin-bottom:4px;">Member already exists in directory</div>
-        <div id="dupPromptMsg" style="margin-bottom:8px; font-size:0.8rem;"></div>
-        <div style="display:flex; gap:6px;">
-          <button type="button" class="btn-action" style="background:#0ea5e9; color:#fff;" onclick="chooseLinkExisting()">Link Existing Member</button>
-          <button type="button" class="btn-action" onclick="chooseCreateNewDuplicate()">Create New Person</button>
-        </div>
-      </div>
+<form id="familyForm" onsubmit="handleFormSubmit(event)">
 
-      <div class="form-group" id="relTypeGroup" style="margin-top:10px;">
-        <label>Relationship Type</label>
-        <input type="text" id="relTypeDisplay" readonly style="background: var(--card-bg); color: var(--text-muted);">
-      </div>
+  <input type="hidden" id="modalAction">
+  <input type="hidden" id="targetId">
+  <input type="hidden" id="editNodeId">
+  <input type="hidden" id="linkedExistingMemberId" value="">
 
-      <div class="form-group">
-        <label>Gender *</label>
-        <select id="genderField" required>
-          <option value="">Select Gender</option>
-          <option value="Male">👨 Male</option>
-          <option value="Female">👩 Female</option>
-        </select>
-      </div>
+  <div class="form-group">
+    <label>Full Name *</label>
 
-      <div class="form-group">
-        <label>Status *</label>
-        <select id="statusCategory">
-          <option value="Living">🟢 Living</option>
-          <option value="Deceased">🕊️ Deceased</option>
-        </select>
-      </div>
+    <input
+      type="text"
+      id="fullName"
+      required
+      placeholder="e.g. Ahmed Omer"
+      oninput="checkForDuplicateName(this.value)"
+    >
+  </div>
 
-      <div class="form-group">
-        <label>Age (Years)</label>
-        <input type="number" id="ageField" placeholder="e.g. 28">
-      </div>
+  <div id="duplicatePrompt" class="duplicate-prompt">
 
-      <div class="form-group">
-        <label>Current Location</label>
-        <input type="text" id="locationField" placeholder="e.g. Colombo, Sri Lanka">
-      </div>
+    <div style="font-weight:700; margin-bottom:4px;">
+      Member already exists in directory
+    </div>
 
-      <div class="form-group">
-        <label>Profession / Occupation</label>
-        <input type="text" id="professionField" placeholder="e.g. Software Engineer">
-      </div>
+    <div id="dupPromptMsg" style="margin-bottom:8px; font-size:0.8rem;"></div>
 
-      <div class="form-group">
-        <label>Contact Number (Protected/Masked)</label>
-        <input type="tel" id="contactNumber" placeholder="e.g. +94771234567" oninput="validatePhoneUI(this.value)">
-        <div id="phoneError" class="field-error">⚠️ Invalid phone format (e.g., +94771234567 or 0771234567)</div>
-      </div>
+    <div style="display:flex; gap:6px;">
 
-      <div class="modal-buttons">
-        <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
-        <button type="submit" class="btn-submit" id="modalSubmitBtn">Save Profile</button>
-      </div>
-    </form>
+      <button
+        type="button"
+        class="btn-action"
+        style="background:#0ea5e9; color:#fff;"
+        onclick="chooseLinkExisting()"
+      >
+        Link Existing Member
+      </button>
+
+      <button
+        type="button"
+        class="btn-action"
+        onclick="chooseCreateNewDuplicate()"
+      >
+        Create New Person
+      </button>
+
+    </div>
+  </div>
+
+  <div class="form-group" id="relTypeGroup" style="margin-top:10px;">
+    <label>Relationship Type</label>
+
+    <input
+      type="text"
+      id="relTypeDisplay"
+      readonly
+      style="background:var(--card-bg); color:var(--text-muted);"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Gender *</label>
+
+    <select id="genderField" required>
+      <option value="">Select Gender</option>
+      <option value="Male">👨 Male</option>
+      <option value="Female">👩 Female</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Status *</label>
+
+    <select id="statusCategory">
+      <option value="Living">🟢 Living</option>
+      <option value="Deceased">🕊️ Deceased</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Age (Years)</label>
+
+    <input
+      type="number"
+      id="ageField"
+      placeholder="e.g. 28"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Current Location</label>
+
+    <input
+      type="text"
+      id="locationField"
+      placeholder="e.g. Colombo, Sri Lanka"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Profession / Occupation</label>
+
+    <input
+      type="text"
+      id="professionField"
+      placeholder="e.g. Software Engineer"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Contact Number (Protected/Masked)</label>
+
+    <input
+      type="tel"
+      id="contactNumber"
+      placeholder="e.g. +94771234567"
+      oninput="validatePhoneUI(this.value)"
+    >
+
+    <div id="phoneError" class="field-error">
+      ⚠️ Invalid phone format (e.g., +94771234567 or 0771234567)
+    </div>
+  </div>
+
+  <div class="modal-buttons">
+
+    <button
+      type="button"
+      class="btn-cancel"
+      onclick="closeModal()"
+    >
+      Cancel
+    </button>
+
+    <button
+      type="submit"
+      class="btn-submit"
+      id="modalSubmitBtn"
+    >
+      Save Profile
+    </button>
+
+  </div>
+
+</form>
+```
+
   </div>
 </div>
+
 <script>
-  const APPS_SCRIPT_URL = 'PASTE_YOUR_OWN_APPS_SCRIPT_WEB_APP_URL_HERE';
-  const CACHE_KEY = 'am_family_circle_v1';
-  
-  let userPin = ""; 
-  let lockoutTimer = null;
-  let isAdminUnlocked = false;
-  let isCanvasActive = false;
-  let isCompactCanvas = false;
 
-  let rawTreeData = [];
-  let navHistory = [];
-  let searchQuery = "";
-  let activeStatusFilter = "ALL";
-  let activeLocationFilter = "ALL";
-  let activeProfessionFilter = "ALL";
-  let matchedDuplicateMember = null;
-  let pendingDeleteId = null;
+/* ============================================================
+   GOOGLE APPS SCRIPT BACKEND CONNECTION
+   ============================================================ */
 
-  let expandedNodeIds = new Set();
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbztzoRdLOQICgqHpMcL3ISSMYvh1DQS_CfQFM7cj0YAyVY-KJsQGwGJNb--YHQlI7Or1Q/exec';
 
-  let scale = 1;
-  let translateX = 0;
-  let translateY = 0;
-  let isDragging = false;
-  let startX = 0;
-  let startY = 0;
+const CACHE_KEY = 'am_family_circle_v1';
 
-  const LEVEL_BORDER_COLORS = ['#0ea5e9', '#6366f1', '#a855f7', '#ec4899', '#14b8a6'];
+let userPin = "";
+let lockoutTimer = null;
+let isAdminUnlocked = false;
+let isCanvasActive = false;
+let isCompactCanvas = false;
 
-  try {
-    rawTreeData = JSON.parse(localStorage.getItem(CACHE_KEY) || "[]");
-  } catch (e) {}
+let rawTreeData = [];
+let navHistory = [];
+let searchQuery = "";
+let activeStatusFilter = "ALL";
+let activeLocationFilter = "ALL";
+let activeProfessionFilter = "ALL";
+let matchedDuplicateMember = null;
+let pendingDeleteId = null;
 
-  function getCombinedTileData(m) {
-    const spouse = rawTreeData.find(s => isSpouseRelation(m, s));
-    if (spouse) {
-      return {
-        id: m.id,
-        primary: m,
-        spouse: spouse,
-        combinedName: `${m.name} & ${spouse.name}`,
-        isPair: true
-      };
-    }
-    return {
-      id: m.id,
-      primary: m,
-      spouse: null,
-      combinedName: m.name,
-      isPair: false
-    };
-  }
+let expandedNodeIds = new Set();
 
-  function truncateCanvasText(ctx, text, maxWidth) {
-    if (ctx.measureText(text).width <= maxWidth) return text;
-    let truncated = text;
-    while (truncated.length > 0 && ctx.measureText(truncated + '...').width > maxWidth) {
-      truncated = truncated.substring(0, truncated.length - 1);
-    }
-    return truncated + '...';
-  }
+let scale = 1;
+let translateX = 0;
+let translateY = 0;
+let isDragging = false;
+let startX = 0;
+let startY = 0;
 
-  function downloadTreeAsImage() {
-    if (!rawTreeData || rawTreeData.length === 0) {
-      alert("No family tree data to download.");
-      return;
-    }
+const LEVEL_BORDER_COLORS = [
+  '#0ea5e9',
+  '#6366f1',
+  '#a855f7',
+  '#ec4899',
+  '#14b8a6'
+];
 
-    const dpr = 2;
 
-    const baseNodeWidth = 260;
-    const baseNodeHeight = 60;
-    const baseLevelSpacingX = 300;
-    const baseSiblingSpacingY = 30;
-    const basePadding = 80;
+/* ============================================================
+   LOCAL CACHE
+   ============================================================ */
 
-    const nodeWidth = baseNodeWidth * dpr;
-    const nodeHeight = baseNodeHeight * dpr;
-    const levelSpacingX = baseLevelSpacingX * dpr;
-    const siblingSpacingY = baseSiblingSpacingY * dpr;
-    const padding = basePadding * dpr;
+try {
+  rawTreeData = JSON.parse(
+    localStorage.getItem(CACHE_KEY) || "[]"
+  );
+} catch (e) {
+  rawTreeData = [];
+}
 
-    let levels = {};
-    let processedIds = new Set();
 
-    function traverseFullTree(memberId, level) {
-      const m = rawTreeData.find(x => String(x.id).trim().toLowerCase() === String(memberId).trim().toLowerCase());
-      if (!m || processedIds.has(m.id)) return;
+/* ============================================================
+   HELPER
+   ============================================================ */
 
-      const tile = getCombinedTileData(m);
-      processedIds.add(tile.primary.id);
-      if (tile.spouse) processedIds.add(tile.spouse.id);
+function apiUrl() {
+  return APPS_SCRIPT_URL +
+    (APPS_SCRIPT_URL.includes('?') ? '&' : '?') +
+    'nocache=' + Date.now();
+}
 
-      if (!levels[level]) levels[level] = [];
-      levels[level].push(tile);
 
-      const children = rawTreeData.filter(c => {
-        const cParentId = String(c.parentId).trim().toLowerCase();
-        const mId = String(m.id).trim().toLowerCase();
-        const spouseId = tile.spouse ? String(tile.spouse.id).trim().toLowerCase() : null;
-        const isSpouse = isSpouseRelation(m, c);
-        return (cParentId === mId || (spouseId && cParentId === spouseId)) && !isSpouse;
-      });
+/* ============================================================
+   LOAD DATA FROM GOOGLE APPS SCRIPT
+   ============================================================ */
 
-      children.forEach(c => traverseFullTree(c.id, level + 1));
+function loadDirectoryScript() {
+
+  console.log("Connecting to Google Apps Script...");
+
+  fetch(apiUrl(), {
+    method: 'GET',
+    cache: 'no-store'
+  })
+  .then(response => {
+
+    if (!response.ok) {
+      throw new Error(
+        'HTTP error: ' + response.status
+      );
     }
 
-    const root = rawTreeData.find(m => String(m.parentId).toUpperCase() === 'ROOT' || String(m.relType).toLowerCase().includes('root ancestor')) || 
-                 rawTreeData[0];
+    return response.json();
+  })
+  .then(data => {
 
-    if (root) traverseFullTree(root.id, 0);
+    console.log("Google Apps Script connected.");
+    console.log("Backend data:", data);
 
-    let maxLvl = Math.max(...Object.keys(levels).map(Number));
-    let maxNodesInLvl = Math.max(...Object.values(levels).map(arr => arr.length));
+    window.handleScriptData(data);
+  })
+  .catch(error => {
 
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
+    console.error(
+      "Google Apps Script connection failed:",
+      error
+    );
 
-    canvas.width = (maxLvl + 1) * levelSpacingX + padding * 2;
-    canvas.height = Math.max(600 * dpr, maxNodesInLvl * (nodeHeight + siblingSpacingY) + padding * 2);
+    console.log(
+      "Using locally cached family data if available."
+    );
 
-    ctx.fillStyle = '#0f172a';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    populateDropdownOptions();
+    initializeDirectory();
+  });
+}
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = `bold ${Math.round(24 * dpr)}px "Plus Jakarta Sans", sans-serif`;
-    ctx.fillText('💛 A&M Family Tree', padding, 45 * dpr);
 
-    let coords = {};
-    const centerY = canvas.height / 2;
+/* ============================================================
+   RECEIVE DATA
+   ============================================================ */
 
-    Object.keys(levels).forEach(lvlStr => {
-      const lvl = parseInt(lvlStr);
-      const tiles = levels[lvl];
-      const x = lvl * levelSpacingX + padding;
-      
-      const totalLvlHeight = tiles.length * nodeHeight + (tiles.length - 1) * siblingSpacingY;
-      const startY = centerY - (totalLvlHeight / 2);
+window.handleScriptData = function(data) {
 
-      tiles.forEach((tile, idx) => {
-        const y = startY + idx * (nodeHeight + siblingSpacingY);
-        coords[tile.primary.id] = { x, y, width: nodeWidth, height: nodeHeight, level: lvl, tile };
-        if (tile.spouse) {
-          coords[tile.spouse.id] = coords[tile.primary.id];
-        }
-      });
-    });
+  if (data && data.length > 1) {
 
-    rawTreeData.forEach(m => {
-      if (m.parentId && coords[m.parentId] && coords[m.id] && coords[m.parentId] !== coords[m.id]) {
-        const p = coords[m.parentId];
-        const c = coords[m.id];
-        ctx.beginPath();
-        ctx.moveTo(p.x + nodeWidth, p.y + nodeHeight / 2);
-        ctx.bezierCurveTo(p.x + nodeWidth + (40 * dpr), p.y + nodeHeight / 2, c.x - (40 * dpr), c.y + nodeHeight / 2, c.x, c.y + nodeHeight / 2);
-        ctx.strokeStyle = '#64748b';
-        ctx.lineWidth = 2 * dpr;
-        ctx.stroke();
-      }
-    });
-
-    Object.keys(coords).forEach(id => {
-      const pos = coords[id];
-      const tile = pos.tile;
-      if (tile.primary.id !== id) return;
-
-      const isDeceased = String(tile.primary.status || '').toLowerCase().includes('deceased');
-
-      ctx.fillStyle = '#1e293b';
-      ctx.strokeStyle = LEVEL_BORDER_COLORS[pos.level % LEVEL_BORDER_COLORS.length];
-      ctx.lineWidth = 2 * dpr;
-      ctx.beginPath();
-      ctx.roundRect(pos.x, pos.y, pos.width, pos.height, 12 * dpr);
-      ctx.fill();
-      ctx.stroke();
-
-      ctx.fillStyle = isDeceased ? '#94a3b8' : '#10b981';
-      ctx.beginPath();
-      ctx.arc(pos.x + (18 * dpr), pos.y + pos.height / 2, 6 * dpr, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#f8fafc';
-      ctx.font = `bold ${Math.round(13 * dpr)}px "Plus Jakarta Sans", sans-serif`;
-      const availableTextWidth = pos.width - (42 * dpr);
-      const safeName = truncateCanvasText(ctx, tile.combinedName, availableTextWidth);
-      ctx.fillText(safeName, pos.x + (32 * dpr), pos.y + (26 * dpr));
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = `${Math.round(10 * dpr)}px "Plus Jakarta Sans", sans-serif`;
-      const sub = tile.primary.dob ? (tile.primary.dob.includes('Lived') ? tile.primary.dob : 'Age ' + tile.primary.dob) : (tile.primary.location || tile.primary.status);
-      const safeSub = truncateCanvasText(ctx, sub, availableTextWidth);
-      ctx.fillText(safeSub, pos.x + (32 * dpr), pos.y + (44 * dpr));
-    });
-
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    if (canvas.toBlob) {
-      canvas.toBlob(function(blob) {
-        if (!blob) {
-          alert("Image generation failed.");
-          return;
-        }
-
-        const blobUrl = URL.createObjectURL(blob);
-
-        if (isMobile) {
-          const imgContainer = document.getElementById('previewImageContainer');
-          imgContainer.innerHTML = `<img src="${blobUrl}" alt="A&M Family Tree" />`;
-          document.getElementById('mobilePreviewModal').classList.add('show');
-        } else {
-          const link = document.createElement('a');
-          link.download = 'am_family_tree.png';
-          link.href = blobUrl;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        }
-      }, 'image/png');
-    } else {
-      alert("Your browser does not support image exports.");
-    }
-  }
-
-  function closeMobilePreviewModal() {
-    document.getElementById('mobilePreviewModal').classList.remove('show');
-  }
-
-  function toggleTheme() {
-    const body = document.documentElement;
-    const currentTheme = body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    body.setAttribute('data-theme', newTheme);
-    document.getElementById('themeIcon').innerText = newTheme === 'dark' ? '☀️' : '🌙';
-  }
-
-  function generateAvatarHTML(name) {
-    if (!name) name = 'Unknown';
-    const cleanedName = name.replace(/\(.*?\)/g, '').replace(/\[.*?\]/g, '').trim();
-    const parts = (cleanedName || name).split(/\s+/);
-    let initials = parts[0][0] || '';
-    if (parts.length > 1) initials += parts[parts.length - 1][0] || '';
-    initials = initials.toUpperCase();
-
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    const h1 = Math.abs(hash) % 360;
-    const h2 = (h1 + 40) % 360;
-
-    const bgGradient = `linear-gradient(135deg, hsl(${h1}, 70%, 50%) 0%, hsl(${h2}, 80%, 45%) 100%)`;
-    return `<div class="avatar-circle" style="background: ${bgGradient};">${initials}</div>`;
-  }
-
-  function getAvatarInitialsAndGradient(name) {
-    if (!name) name = 'U';
-    const cleanedName = name.replace(/\(.*?\)/g, '').replace(/\[.*?\]/g, '').trim();
-    const parts = (cleanedName || name).split(/\s+/);
-    let initials = parts[0][0] || '';
-    if (parts.length > 1) initials += parts[parts.length - 1][0] || '';
-    initials = initials.toUpperCase();
-
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    const h1 = Math.abs(hash) % 360;
-    const h2 = (h1 + 40) % 360;
-
-    return { initials, color1: `hsl(${h1}, 70%, 50%)`, color2: `hsl(${h2}, 80%, 45%)` };
-  }
-
-  window.handleScriptData = function(data) {
-    if (data && data.length > 1) {
-      const fetched = data.slice(1).map(row => ({
+    const fetched = data
+      .slice(1)
+      .map(row => ({
         id: String(row[0] || '').trim(),
         name: String(row[1] || '').trim(),
         parentId: String(row[2] || '').trim(),
@@ -724,894 +1253,3495 @@
         spouseId: String(row[8] || '').trim(),
         gender: String(row[9] || '').trim(),
         dob: String(row[10] || '').trim()
-      })).filter(x => x.name.length > 0);
+      }))
+      .filter(x => x.name.length > 0);
 
-      if (fetched.length > 0) {
-        rawTreeData = fetched;
-        try { localStorage.setItem(CACHE_KEY, JSON.stringify(rawTreeData)); } catch(e) {}
-      }
+    if (fetched.length > 0) {
+
+      rawTreeData = fetched;
+
+      try {
+        localStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify(rawTreeData)
+        );
+      } catch (e) {}
     }
-    populateDropdownOptions();
-    initializeDirectory();
+  }
+
+  populateDropdownOptions();
+  initializeDirectory();
+};
+
+
+/* ============================================================
+   FAMILY DATA HELPERS
+   ============================================================ */
+
+function getCombinedTileData(m) {
+
+  const spouse = rawTreeData.find(
+    s => isSpouseRelation(m, s)
+  );
+
+  if (spouse) {
+
+    return {
+      id: m.id,
+      primary: m,
+      spouse: spouse,
+      combinedName: `${m.name} & ${spouse.name}`,
+      isPair: true
+    };
+  }
+
+  return {
+    id: m.id,
+    primary: m,
+    spouse: null,
+    combinedName: m.name,
+    isPair: false
   };
+}
 
-  function loadDirectoryScript() {
-    fetch(`${APPS_SCRIPT_URL}?nocache=${new Date().getTime()}`)
-      .then(res => res.json())
-      .then(data => window.handleScriptData(data))
-      .catch(() => {
-        const script = document.createElement('script');
-        script.src = `${APPS_SCRIPT_URL}?callback=handleScriptData&nocache=${new Date().getTime()}`;
-        document.body.appendChild(script);
-      });
+
+function truncateCanvasText(ctx, text, maxWidth) {
+
+  if (ctx.measureText(text).width <= maxWidth) {
+    return text;
   }
 
-  function initializeDirectory() {
-    updateStats();
-    populateDropdownOptions();
-    if (!rawTreeData || rawTreeData.length === 0) return;
+  let truncated = text;
 
-    if (navHistory.length === 0) {
-      const root = rawTreeData.find(m => String(m.parentId).toUpperCase() === 'ROOT' || String(m.relType).toLowerCase().includes('root ancestor'));
-      if (root) {
-        navHistory.push(root.id);
-        expandedNodeIds.add(root.id);
-      }
-    }
-    renderActiveView();
+  while (
+    truncated.length > 0 &&
+    ctx.measureText(truncated + '...').width > maxWidth
+  ) {
+    truncated = truncated.substring(
+      0,
+      truncated.length - 1
+    );
   }
 
-  function toggleViewMode() {
-    isCanvasActive = !isCanvasActive;
-    const btn = document.getElementById('viewToggleBtn');
-    btn.innerHTML = isCanvasActive ? "📱 Profile View" : "🌐 Canvas View";
-    renderActiveView();
+  return truncated + '...';
+}
+
+
+/* ============================================================
+   DOWNLOAD FAMILY TREE
+   ============================================================ */
+
+function downloadTreeAsImage() {
+
+  if (!rawTreeData || rawTreeData.length === 0) {
+    alert("No family tree data to download.");
+    return;
   }
 
-  function toggleCompactCanvas() {
-    isCompactCanvas = !isCompactCanvas;
-    document.getElementById('compactToggleBtn').innerText = isCompactCanvas ? "🎛️ Detailed Mode" : "🎛️ Compact Mode";
-    renderSvgTreeCanvas();
-  }
+  const dpr = 2;
 
-  function populateDropdownOptions() {
-    if (!rawTreeData || rawTreeData.length === 0) return;
+  const baseNodeWidth = 260;
+  const baseNodeHeight = 60;
+  const baseLevelSpacingX = 300;
+  const baseSiblingSpacingY = 30;
+  const basePadding = 80;
 
-    const locations = [...new Set(rawTreeData.map(m => m.location).filter(Boolean))].sort();
-    const professions = [...new Set(rawTreeData.map(m => m.profession).filter(Boolean))].sort();
+  const nodeWidth = baseNodeWidth * dpr;
+  const nodeHeight = baseNodeHeight * dpr;
+  const levelSpacingX = baseLevelSpacingX * dpr;
+  const siblingSpacingY = baseSiblingSpacingY * dpr;
+  const padding = basePadding * dpr;
 
-    const locSelect = document.getElementById('locationFilter');
-    locSelect.innerHTML = `<option value="ALL">📍 All Locations</option>` + 
-      locations.map(loc => `<option value="${loc}">${loc}</option>`).join('');
+  let levels = {};
+  let processedIds = new Set();
 
-    const profSelect = document.getElementById('professionFilter');
-    profSelect.innerHTML = `<option value="ALL">💼 All Professions</option>` + 
-      professions.map(prof => `<option value="${prof}">${prof}</option>`).join('');
-  }
+  function traverseFullTree(memberId, level) {
 
-  function handleDropdownFilter() {
-    activeStatusFilter = document.getElementById('statusFilter').value;
-    activeLocationFilter = document.getElementById('locationFilter').value;
-    activeProfessionFilter = document.getElementById('professionFilter').value;
-    renderActiveView();
-  }
+    const m = rawTreeData.find(
+      x =>
+        String(x.id).trim().toLowerCase() ===
+        String(memberId).trim().toLowerCase()
+    );
 
-  function handleSearch(q) {
-    searchQuery = q.trim().toLowerCase();
-    renderActiveView();
-  }
+    if (!m || processedIds.has(m.id)) return;
 
-  function isFilterActive() {
-    return searchQuery.length > 0 || 
-           activeStatusFilter !== 'ALL' || 
-           activeLocationFilter !== 'ALL' || 
-           activeProfessionFilter !== 'ALL';
-  }
+    const tile = getCombinedTileData(m);
 
-  function renderActiveView() {
-    updateStats();
-    const searchResultsView = document.getElementById('searchResultsView');
-    const cardsView = document.getElementById('cardsView');
-    const canvasView = document.getElementById('canvasView');
+    processedIds.add(tile.primary.id);
 
-    if (isFilterActive()) {
-      searchResultsView.classList.add('active');
-      cardsView.classList.remove('active');
-      canvasView.classList.remove('active');
-      renderSearchResults();
-    } else if (isCanvasActive) {
-      searchResultsView.classList.remove('active');
-      cardsView.classList.remove('active');
-      canvasView.classList.add('active');
-      renderSvgTreeCanvas();
-    } else {
-      searchResultsView.classList.remove('active');
-      cardsView.classList.add('active');
-      canvasView.classList.remove('active');
-      renderCardsView();
-    }
-  }
-
-  function isSpouseRelation(m1, m2) {
-    if (!m1 || !m2) return false;
-    const m1Id = String(m1.id).trim().toLowerCase();
-    const m2Id = String(m2.id).trim().toLowerCase();
-
-    const linkedBySpouseId = (m1.spouseId && String(m1.spouseId).trim().toLowerCase() === m2Id) ||
-                             (m2.spouseId && String(m2.spouseId).trim().toLowerCase() === m1Id);
-
-    const keywords = ['spouse', 'husband', 'wife', 'partner', 'married'];
-    const m2Rel = String(m2.relType || '').toLowerCase();
-    const m1Rel = String(m1.relType || '').toLowerCase();
-
-    const m2IsChildSpouseOfM1 = String(m2.parentId).trim().toLowerCase() === m1Id && keywords.some(k => m2Rel.includes(k));
-    const m1IsChildSpouseOfM2 = String(m1.parentId).trim().toLowerCase() === m2Id && keywords.some(k => m1Rel.includes(k));
-
-    return linkedBySpouseId || m2IsChildSpouseOfM1 || m1IsChildSpouseOfM2;
-  }
-
-  function getFamilyCount(memberId) {
-    const visited = new Set();
-
-    function collectBranch(id) {
-      const cleanId = String(id).trim().toLowerCase();
-      if (visited.has(cleanId)) return 0;
-      visited.add(cleanId);
-
-      const member = rawTreeData.find(m => String(m.id).trim().toLowerCase() === cleanId);
-      if (!member) return 0;
-
-      let household = [member];
-      rawTreeData.forEach(other => {
-        const otherId = String(other.id).trim().toLowerCase();
-        if (!visited.has(otherId) && isSpouseRelation(member, other)) {
-          household.push(other);
-          visited.add(otherId);
-        }
-      });
-
-      let count = household.length;
-      const householdIds = household.map(h => String(h.id).trim().toLowerCase());
-
-      const children = rawTreeData.filter(c => {
-        const cId = String(c.id).trim().toLowerCase();
-        const cParentId = String(c.parentId).trim().toLowerCase();
-        const isSpouse = household.some(h => isSpouseRelation(h, c));
-        return householdIds.includes(cParentId) && !isSpouse && !visited.has(cId);
-      });
-
-      children.forEach(child => {
-        count += collectBranch(child.id);
-      });
-
-      return count;
+    if (tile.spouse) {
+      processedIds.add(tile.spouse.id);
     }
 
-    return collectBranch(memberId);
-  }
-
-  function isValidPhone(phone) {
-    if (!phone) return true;
-    const phoneRegex = /^\+?[0-9\s\-\(\)]{7,20}$/;
-    return phoneRegex.test(phone.trim());
-  }
-
-  function validatePhoneUI(val) {
-    const err = document.getElementById('phoneError');
-    if (val && !isValidPhone(val)) {
-      err.style.display = 'block';
-      return false;
-    } else {
-      err.style.display = 'none';
-      return true;
+    if (!levels[level]) {
+      levels[level] = [];
     }
-  }
 
-  function renderAgeOrLivedText(member) {
-    if (!member || !member.dob) return '';
-    const val = String(member.dob).trim();
-    const isDeceased = String(member.status || '').toLowerCase().includes('deceased');
+    levels[level].push(tile);
 
-    if (isDeceased) {
-      if (val.toLowerCase().includes('lived')) return `🕊️ ${val}`;
-      return `🕊️ Lived ${val}`;
-    }
-    return `⏳ Age: ${val}`;
-  }
+    const children = rawTreeData.filter(c => {
 
-  function renderSearchResults() {
-    const container = document.getElementById('searchResultsContainer');
-    
-    let filtered = rawTreeData.filter(m => {
-      const matchesSearch = !searchQuery || 
-        m.name.toLowerCase().includes(searchQuery) || 
-        m.location.toLowerCase().includes(searchQuery) || 
-        m.profession.toLowerCase().includes(searchQuery) ||
-        (m.dob && m.dob.toLowerCase().includes(searchQuery));
+      const cParentId =
+        String(c.parentId).trim().toLowerCase();
 
-      const matchesStatus = activeStatusFilter === 'ALL' ||
-        (activeStatusFilter === 'LIVING' && !String(m.status).toLowerCase().includes('deceased')) ||
-        (activeStatusFilter === 'DECEASED' && String(m.status).toLowerCase().includes('deceased'));
+      const mId =
+        String(m.id).trim().toLowerCase();
 
-      const matchesLocation = activeLocationFilter === 'ALL' || m.location === activeLocationFilter;
-      const matchesProfession = activeProfessionFilter === 'ALL' || m.profession === activeProfessionFilter;
+      const spouseId =
+        tile.spouse
+          ? String(tile.spouse.id).trim().toLowerCase()
+          : null;
 
-      return matchesSearch && matchesStatus && matchesLocation && matchesProfession;
+      const isSpouse = isSpouseRelation(m, c);
+
+      return (
+        cParentId === mId ||
+        (spouseId && cParentId === spouseId)
+      ) && !isSpouse;
     });
 
-    if (filtered.length === 0) {
-      container.innerHTML = `<div style="text-align:center; padding: 30px; color: var(--text-muted);">No members match your filter choices.</div>`;
-      return;
+    children.forEach(
+      c => traverseFullTree(c.id, level + 1)
+    );
+  }
+
+  const root =
+    rawTreeData.find(
+      m =>
+        String(m.parentId).toUpperCase() === 'ROOT' ||
+        String(m.relType)
+          .toLowerCase()
+          .includes('root ancestor')
+    ) ||
+    rawTreeData[0];
+
+  if (root) {
+    traverseFullTree(root.id, 0);
+  }
+
+  let maxLvl =
+    Math.max(
+      ...Object.keys(levels).map(Number)
+    );
+
+  let maxNodesInLvl =
+    Math.max(
+      ...Object.values(levels).map(arr => arr.length)
+    );
+
+  const canvas =
+    document.createElement('canvas');
+
+  const ctx = canvas.getContext('2d');
+
+  canvas.width =
+    (maxLvl + 1) *
+    levelSpacingX +
+    padding * 2;
+
+  canvas.height =
+    Math.max(
+      600 * dpr,
+      maxNodesInLvl *
+        (nodeHeight + siblingSpacingY) +
+        padding * 2
+    );
+
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font =
+    `bold ${Math.round(24 * dpr)}px "Plus Jakarta Sans", sans-serif`;
+
+  ctx.fillText(
+    '💛 A&M Family Tree',
+    padding,
+    45 * dpr
+  );
+
+  let coords = {};
+  const centerY = canvas.height / 2;
+
+  Object.keys(levels).forEach(lvlStr => {
+
+    const lvl = parseInt(lvlStr);
+    const tiles = levels[lvl];
+
+    const x =
+      lvl *
+      levelSpacingX +
+      padding;
+
+    const totalLvlHeight =
+      tiles.length *
+        nodeHeight +
+      (tiles.length - 1) *
+        siblingSpacingY;
+
+    const startY =
+      centerY -
+      totalLvlHeight / 2;
+
+    tiles.forEach((tile, idx) => {
+
+      const y =
+        startY +
+        idx *
+          (nodeHeight +
+            siblingSpacingY);
+
+      coords[tile.primary.id] = {
+        x,
+        y,
+        width: nodeWidth,
+        height: nodeHeight,
+        level: lvl,
+        tile
+      };
+
+      if (tile.spouse) {
+        coords[tile.spouse.id] =
+          coords[tile.primary.id];
+      }
+    });
+  });
+
+  rawTreeData.forEach(m => {
+
+    if (
+      m.parentId &&
+      coords[m.parentId] &&
+      coords[m.id] &&
+      coords[m.parentId] !== coords[m.id]
+    ) {
+
+      const p = coords[m.parentId];
+      const c = coords[m.id];
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        p.x + nodeWidth,
+        p.y + nodeHeight / 2
+      );
+
+      ctx.bezierCurveTo(
+        p.x +
+          nodeWidth +
+          40 * dpr,
+        p.y + nodeHeight / 2,
+
+        c.x -
+          40 * dpr,
+        c.y + nodeHeight / 2,
+
+        c.x,
+        c.y + nodeHeight / 2
+      );
+
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 2 * dpr;
+      ctx.stroke();
     }
+  });
 
-    container.innerHTML = filtered.map(m => {
-      const famCount = getFamilyCount(m.id);
-      const ageText = renderAgeOrLivedText(m);
+  Object.keys(coords).forEach(id => {
 
-      return `
-        <div class="member-card" onclick="jumpToSearchResult('${m.id}')">
-          ${generateAvatarHTML(m.name)}
-          <div class="member-info">
-            <div class="c-name">${getGenderIcon(m.gender)} ${m.name}</div>
-            <div class="c-sub">
-              ${getStatusBadge(m.status)}
-              <span class="status-badge badge-family-count">👨‍👩‍👧‍👦 ${famCount}</span>
-              ${ageText ? `<span>${ageText}</span>` : ''}
-              ${m.location ? `<span>📍 ${m.location}</span>` : ''}
-            </div>
-          </div>
-          <div style="color:#0ea5e9; font-weight:800; font-size:1.1rem;">›</div>
-        </div>
-      `;
-    }).join('');
-  }
+    const pos = coords[id];
+    const tile = pos.tile;
 
-  function jumpToSearchResult(targetId) {
-    searchQuery = "";
-    document.getElementById('searchInput').value = "";
-    activeStatusFilter = "ALL";
-    activeLocationFilter = "ALL";
-    activeProfessionFilter = "ALL";
-    
-    document.getElementById('statusFilter').value = "ALL";
-    document.getElementById('locationFilter').value = "ALL";
-    document.getElementById('professionFilter').value = "ALL";
-    
-    navHistory = buildBreadcrumbTrail(targetId);
-    renderActiveView();
-  }
+    if (tile.primary.id !== id) return;
 
-  function buildBreadcrumbTrail(id) {
-    let trail = [];
-    let curr = rawTreeData.find(m => String(m.id).trim() === String(id).trim());
-    
-    while (curr) {
-      trail.unshift(curr.id);
-      if (curr.parentId && String(curr.parentId).toUpperCase() !== 'ROOT') {
-        curr = rawTreeData.find(m => String(m.id).trim() === String(curr.parentId).trim());
+    const isDeceased =
+      String(tile.primary.status || '')
+        .toLowerCase()
+        .includes('deceased');
+
+    ctx.fillStyle = '#1e293b';
+
+    ctx.strokeStyle =
+      LEVEL_BORDER_COLORS[
+        pos.level %
+        LEVEL_BORDER_COLORS.length
+      ];
+
+    ctx.lineWidth = 2 * dpr;
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+      pos.x,
+      pos.y,
+      pos.width,
+      pos.height,
+      12 * dpr
+    );
+
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle =
+      isDeceased
+        ? '#94a3b8'
+        : '#10b981';
+
+    ctx.beginPath();
+
+    ctx.arc(
+      pos.x + 18 * dpr,
+      pos.y + pos.height / 2,
+      6 * dpr,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle = '#f8fafc';
+
+    ctx.font =
+      `bold ${Math.round(13 * dpr)}px "Plus Jakarta Sans", sans-serif`;
+
+    const availableTextWidth =
+      pos.width - 42 * dpr;
+
+    const safeName =
+      truncateCanvasText(
+        ctx,
+        tile.combinedName,
+        availableTextWidth
+      );
+
+    ctx.fillText(
+      safeName,
+      pos.x + 32 * dpr,
+      pos.y + 26 * dpr
+    );
+
+    ctx.fillStyle = '#94a3b8';
+
+    ctx.font =
+      `${Math.round(10 * dpr)}px "Plus Jakarta Sans", sans-serif`;
+
+    const sub =
+      tile.primary.dob
+        ? (
+            tile.primary.dob.includes('Lived')
+              ? tile.primary.dob
+              : 'Age ' + tile.primary.dob
+          )
+        : (
+            tile.primary.location ||
+            tile.primary.status
+          );
+
+    const safeSub =
+      truncateCanvasText(
+        ctx,
+        sub,
+        availableTextWidth
+      );
+
+    ctx.fillText(
+      safeSub,
+      pos.x + 32 * dpr,
+      pos.y + 44 * dpr
+    );
+  });
+
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i
+      .test(navigator.userAgent);
+
+  if (canvas.toBlob) {
+
+    canvas.toBlob(function(blob) {
+
+      if (!blob) {
+        alert("Image generation failed.");
+        return;
+      }
+
+      const blobUrl =
+        URL.createObjectURL(blob);
+
+      if (isMobile) {
+
+        const imgContainer =
+          document.getElementById(
+            'previewImageContainer'
+          );
+
+        imgContainer.innerHTML =
+          `<img src="${blobUrl}" alt="A&M Family Tree" />`;
+
+        document
+          .getElementById('mobilePreviewModal')
+          .classList.add('show');
+
       } else {
-        break;
+
+        const link =
+          document.createElement('a');
+
+        link.download =
+          'am_family_tree.png';
+
+        link.href = blobUrl;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
       }
-    }
-    return trail;
+
+    }, 'image/png');
+
+  } else {
+
+    alert(
+      "Your browser does not support image exports."
+    );
+  }
+}
+
+
+function closeMobilePreviewModal() {
+  document
+    .getElementById('mobilePreviewModal')
+    .classList.remove('show');
+}
+
+
+/* ============================================================
+   THEME
+   ============================================================ */
+
+function toggleTheme() {
+
+  const body =
+    document.documentElement;
+
+  const currentTheme =
+    body.getAttribute('data-theme');
+
+  const newTheme =
+    currentTheme === 'dark'
+      ? 'light'
+      : 'dark';
+
+  body.setAttribute(
+    'data-theme',
+    newTheme
+  );
+
+  document.getElementById(
+    'themeIcon'
+  ).innerText =
+    newTheme === 'dark'
+      ? '☀️'
+      : '🌙';
+}
+
+
+/* ============================================================
+   AVATARS
+   ============================================================ */
+
+function generateAvatarHTML(name) {
+
+  if (!name) name = 'Unknown';
+
+  const cleanedName =
+    name
+      .replace(/\(.*?\)/g, '')
+      .replace(/\[.*?\]/g, '')
+      .trim();
+
+  const parts =
+    (cleanedName || name)
+      .split(/\s+/);
+
+  let initials =
+    parts[0][0] || '';
+
+  if (parts.length > 1) {
+    initials +=
+      parts[parts.length - 1][0] || '';
   }
 
-  function renderPartnerColumn(member) {
-    const hasContactSaved = member.contact && member.contact.length > 0;
-    const ageText = renderAgeOrLivedText(member);
+  initials =
+    initials.toUpperCase();
 
-    return `
-      <div class="partner-col">
-        <div class="partner-top-section">
-          ${generateAvatarHTML(member.name)}
-          <div class="p-name">${getGenderIcon(member.gender)} ${member.name}</div>
-          <div style="margin-bottom: 8px;">${getStatusBadge(member.status)}</div>
+  let hash = 0;
 
-          <div class="detail-list">
-            ${member.gender ? `<div class="detail-item">👤 <span><strong>Gender:</strong> ${member.gender}</span></div>` : ''}
-            ${ageText ? `<div class="detail-item"><span><strong>${ageText}</strong></span></div>` : ''}
-            ${member.location ? `<div class="detail-item">📍 <span><strong>Location:</strong> ${member.location}</span></div>` : ''}
-            ${member.profession ? `<div class="detail-item">💼 <span><strong>Profession:</strong> ${member.profession}</span></div>` : ''}
-            ${hasContactSaved ? `<div class="detail-item">📞 <span><strong>Contact:</strong> <span class="hidden-check-badge">✓ Saved</span></span></div>` : ''}
-          </div>
-        </div>
-
-        <div class="card-actions" style="display: ${isAdminUnlocked ? 'flex' : 'none'};">
-          <button class="btn-action" onclick="openEditModal('${member.id}')">✏️ Edit</button>
-          <button class="btn-action btn-delete" onclick="deleteMember('${member.id}')">🗑️ Delete</button>
-        </div>
-      </div>
-    `;
+  for (
+    let i = 0;
+    i < name.length;
+    i++
+  ) {
+    hash =
+      name.charCodeAt(i) +
+      ((hash << 5) - hash);
   }
 
-  function renderCardsView() {
-    if (navHistory.length === 0) return;
-    const focusId = navHistory[navHistory.length - 1];
-    const member = rawTreeData.find(m => String(m.id).trim() === String(focusId).trim());
-    if (!member) return;
+  const h1 =
+    Math.abs(hash) % 360;
 
-    const breadcrumbContainer = document.getElementById('breadcrumbContainer');
-    breadcrumbContainer.innerHTML = navHistory.map((id, index) => {
-      const m = rawTreeData.find(x => String(x.id).trim() === String(id).trim());
-      const isLast = index === navHistory.length - 1;
-      return `<span class="crumb ${isLast ? 'active' : ''}" onclick="navigateToBreadcrumb(${index})">${m ? m.name : 'Unknown'}</span>` +
-             (!isLast ? `<span class="crumb-separator">›</span>` : '');
-    }).join('');
+  const h2 =
+    (h1 + 40) % 360;
 
-    let spouse = rawTreeData.find(s => isSpouseRelation(member, s));
-    const focusFamilyCount = getFamilyCount(member.id);
+  const bgGradient =
+    `linear-gradient(135deg, hsl(${h1},70%,50%) 0%, hsl(${h2},80%,45%) 100%)`;
 
-    let partnersHTML = renderPartnerColumn(member);
+  return `
+    <div
+      class="avatar-circle"
+      style="background:${bgGradient};"
+    >
+      ${initials}
+    </div>
+  `;
+}
 
-    if (spouse) {
-      partnersHTML += renderPartnerColumn(spouse);
-    } else {
-      partnersHTML += `
-        <div class="partner-col empty-spouse">
-          <div style="text-align:center;">
-            <div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-bottom: 8px;">No Spouse Linked</div>
-            <button class="btn-action" style="display: ${isAdminUnlocked ? 'inline-block' : 'none'}; background: #ec4899; color: #fff;" onclick="openAddModal('Spouse', '${member.id}')">+ Add Spouse</button>
-          </div>
-        </div>
-      `;
-    }
 
-    document.getElementById('focusContainer').innerHTML = `
-      <div class="focus-card-wrapper">
-        <div class="focus-card-main">
-          <div class="focus-header-badge">
-            <span class="status-badge badge-family-count" style="font-size:0.85rem; padding: 6px 14px;">👨‍👩‍👧‍👦 ${focusFamilyCount} Family Members</span>
-          </div>
-          <div class="partners-container">
-            ${partnersHTML}
-          </div>
-        </div>
-      </div>
-    `;
+function getAvatarInitialsAndGradient(name) {
 
-    let validParentIds = [String(member.id).trim().toLowerCase()];
-    if (member.spouseId) validParentIds.push(String(member.spouseId).trim().toLowerCase());
-    if (spouse) validParentIds.push(String(spouse.id).trim().toLowerCase());
+  if (!name) name = 'U';
 
-    let children = rawTreeData.filter(c => {
-      const cParentId = String(c.parentId).trim().toLowerCase();
-      const isSpouseOfMember = isSpouseRelation(member, c);
-      return validParentIds.includes(cParentId) && !isSpouseOfMember;
-    });
+  const cleanedName =
+    name
+      .replace(/\(.*?\)/g, '')
+      .replace(/\[.*?\]/g, '')
+      .trim();
 
-    const childrenContainer = document.getElementById('childrenContainer');
-    document.getElementById('addChildBtn').style.display = isAdminUnlocked ? 'inline-block' : 'none';
+  const parts =
+    (cleanedName || name)
+      .split(/\s+/);
 
-    if (children.length === 0) {
-      childrenContainer.innerHTML = `<div style="text-align:center; padding: 12px; color: var(--text-muted); font-size: 0.8rem;">No children added yet.</div>`;
-    } else {
-      childrenContainer.innerHTML = children.map(c => {
-        const cFamCount = getFamilyCount(c.id);
-        const ageText = renderAgeOrLivedText(c);
+  let initials =
+    parts[0][0] || '';
 
-        return `
-          <div class="member-card" onclick="focusOnMember('${c.id}')">
-            ${generateAvatarHTML(c.name)}
-            <div class="member-info">
-              <div class="c-name">${getGenderIcon(c.gender)} ${c.name}</div>
-              <div class="c-sub">
-                ${getStatusBadge(c.status)}
-                <span class="status-badge badge-family-count">👨‍👩‍👧‍👦 ${cFamCount}</span>
-                ${ageText ? `<span>${ageText}</span>` : ''}
-                ${c.location ? `<span>📍 ${c.location}</span>` : ''}
-              </div>
-            </div>
-            <div style="color:#0ea5e9; font-weight:800; font-size:1.1rem;">›</div>
-          </div>
-        `;
-      }).join('');
+  if (parts.length > 1) {
+    initials +=
+      parts[parts.length - 1][0] || '';
+  }
+
+  initials =
+    initials.toUpperCase();
+
+  let hash = 0;
+
+  for (
+    let i = 0;
+    i < name.length;
+    i++
+  ) {
+    hash =
+      name.charCodeAt(i) +
+      ((hash << 5) - hash);
+  }
+
+  const h1 =
+    Math.abs(hash) % 360;
+
+  const h2 =
+    (h1 + 40) % 360;
+
+  return {
+    initials,
+    color1: `hsl(${h1},70%,50%)`,
+    color2: `hsl(${h2},80%,45%)`
+  };
+}
+
+
+/* ============================================================
+   INITIALIZE DIRECTORY
+   ============================================================ */
+
+function initializeDirectory() {
+
+  updateStats();
+  populateDropdownOptions();
+
+  if (
+    !rawTreeData ||
+    rawTreeData.length === 0
+  ) {
+    return;
+  }
+
+  if (navHistory.length === 0) {
+
+    const root =
+      rawTreeData.find(
+        m =>
+          String(m.parentId)
+            .toUpperCase() === 'ROOT' ||
+          String(m.relType)
+            .toLowerCase()
+            .includes('root ancestor')
+      );
+
+    if (root) {
+
+      navHistory.push(root.id);
+      expandedNodeIds.add(root.id);
     }
   }
 
-  function focusOnMember(id) { navHistory.push(id); renderActiveView(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  function navigateToBreadcrumb(index) { navHistory = navHistory.slice(0, index + 1); renderActiveView(); }
+  renderActiveView();
+}
 
-  function renderSvgTreeCanvas() {
-    const svgGroup = document.getElementById('svgGroup');
-    svgGroup.innerHTML = '';
 
-    if (!rawTreeData || rawTreeData.length === 0) return;
+/* ============================================================
+   VIEW
+   ============================================================ */
 
-    const nodeWidth = isCompactCanvas ? 160 : 230;
-    const nodeHeight = isCompactCanvas ? 44 : 58;
-    const levelSpacingX = isCompactCanvas ? 200 : 280;
-    const siblingSpacingY = isCompactCanvas ? 18 : 26;
+function toggleViewMode() {
 
-    let levels = {};
-    let processedIds = new Set();
+  isCanvasActive =
+    !isCanvasActive;
 
-    function traverseVisibleTree(memberId, level) {
-      const m = rawTreeData.find(x => String(x.id).trim().toLowerCase() === String(memberId).trim().toLowerCase());
-      if (!m || processedIds.has(m.id)) return;
+  const btn =
+    document.getElementById(
+      'viewToggleBtn'
+    );
 
-      const tile = getCombinedTileData(m);
-      processedIds.add(tile.primary.id);
-      if (tile.spouse) processedIds.add(tile.spouse.id);
+  btn.innerHTML =
+    isCanvasActive
+      ? "📱 Profile View"
+      : "🌐 Canvas View";
 
-      if (!levels[level]) levels[level] = [];
-      levels[level].push(tile);
+  renderActiveView();
+}
 
-      if (expandedNodeIds.has(tile.primary.id) || (tile.spouse && expandedNodeIds.has(tile.spouse.id))) {
-        const children = rawTreeData.filter(c => {
-          const cParentId = String(c.parentId).trim().toLowerCase();
-          const mId = String(m.id).trim().toLowerCase();
-          const spouseId = tile.spouse ? String(tile.spouse.id).trim().toLowerCase() : null;
-          const isSpouse = isSpouseRelation(m, c);
-          return (cParentId === mId || (spouseId && cParentId === spouseId)) && !isSpouse;
-        });
 
-        children.forEach(c => traverseVisibleTree(c.id, level + 1));
-      }
-    }
+function toggleCompactCanvas() {
 
-    const root = rawTreeData.find(m => String(m.parentId).toUpperCase() === 'ROOT' || String(m.relType).toLowerCase().includes('root ancestor'));
-    if (root) traverseVisibleTree(root.id, 0);
+  isCompactCanvas =
+    !isCompactCanvas;
 
-    let coords = {};
-    let defsGradients = `<defs>`;
-    let svgContent = '';
+  document.getElementById(
+    'compactToggleBtn'
+  ).innerText =
+    isCompactCanvas
+      ? "🎛️ Detailed Mode"
+      : "🎛️ Compact Mode";
 
-    Object.keys(levels).forEach(lvlStr => {
-      const lvl = parseInt(lvlStr);
-      const tiles = levels[lvl];
-      const totalHeight = tiles.length * (nodeHeight + siblingSpacingY) - siblingSpacingY;
-      let startYPos = -totalHeight / 2;
+  renderSvgTreeCanvas();
+}
 
-      const x = lvl * levelSpacingX + 40;
 
-      tiles.forEach((tile, idx) => {
-        const y = startYPos + idx * (nodeHeight + siblingSpacingY);
-        coords[tile.primary.id] = { x, y, width: nodeWidth, height: nodeHeight, level: lvl, tile };
-        if (tile.spouse) {
-          coords[tile.spouse.id] = coords[tile.primary.id];
-        }
-      });
-    });
+/* ============================================================
+   FILTERS
+   ============================================================ */
 
-    rawTreeData.forEach(m => {
-      if (m.parentId && coords[m.parentId] && coords[m.id] && coords[m.parentId] !== coords[m.id]) {
-        const parentPos = coords[m.parentId];
-        const childPos = coords[m.id];
+function populateDropdownOptions() {
 
-        const x1 = parentPos.x + nodeWidth;
-        const y1 = parentPos.y + nodeHeight / 2;
-        const x2 = childPos.x;
-        const y2 = childPos.y + nodeHeight / 2;
-
-        const pathD = `M ${x1} ${y1} C ${(x1 + x2) / 2} ${y1}, ${(x1 + x2) / 2} ${y2}, ${x2} ${y2}`;
-        svgContent += `<path d="${pathD}" class="svg-line"/>`;
-      }
-    });
-
-    Object.keys(coords).forEach(id => {
-      const pos = coords[id];
-      const tile = pos.tile;
-      if (tile.primary.id !== id) return;
-
-      const isExpanded = expandedNodeIds.has(tile.primary.id) || (tile.spouse && expandedNodeIds.has(tile.spouse.id));
-      const isDeceased = String(tile.primary.status || '').toLowerCase().includes('deceased');
-      const statusColor = isDeceased ? '#94a3b8' : '#10b981';
-
-      const levelColor = LEVEL_BORDER_COLORS[pos.level % LEVEL_BORDER_COLORS.length];
-      const avatarData = getAvatarInitialsAndGradient(tile.combinedName);
-      const gradId = `grad_${tile.primary.id.replace(/[^a-zA-Z0-9]/g, '_')}`;
-
-      defsGradients += `
-        <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="${avatarData.color1}" />
-          <stop offset="100%" stop-color="${avatarData.color2}" />
-        </linearGradient>
-      `;
-
-      const directChildren = rawTreeData.filter(c => {
-        const cParentId = String(c.parentId).trim().toLowerCase();
-        const mId = String(tile.primary.id).trim().toLowerCase();
-        const spouseId = tile.spouse ? String(tile.spouse.id).trim().toLowerCase() : null;
-        const isSpouse = isSpouseRelation(tile.primary, c);
-        return (cParentId === mId || (spouseId && cParentId === spouseId)) && !isSpouse;
-      });
-
-      const hasChildren = directChildren.length > 0;
-      const avatarRadius = isCompactCanvas ? 12 : 15;
-      const avatarCX = pos.x + 18 + avatarRadius;
-      const avatarCY = pos.y + pos.height / 2;
-
-      svgContent += `
-        <g class="svg-node-group" onclick="toggleExpandTile('${tile.primary.id}')">
-          <rect x="${pos.x}" y="${pos.y}" width="${pos.width}" height="${pos.height}" 
-                class="svg-node-rect ${isExpanded ? 'is-expanded' : ''}" 
-                style="stroke: ${isExpanded ? levelColor : 'var(--node-stroke)'};" />
-          
-          <path d="M ${pos.x + 4} ${pos.y} 
-                   A 4 4 0 0 0 ${pos.x} ${pos.y + 4} 
-                   L ${pos.x} ${pos.y + pos.height - 4} 
-                   A 4 4 0 0 0 ${pos.x + 4} ${pos.y + pos.height} 
-                   L ${pos.x + 4} ${pos.y} Z" 
-                fill="${statusColor}" />
-
-          <circle cx="${avatarCX}" cy="${avatarCY}" r="${avatarRadius}" fill="url(#${gradId})" />
-          <text x="${avatarCX}" y="${avatarCY}" class="svg-avatar-bg">${avatarData.initials}</text>
-
-          <text x="${avatarCX + avatarRadius + 10}" y="${pos.y + (isCompactCanvas ? 26 : 28)}" class="svg-text-name">
-            ${tile.combinedName.length > (isCompactCanvas ? 16 : 22) ? tile.combinedName.substring(0, isCompactCanvas ? 14 : 20) + '..' : tile.combinedName}
-          </text>
-          
-          ${!isCompactCanvas ? `
-            <text x="${avatarCX + avatarRadius + 10}" y="${pos.y + 44}" class="svg-text-sub">
-              ${tile.primary.dob ? (tile.primary.dob.includes('Lived') ? tile.primary.dob : tile.primary.dob + ' yrs') : (tile.primary.location || tile.primary.status)}
-            </text>
-          ` : ''}
-
-          ${hasChildren ? `
-            <g transform="translate(${pos.x + pos.width - 24}, ${pos.y + (isCompactCanvas ? 12 : 18)})">
-              <rect x="-2" y="-10" width="22" height="18" rx="9" ry="9" fill="${levelColor}" opacity="0.18" />
-              <text x="9" y="2" font-size="10" font-weight="800" fill="${levelColor}" text-anchor="middle">
-                ${isExpanded ? '−' : directChildren.length}
-              </text>
-            </g>
-          ` : ''}
-        </g>
-      `;
-    });
-
-    defsGradients += `</defs>`;
-    svgGroup.innerHTML = defsGradients + svgContent;
-    updateCanvasTransform();
+  if (
+    !rawTreeData ||
+    rawTreeData.length === 0
+  ) {
+    return;
   }
 
-  function toggleExpandTile(id) {
-    if (expandedNodeIds.has(id)) {
-      expandedNodeIds.delete(id);
-    } else {
-      expandedNodeIds.add(id);
-    }
+  const locations =
+    [
+      ...new Set(
+        rawTreeData
+          .map(m => m.location)
+          .filter(Boolean)
+      )
+    ].sort();
+
+  const professions =
+    [
+      ...new Set(
+        rawTreeData
+          .map(m => m.profession)
+          .filter(Boolean)
+      )
+    ].sort();
+
+  const locSelect =
+    document.getElementById(
+      'locationFilter'
+    );
+
+  locSelect.innerHTML =
+    `<option value="ALL">📍 All Locations</option>` +
+    locations
+      .map(
+        loc =>
+          `<option value="${loc}">${loc}</option>`
+      )
+      .join('');
+
+  const profSelect =
+    document.getElementById(
+      'professionFilter'
+    );
+
+  profSelect.innerHTML =
+    `<option value="ALL">💼 All Professions</option>` +
+    professions
+      .map(
+        prof =>
+          `<option value="${prof}">${prof}</option>`
+      )
+      .join('');
+}
+
+
+function handleDropdownFilter() {
+
+  activeStatusFilter =
+    document.getElementById(
+      'statusFilter'
+    ).value;
+
+  activeLocationFilter =
+    document.getElementById(
+      'locationFilter'
+    ).value;
+
+  activeProfessionFilter =
+    document.getElementById(
+      'professionFilter'
+    ).value;
+
+  renderActiveView();
+}
+
+
+function handleSearch(q) {
+
+  searchQuery =
+    q.trim().toLowerCase();
+
+  renderActiveView();
+}
+
+
+function isFilterActive() {
+
+  return (
+    searchQuery.length > 0 ||
+    activeStatusFilter !== 'ALL' ||
+    activeLocationFilter !== 'ALL' ||
+    activeProfessionFilter !== 'ALL'
+  );
+}
+
+
+function renderActiveView() {
+
+  updateStats();
+
+  const searchResultsView =
+    document.getElementById(
+      'searchResultsView'
+    );
+
+  const cardsView =
+    document.getElementById(
+      'cardsView'
+    );
+
+  const canvasView =
+    document.getElementById(
+      'canvasView'
+    );
+
+  if (isFilterActive()) {
+
+    searchResultsView.classList.add(
+      'active'
+    );
+
+    cardsView.classList.remove(
+      'active'
+    );
+
+    canvasView.classList.remove(
+      'active'
+    );
+
+    renderSearchResults();
+
+  } else if (isCanvasActive) {
+
+    searchResultsView.classList.remove(
+      'active'
+    );
+
+    cardsView.classList.remove(
+      'active'
+    );
+
+    canvasView.classList.add(
+      'active'
+    );
+
     renderSvgTreeCanvas();
+
+  } else {
+
+    searchResultsView.classList.remove(
+      'active'
+    );
+
+    cardsView.classList.add(
+      'active'
+    );
+
+    canvasView.classList.remove(
+      'active'
+    );
+
+    renderCardsView();
   }
+}
 
-  function updateCanvasTransform() {
-    const svgGroup = document.getElementById('svgGroup');
-    const container = document.getElementById('canvasContainer');
-    const centerY = container.clientHeight / 2;
-    svgGroup.setAttribute('transform', `translate(${translateX + 30}, ${centerY + translateY}) scale(${scale})`);
-  }
 
-  function zoomCanvas(factor) { scale *= factor; updateCanvasTransform(); }
-  function resetCanvasTransform() { scale = 1; translateX = 0; translateY = 0; updateCanvasTransform(); }
+/* ============================================================
+   RELATIONSHIP FUNCTIONS
+   ============================================================ */
 
-  const canvasContainer = document.getElementById('canvasContainer');
-  canvasContainer.addEventListener('pointerdown', e => {
-    isDragging = true;
-    startX = e.clientX - translateX;
-    startY = e.clientY - translateY;
-  });
-  window.addEventListener('pointermove', e => {
-    if (!isDragging) return;
-    translateX = e.clientX - startX;
-    translateY = e.clientY - startY;
-    updateCanvasTransform();
-  });
-  window.addEventListener('pointerup', () => isDragging = false);
+function isSpouseRelation(m1, m2) {
 
-  function checkForDuplicateName(val) {
-    const cleanName = val.trim().toLowerCase();
-    const promptBox = document.getElementById('duplicatePrompt');
-    const action = document.getElementById('modalAction').value;
+  if (!m1 || !m2) return false;
 
-    if (action === 'edit' || cleanName.length < 3) {
-      promptBox.style.display = 'none';
-      matchedDuplicateMember = null;
-      return;
+  const m1Id =
+    String(m1.id)
+      .trim()
+      .toLowerCase();
+
+  const m2Id =
+    String(m2.id)
+      .trim()
+      .toLowerCase();
+
+  const linkedBySpouseId =
+    (
+      m1.spouseId &&
+      String(m1.spouseId)
+        .trim()
+        .toLowerCase() === m2Id
+    ) ||
+    (
+      m2.spouseId &&
+      String(m2.spouseId)
+        .trim()
+        .toLowerCase() === m1Id
+    );
+
+  const keywords = [
+    'spouse',
+    'husband',
+    'wife',
+    'partner',
+    'married'
+  ];
+
+  const m2Rel =
+    String(m2.relType || '')
+      .toLowerCase();
+
+  const m1Rel =
+    String(m1.relType || '')
+      .toLowerCase();
+
+  const m2IsChildSpouseOfM1 =
+    String(m2.parentId)
+      .trim()
+      .toLowerCase() === m1Id &&
+    keywords.some(
+      k => m2Rel.includes(k)
+    );
+
+  const m1IsChildSpouseOfM2 =
+    String(m1.parentId)
+      .trim()
+      .toLowerCase() === m2Id &&
+    keywords.some(
+      k => m1Rel.includes(k)
+    );
+
+  return (
+    linkedBySpouseId ||
+    m2IsChildSpouseOfM1 ||
+    m1IsChildSpouseOfM2
+  );
+}
+
+
+function getFamilyCount(memberId) {
+
+  const visited = new Set();
+
+  function collectBranch(id) {
+
+    const cleanId =
+      String(id)
+        .trim()
+        .toLowerCase();
+
+    if (visited.has(cleanId)) {
+      return 0;
     }
 
-    const match = rawTreeData.find(m => m.name.toLowerCase() === cleanName);
-    if (match) {
-      matchedDuplicateMember = match;
-      document.getElementById('dupPromptMsg').innerText = `"${match.name}" already exists in the tree (${match.location || 'No location'}). Link them as an inter-family marriage?`;
-      promptBox.style.display = 'block';
-    } else {
-      promptBox.style.display = 'none';
-      matchedDuplicateMember = null;
+    visited.add(cleanId);
+
+    const member =
+      rawTreeData.find(
+        m =>
+          String(m.id)
+            .trim()
+            .toLowerCase() === cleanId
+      );
+
+    if (!member) {
+      return 0;
     }
+
+    let household = [member];
+
+    rawTreeData.forEach(other => {
+
+      const otherId =
+        String(other.id)
+          .trim()
+          .toLowerCase();
+
+      if (
+        !visited.has(otherId) &&
+        isSpouseRelation(member, other)
+      ) {
+
+        household.push(other);
+        visited.add(otherId);
+      }
+    });
+
+    let count =
+      household.length;
+
+    const householdIds =
+      household.map(
+        h =>
+          String(h.id)
+            .trim()
+            .toLowerCase()
+      );
+
+    const children =
+      rawTreeData.filter(c => {
+
+        const cId =
+          String(c.id)
+            .trim()
+            .toLowerCase();
+
+        const cParentId =
+          String(c.parentId)
+            .trim()
+            .toLowerCase();
+
+        const isSpouse =
+          household.some(
+            h =>
+              isSpouseRelation(h, c)
+          );
+
+        return (
+          householdIds.includes(cParentId) &&
+          !isSpouse &&
+          !visited.has(cId)
+        );
+      });
+
+    children.forEach(
+      child => {
+        count +=
+          collectBranch(child.id);
+      }
+    );
+
+    return count;
   }
 
-  function chooseLinkExisting() {
-    if (matchedDuplicateMember) {
-      document.getElementById('linkedExistingMemberId').value = matchedDuplicateMember.id;
-      document.getElementById('duplicatePrompt').style.display = 'none';
-      document.getElementById('statusCategory').value = matchedDuplicateMember.status || 'Living';
-      document.getElementById('locationField').value = matchedDuplicateMember.location || '';
-      document.getElementById('professionField').value = matchedDuplicateMember.profession || '';
-      document.getElementById('genderField').value = matchedDuplicateMember.gender || '';
-      document.getElementById('ageField').value = (matchedDuplicateMember.dob || '').replace(/[^0-9]/g, '');
-    }
-  }
+  return collectBranch(memberId);
+}
 
-  function chooseCreateNewDuplicate() {
-    document.getElementById('linkedExistingMemberId').value = '';
-    document.getElementById('duplicatePrompt').style.display = 'none';
-  }
 
-  function getGenderIcon(gender) {
-    const g = String(gender || '').toLowerCase();
-    if (g === 'male') return '👨';
-    if (g === 'female') return '👩';
+/* ============================================================
+   PHONE
+   ============================================================ */
+
+function isValidPhone(phone) {
+
+  if (!phone) return true;
+
+  const phoneRegex =
+    /^\+?[0-9\s\-\(\)]{7,20}$/;
+
+  return phoneRegex.test(
+    phone.trim()
+  );
+}
+
+
+function validatePhoneUI(val) {
+
+  const err =
+    document.getElementById(
+      'phoneError'
+    );
+
+  if (
+    val &&
+    !isValidPhone(val)
+  ) {
+
+    err.style.display =
+      'block';
+
+    return false;
+
+  } else {
+
+    err.style.display =
+      'none';
+
+    return true;
+  }
+}
+
+
+/* ============================================================
+   AGE
+   ============================================================ */
+
+function renderAgeOrLivedText(member) {
+
+  if (!member || !member.dob) {
     return '';
   }
 
-  function getStatusBadge(status) {
-    const s = String(status || '').toLowerCase();
-    if (s.includes('deceased')) return `<span class="status-badge badge-deceased">🕊️ Deceased</span>`;
-    return `<span class="status-badge badge-living">🟢 Living</span>`;
+  const val =
+    String(member.dob).trim();
+
+  const isDeceased =
+    String(member.status || '')
+      .toLowerCase()
+      .includes('deceased');
+
+  if (isDeceased) {
+
+    if (
+      val
+        .toLowerCase()
+        .includes('lived')
+    ) {
+      return `🕊️ ${val}`;
+    }
+
+    return `🕊️ Lived ${val}`;
   }
 
-  function updateStats() {
-    const container = document.getElementById('statsContainer');
-    if (!rawTreeData || rawTreeData.length === 0) return container.innerHTML = '';
+  return `⏳ Age: ${val}`;
+}
 
-    const total = rawTreeData.length;
-    let deceasedCount = 0;
-    rawTreeData.forEach(member => {
-      if (String(member.status || '').toLowerCase().includes('deceased')) deceasedCount++;
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+function renderSearchResults() {
+
+  const container =
+    document.getElementById(
+      'searchResultsContainer'
+    );
+
+  let filtered =
+    rawTreeData.filter(m => {
+
+      const matchesSearch =
+        !searchQuery ||
+        m.name
+          .toLowerCase()
+          .includes(searchQuery) ||
+        m.location
+          .toLowerCase()
+          .includes(searchQuery) ||
+        m.profession
+          .toLowerCase()
+          .includes(searchQuery) ||
+        (
+          m.dob &&
+          m.dob
+            .toLowerCase()
+            .includes(searchQuery)
+        );
+
+      const matchesStatus =
+        activeStatusFilter === 'ALL' ||
+        (
+          activeStatusFilter === 'LIVING' &&
+          !String(m.status)
+            .toLowerCase()
+            .includes('deceased')
+        ) ||
+        (
+          activeStatusFilter === 'DECEASED' &&
+          String(m.status)
+            .toLowerCase()
+            .includes('deceased')
+        );
+
+      const matchesLocation =
+        activeLocationFilter === 'ALL' ||
+        m.location === activeLocationFilter;
+
+      const matchesProfession =
+        activeProfessionFilter === 'ALL' ||
+        m.profession === activeProfessionFilter;
+
+      return (
+        matchesSearch &&
+        matchesStatus &&
+        matchesLocation &&
+        matchesProfession
+      );
     });
 
-    container.innerHTML = `
-      <div class="stat-badge">👥 Total Members <span class="count">${total}</span></div>
-      <div class="stat-badge">🟢 Living <span class="count">${total - deceasedCount}</span></div>
-      <div class="stat-badge">🕊️ Deceased <span class="count">${deceasedCount}</span></div>
+  if (filtered.length === 0) {
+
+    container.innerHTML =
+      `<div style="text-align:center; padding:30px; color:var(--text-muted);">
+        No members match your filter choices.
+      </div>`;
+
+    return;
+  }
+
+  container.innerHTML =
+    filtered.map(m => {
+
+      const famCount =
+        getFamilyCount(m.id);
+
+      const ageText =
+        renderAgeOrLivedText(m);
+
+      return `
+        <div
+          class="member-card"
+          onclick="jumpToSearchResult('${m.id}')"
+        >
+          ${generateAvatarHTML(m.name)}
+
+          <div class="member-info">
+
+            <div class="c-name">
+              ${getGenderIcon(m.gender)}
+              ${m.name}
+            </div>
+
+            <div class="c-sub">
+              ${getStatusBadge(m.status)}
+
+              <span class="status-badge badge-family-count">
+                👨‍👩‍👧‍👦 ${famCount}
+              </span>
+
+              ${ageText ? `<span>${ageText}</span>` : ''}
+
+              ${
+                m.location
+                  ? `<span>📍 ${m.location}</span>`
+                  : ''
+              }
+            </div>
+
+          </div>
+
+          <div style="color:#0ea5e9; font-weight:800; font-size:1.1rem;">
+            ›
+          </div>
+
+        </div>
+      `;
+    }).join('');
+}
+
+
+function jumpToSearchResult(targetId) {
+
+  searchQuery = "";
+
+  document.getElementById(
+    'searchInput'
+  ).value = "";
+
+  activeStatusFilter = "ALL";
+  activeLocationFilter = "ALL";
+  activeProfessionFilter = "ALL";
+
+  document.getElementById(
+    'statusFilter'
+  ).value = "ALL";
+
+  document.getElementById(
+    'locationFilter'
+  ).value = "ALL";
+
+  document.getElementById(
+    'professionFilter'
+  ).value = "ALL";
+
+  navHistory =
+    buildBreadcrumbTrail(
+      targetId
+    );
+
+  renderActiveView();
+}
+
+
+function buildBreadcrumbTrail(id) {
+
+  let trail = [];
+
+  let curr =
+    rawTreeData.find(
+      m =>
+        String(m.id).trim() ===
+        String(id).trim()
+    );
+
+  while (curr) {
+
+    trail.unshift(curr.id);
+
+    if (
+      curr.parentId &&
+      String(curr.parentId)
+        .toUpperCase() !== 'ROOT'
+    ) {
+
+      curr =
+        rawTreeData.find(
+          m =>
+            String(m.id).trim() ===
+            String(curr.parentId).trim()
+        );
+
+    } else {
+
+      break;
+    }
+  }
+
+  return trail;
+}
+
+
+/* ============================================================
+   PROFILE CARDS
+   ============================================================ */
+
+function renderPartnerColumn(member) {
+
+  const hasContactSaved =
+    member.contact &&
+    member.contact.length > 0;
+
+  const ageText =
+    renderAgeOrLivedText(member);
+
+  return `
+    <div class="partner-col">
+
+      <div class="partner-top-section">
+
+        ${generateAvatarHTML(member.name)}
+
+        <div class="p-name">
+          ${getGenderIcon(member.gender)}
+          ${member.name}
+        </div>
+
+        <div style="margin-bottom:8px;">
+          ${getStatusBadge(member.status)}
+        </div>
+
+        <div class="detail-list">
+
+          ${
+            member.gender
+              ? `<div class="detail-item">
+                  👤 <span><strong>Gender:</strong> ${member.gender}</span>
+                </div>`
+              : ''
+          }
+
+          ${
+            ageText
+              ? `<div class="detail-item">
+                  <span><strong>${ageText}</strong></span>
+                </div>`
+              : ''
+          }
+
+          ${
+            member.location
+              ? `<div class="detail-item">
+                  📍 <span><strong>Location:</strong> ${member.location}</span>
+                </div>`
+              : ''
+          }
+
+          ${
+            member.profession
+              ? `<div class="detail-item">
+                  💼 <span><strong>Profession:</strong> ${member.profession}</span>
+                </div>`
+              : ''
+          }
+
+          ${
+            hasContactSaved
+              ? `<div class="detail-item">
+                  📞 <span><strong>Contact:</strong>
+                  <span class="hidden-check-badge">✓ Saved</span></span>
+                </div>`
+              : ''
+          }
+
+        </div>
+
+      </div>
+
+      <div
+        class="card-actions"
+        style="display:${isAdminUnlocked ? 'flex' : 'none'};"
+      >
+
+        <button
+          class="btn-action"
+          onclick="openEditModal('${member.id}')"
+        >
+          ✏️ Edit
+        </button>
+
+        <button
+          class="btn-action btn-delete"
+          onclick="deleteMember('${member.id}')"
+        >
+          🗑️ Delete
+        </button>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+function renderCardsView() {
+
+  if (navHistory.length === 0) {
+    return;
+  }
+
+  const focusId =
+    navHistory[
+      navHistory.length - 1
+    ];
+
+  const member =
+    rawTreeData.find(
+      m =>
+        String(m.id).trim() ===
+        String(focusId).trim()
+    );
+
+  if (!member) return;
+
+  const breadcrumbContainer =
+    document.getElementById(
+      'breadcrumbContainer'
+    );
+
+  breadcrumbContainer.innerHTML =
+    navHistory.map(
+      (id, index) => {
+
+        const m =
+          rawTreeData.find(
+            x =>
+              String(x.id).trim() ===
+              String(id).trim()
+          );
+
+        const isLast =
+          index ===
+          navHistory.length - 1;
+
+        return `
+          <span
+            class="crumb ${isLast ? 'active' : ''}"
+            onclick="navigateToBreadcrumb(${index})"
+          >
+            ${m ? m.name : 'Unknown'}
+          </span>
+        ` +
+        (
+          !isLast
+            ? `<span class="crumb-separator">›</span>`
+            : ''
+        );
+      }
+    ).join('');
+
+  let spouse =
+    rawTreeData.find(
+      s =>
+        isSpouseRelation(
+          member,
+          s
+        )
+    );
+
+  const focusFamilyCount =
+    getFamilyCount(member.id);
+
+  let partnersHTML =
+    renderPartnerColumn(member);
+
+  if (spouse) {
+
+    partnersHTML +=
+      renderPartnerColumn(spouse);
+
+  } else {
+
+    partnersHTML += `
+      <div class="partner-col empty-spouse">
+
+        <div style="text-align:center;">
+
+          <div
+            style="font-size:0.85rem; color:var(--text-muted); font-weight:600; margin-bottom:8px;"
+          >
+            No Spouse Linked
+          </div>
+
+          <button
+            class="btn-action"
+            style="display:${isAdminUnlocked ? 'inline-block' : 'none'}; background:#ec4899; color:#fff;"
+            onclick="openAddModal('Spouse','${member.id}')"
+          >
+            + Add Spouse
+          </button>
+
+        </div>
+
+      </div>
     `;
   }
 
-  function triggerPinModal() {
-    if (lockoutTimer) {
-      alert("Too many failed attempts. Please try again later.");
+  document.getElementById(
+    'focusContainer'
+  ).innerHTML = `
+
+    <div class="focus-card-wrapper">
+
+      <div class="focus-card-main">
+
+        <div class="focus-header-badge">
+
+          <span
+            class="status-badge badge-family-count"
+            style="font-size:0.85rem; padding:6px 14px;"
+          >
+            👨‍👩‍👧‍👦 ${focusFamilyCount} Family Members
+          </span>
+
+        </div>
+
+        <div class="partners-container">
+          ${partnersHTML}
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  let validParentIds = [
+    String(member.id)
+      .trim()
+      .toLowerCase()
+  ];
+
+  if (member.spouseId) {
+
+    validParentIds.push(
+      String(member.spouseId)
+        .trim()
+        .toLowerCase()
+    );
+  }
+
+  if (spouse) {
+
+    validParentIds.push(
+      String(spouse.id)
+        .trim()
+        .toLowerCase()
+    );
+  }
+
+  let children =
+    rawTreeData.filter(c => {
+
+      const cParentId =
+        String(c.parentId)
+          .trim()
+          .toLowerCase();
+
+      const isSpouseOfMember =
+        isSpouseRelation(
+          member,
+          c
+        );
+
+      return (
+        validParentIds.includes(
+          cParentId
+        ) &&
+        !isSpouseOfMember
+      );
+    });
+
+  const childrenContainer =
+    document.getElementById(
+      'childrenContainer'
+    );
+
+  document.getElementById(
+    'addChildBtn'
+  ).style.display =
+    isAdminUnlocked
+      ? 'inline-block'
+      : 'none';
+
+  if (children.length === 0) {
+
+    childrenContainer.innerHTML =
+      `<div style="text-align:center; padding:12px; color:var(--text-muted); font-size:0.8rem;">
+        No children added yet.
+      </div>`;
+
+  } else {
+
+    childrenContainer.innerHTML =
+      children.map(c => {
+
+        const cFamCount =
+          getFamilyCount(c.id);
+
+        const ageText =
+          renderAgeOrLivedText(c);
+
+        return `
+          <div
+            class="member-card"
+            onclick="focusOnMember('${c.id}')"
+          >
+
+            ${generateAvatarHTML(c.name)}
+
+            <div class="member-info">
+
+              <div class="c-name">
+                ${getGenderIcon(c.gender)}
+                ${c.name}
+              </div>
+
+              <div class="c-sub">
+
+                ${getStatusBadge(c.status)}
+
+                <span class="status-badge badge-family-count">
+                  👨‍👩‍👧‍👦 ${cFamCount}
+                </span>
+
+                ${
+                  ageText
+                    ? `<span>${ageText}</span>`
+                    : ''
+                }
+
+                ${
+                  c.location
+                    ? `<span>📍 ${c.location}</span>`
+                    : ''
+                }
+
+              </div>
+
+            </div>
+
+            <div style="color:#0ea5e9; font-weight:800; font-size:1.1rem;">
+              ›
+            </div>
+
+          </div>
+        `;
+      }).join('');
+  }
+}
+
+
+function focusOnMember(id) {
+
+  navHistory.push(id);
+
+  renderActiveView();
+
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+
+function navigateToBreadcrumb(index) {
+
+  navHistory =
+    navHistory.slice(
+      0,
+      index + 1
+    );
+
+  renderActiveView();
+}
+
+
+/* ============================================================
+   SVG TREE
+   ============================================================ */
+
+function renderSvgTreeCanvas() {
+
+  const svgGroup =
+    document.getElementById(
+      'svgGroup'
+    );
+
+  svgGroup.innerHTML = '';
+
+  if (
+    !rawTreeData ||
+    rawTreeData.length === 0
+  ) {
+    return;
+  }
+
+  const nodeWidth =
+    isCompactCanvas
+      ? 160
+      : 230;
+
+  const nodeHeight =
+    isCompactCanvas
+      ? 44
+      : 58;
+
+  const levelSpacingX =
+    isCompactCanvas
+      ? 200
+      : 280;
+
+  const siblingSpacingY =
+    isCompactCanvas
+      ? 18
+      : 26;
+
+  let levels = {};
+  let processedIds = new Set();
+
+  function traverseVisibleTree(
+    memberId,
+    level
+  ) {
+
+    const m =
+      rawTreeData.find(
+        x =>
+          String(x.id)
+            .trim()
+            .toLowerCase() ===
+          String(memberId)
+            .trim()
+            .toLowerCase()
+      );
+
+    if (
+      !m ||
+      processedIds.has(m.id)
+    ) {
       return;
     }
 
-    if (!isAdminUnlocked) {
-      document.getElementById('pinInput').value = '';
-      document.getElementById('pinError').style.display = 'none';
-      document.getElementById('pinModal').classList.add('show');
-      setTimeout(() => document.getElementById('pinInput').focus(), 100);
-    } else {
-      isAdminUnlocked = false;
-      userPin = "";
-      updateAdminButtonUI();
-      renderActiveView();
+    const tile =
+      getCombinedTileData(m);
+
+    processedIds.add(
+      tile.primary.id
+    );
+
+    if (tile.spouse) {
+      processedIds.add(
+        tile.spouse.id
+      );
+    }
+
+    if (!levels[level]) {
+      levels[level] = [];
+    }
+
+    levels[level].push(tile);
+
+    if (
+      expandedNodeIds.has(
+        tile.primary.id
+      ) ||
+      (
+        tile.spouse &&
+        expandedNodeIds.has(
+          tile.spouse.id
+        )
+      )
+    ) {
+
+      const children =
+        rawTreeData.filter(c => {
+
+          const cParentId =
+            String(c.parentId)
+              .trim()
+              .toLowerCase();
+
+          const mId =
+            String(m.id)
+              .trim()
+              .toLowerCase();
+
+          const spouseId =
+            tile.spouse
+              ? String(tile.spouse.id)
+                  .trim()
+                  .toLowerCase()
+              : null;
+
+          const isSpouse =
+            isSpouseRelation(
+              m,
+              c
+            );
+
+          return (
+            cParentId === mId ||
+            (
+              spouseId &&
+              cParentId === spouseId
+            )
+          ) &&
+          !isSpouse;
+        });
+
+      children.forEach(
+        c =>
+          traverseVisibleTree(
+            c.id,
+            level + 1
+          )
+      );
     }
   }
 
-  function closePinModal() { document.getElementById('pinModal').classList.remove('show'); }
-  function handlePinKeyPress(e) { if (e.key === "Enter") { e.preventDefault(); submitPin(); } }
+  const root =
+    rawTreeData.find(
+      m =>
+        String(m.parentId)
+          .toUpperCase() === 'ROOT' ||
+        String(m.relType)
+          .toLowerCase()
+          .includes('root ancestor')
+    );
 
-  function submitPin() {
-    const inputVal = document.getElementById('pinInput').value.trim();
-    if (!inputVal) return;
-
-    userPin = inputVal;
-    isAdminUnlocked = true;
-    closePinModal();
-    updateAdminButtonUI();
-    renderActiveView();
+  if (root) {
+    traverseVisibleTree(
+      root.id,
+      0
+    );
   }
 
-  function updateAdminButtonUI() {
-    const btn = document.getElementById('adminToggleBtn');
-    btn.innerHTML = isAdminUnlocked ? "🔓 Unlocked" : "🔒 Unlock";
-    btn.classList.toggle('unlocked', isAdminUnlocked);
-  }
+  let coords = {};
 
-  function openAddModal(relationship, overrideTargetId) {
-    if (!isAdminUnlocked) return;
-    let targetId = overrideTargetId || navHistory[navHistory.length - 1];
-    const currentMember = rawTreeData.find(m => String(m.id).trim() === String(targetId).trim());
+  let defsGradients =
+    `<defs>`;
 
-    if (relationship === 'Child' && currentMember) {
-      if (String(currentMember.relType).toLowerCase().includes('spouse') && currentMember.parentId && String(currentMember.parentId).toUpperCase() !== 'ROOT') {
-        targetId = currentMember.parentId;
-      }
-    }
+  let svgContent = '';
 
-    document.getElementById('modalAction').value = 'add';
-    document.getElementById('targetId').value = targetId;
-    document.getElementById('editNodeId').value = '';
-    document.getElementById('linkedExistingMemberId').value = '';
-    document.getElementById('fullName').value = '';
-    document.getElementById('contactNumber').value = '';
-    document.getElementById('phoneError').style.display = 'none';
-    document.getElementById('locationField').value = '';
-    document.getElementById('professionField').value = '';
-    document.getElementById('genderField').value = '';
-    document.getElementById('ageField').value = '';
+  Object.keys(levels).forEach(
+    lvlStr => {
 
-    document.getElementById('statusCategory').value = 'Living';
-    document.getElementById('relTypeDisplay').value = relationship;
-    document.getElementById('relTypeGroup').style.display = 'block';
-    document.getElementById('duplicatePrompt').style.display = 'none';
-    document.getElementById('modalTitle').innerText = `Add ${relationship}`;
-    document.getElementById('addModal').classList.add('show');
-  }
+      const lvl =
+        parseInt(lvlStr);
 
-  function openEditModal(id) {
-    if (!isAdminUnlocked) return;
-    const member = rawTreeData.find(m => String(m.id).trim() === String(id).trim());
-    if (!member) return;
+      const tiles =
+        levels[lvl];
 
-    document.getElementById('modalAction').value = 'edit';
-    document.getElementById('editNodeId').value = id;
-    document.getElementById('linkedExistingMemberId').value = '';
-    document.getElementById('fullName').value = member.name;
-    document.getElementById('contactNumber').value = ''; 
-    document.getElementById('phoneError').style.display = 'none';
-    document.getElementById('locationField').value = member.location || '';
-    document.getElementById('professionField').value = member.profession || '';
-    document.getElementById('genderField').value = member.gender || '';
-    document.getElementById('ageField').value = (member.dob || '').replace(/[^0-9]/g, '');
+      const totalHeight =
+        tiles.length *
+          (nodeHeight +
+            siblingSpacingY) -
+        siblingSpacingY;
 
-    document.getElementById('statusCategory').value = member.status || 'Living';
+      let startYPos =
+        -totalHeight / 2;
 
-    document.getElementById('relTypeGroup').style.display = 'none';
-    document.getElementById('duplicatePrompt').style.display = 'none';
-    document.getElementById('modalTitle').innerText = `Edit Profile`;
-    document.getElementById('addModal').classList.add('show');
-  }
+      const x =
+        lvl *
+          levelSpacingX +
+        40;
 
-  function closeModal() {
-    document.getElementById('addModal').classList.remove('show');
-    setTimeout(() => document.getElementById('familyForm').reset(), 300);
-  }
+      tiles.forEach(
+        (tile, idx) => {
 
-  function deleteMember(id) {
-    if (!isAdminUnlocked) return;
-    
-    const targetId = String(id).trim();
-    const targetMember = rawTreeData.find(m => String(m.id).trim() === targetId);
-    
-    if (!targetMember) return;
+          const y =
+            startYPos +
+            idx *
+              (nodeHeight +
+                siblingSpacingY);
 
-    pendingDeleteId = targetId;
-    document.getElementById('confirmMessage').innerText = `Are you sure you want to delete "${targetMember.name}"? This cannot be undone.`;
-    document.getElementById('confirmModal').classList.add('show');
-  }
+          coords[
+            tile.primary.id
+          ] = {
+            x,
+            y,
+            width: nodeWidth,
+            height: nodeHeight,
+            level: lvl,
+            tile
+          };
 
-  function closeConfirmModal() {
-    document.getElementById('confirmModal').classList.remove('show');
-    pendingDeleteId = null;
-  }
+          if (tile.spouse) {
 
-  function executeDelete() {
-    if (!pendingDeleteId) return;
-
-    const targetId = pendingDeleteId;
-
-    rawTreeData = rawTreeData.filter(m => String(m.id).trim() !== targetId);
-
-    rawTreeData.forEach(m => {
-      if (String(m.spouseId).trim() === targetId) m.spouseId = "";
-    });
-
-    navHistory = navHistory.filter(navId => String(navId).trim() !== targetId);
-
-    if (navHistory.length === 0 && rawTreeData.length > 0) {
-      const root = rawTreeData.find(m => String(m.parentId).toUpperCase() === 'ROOT' || String(m.relType).toLowerCase().includes('root ancestor'));
-      if (root) navHistory.push(root.id);
-      else navHistory.push(rawTreeData[0].id);
-    }
-
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify(rawTreeData)); } catch(e) {}
-
-    closeConfirmModal();
-    populateDropdownOptions();
-    renderActiveView();
-
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ action: 'delete', id: targetId, pin: userPin })
-    }).catch(err => console.error('Delete request failed:', err));
-  }
-
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    if (!isAdminUnlocked) return;
-
-    const contactInput = document.getElementById('contactNumber').value.trim();
-    if (contactInput && !validatePhoneUI(contactInput)) return;
-
-    const action = document.getElementById('modalAction').value;
-    const newName = document.getElementById('fullName').value.trim();
-    const status = document.getElementById('statusCategory').value;
-    const location = document.getElementById('locationField').value.trim();
-    const profession = document.getElementById('professionField').value.trim();
-    const gender = document.getElementById('genderField').value;
-    const ageVal = document.getElementById('ageField').value.trim();
-    const ageDisplay = ageVal ? (status.includes('Deceased') ? `Lived ${ageVal} years` : `${ageVal} years`) : "";
-    
-    const targetId = document.getElementById('targetId').value;
-    const relType = document.getElementById('relTypeDisplay').value;
-    const editId = document.getElementById('editNodeId').value;
-    const linkedExistingId = document.getElementById('linkedExistingMemberId').value;
-
-    let payload = { pin: userPin };
-
-    if (action === 'edit') {
-      const member = rawTreeData.find(m => String(m.id).trim() === String(editId).trim());
-      if (member) {
-        member.name = newName;
-        member.status = status;
-        if (contactInput) member.contact = "HAS_CONTACT";
-        member.location = location;
-        member.profession = profession;
-        member.gender = gender;
-        member.dob = ageDisplay;
-      }
-      payload = { action: 'edit', id: editId, name: newName, status: status, contact: contactInput || "HAS_CONTACT", location: location, profession: profession, gender: gender, dob: ageDisplay, pin: userPin };
-    } else {
-      if (linkedExistingId) {
-        const spouseA = rawTreeData.find(m => String(m.id).trim() === String(targetId).trim());
-        const spouseB = rawTreeData.find(m => String(m.id).trim() === String(linkedExistingId).trim());
-
-        if (spouseA) spouseA.spouseId = linkedExistingId;
-        if (spouseB) spouseB.spouseId = targetId;
-
-        payload = {
-          action: 'add',
-          isInterFamilyMarriage: true,
-          parentId: targetId,
-          linkedSpouseId: linkedExistingId,
-          pin: userPin
-        };
-      } else {
-        const newId = 'ID_' + new Date().getTime();
-        let newSpouseId = "";
-
-        if (relType === 'Spouse') {
-          const parentPartner = rawTreeData.find(m => String(m.id).trim() === String(targetId).trim());
-          if (parentPartner) {
-            parentPartner.spouseId = newId;
-            newSpouseId = parentPartner.id;
+            coords[
+              tile.spouse.id
+            ] =
+              coords[
+                tile.primary.id
+              ];
           }
         }
-
-        const newMember = { 
-          id: newId, 
-          name: newName, 
-          parentId: targetId, 
-          relType: relType, 
-          status: status, 
-          contact: contactInput ? "HAS_CONTACT" : "", 
-          location: location, 
-          profession: profession, 
-          spouseId: newSpouseId, 
-          gender: gender, 
-          dob: ageDisplay
-        };
-
-        rawTreeData.push(newMember);
-
-        payload = { action: 'add', id: newId, name: newName, parentId: targetId, relType: relType, status: status, contact: contactInput, location: location, profession: profession, spouseId: newSpouseId, gender: gender, dob: ageDisplay, pin: userPin };
-      }
+      );
     }
+  );
 
-    try { localStorage.setItem(CACHE_KEY, JSON.stringify(rawTreeData)); } catch(e) {}
-    closeModal();
-    populateDropdownOptions();
-    renderActiveView();
+  rawTreeData.forEach(m => {
 
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    });
+    if (
+      m.parentId &&
+      coords[m.parentId] &&
+      coords[m.id] &&
+      coords[m.parentId] !==
+        coords[m.id]
+    ) {
+
+      const parentPos =
+        coords[m.parentId];
+
+      const childPos =
+        coords[m.id];
+
+      const x1 =
+        parentPos.x +
+        nodeWidth;
+
+      const y1 =
+        parentPos.y +
+        nodeHeight / 2;
+
+      const x2 =
+        childPos.x;
+
+      const y2 =
+        childPos.y +
+        nodeHeight / 2;
+
+      const pathD =
+        `M ${x1} ${y1}
+         C ${(x1 + x2) / 2} ${y1},
+           ${(x1 + x2) / 2} ${y2},
+           ${x2} ${y2}`;
+
+      svgContent +=
+        `<path d="${pathD}" class="svg-line"/>`;
+    }
+  });
+
+  Object.keys(coords).forEach(
+    id => {
+
+      const pos =
+        coords[id];
+
+      const tile =
+        pos.tile;
+
+      if (
+        tile.primary.id !== id
+      ) {
+        return;
+      }
+
+      const isExpanded =
+        expandedNodeIds.has(
+          tile.primary.id
+        ) ||
+        (
+          tile.spouse &&
+          expandedNodeIds.has(
+            tile.spouse.id
+          )
+        );
+
+      const isDeceased =
+        String(
+          tile.primary.status || ''
+        )
+          .toLowerCase()
+          .includes('deceased');
+
+      const statusColor =
+        isDeceased
+          ? '#94a3b8'
+          : '#10b981';
+
+      const levelColor =
+        LEVEL_BORDER_COLORS[
+          pos.level %
+          LEVEL_BORDER_COLORS.length
+        ];
+
+      const avatarData =
+        getAvatarInitialsAndGradient(
+          tile.combinedName
+        );
+
+      const gradId =
+        `grad_${tile.primary.id.replace(
+          /[^a-zA-Z0-9]/g,
+          '_'
+        )}`;
+
+      defsGradients += `
+
+        <linearGradient
+          id="${gradId}"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="100%"
+        >
+
+          <stop
+            offset="0%"
+            stop-color="${avatarData.color1}"
+          />
+
+          <stop
+            offset="100%"
+            stop-color="${avatarData.color2}"
+          />
+
+        </linearGradient>
+      `;
+
+      const directChildren =
+        rawTreeData.filter(c => {
+
+          const cParentId =
+            String(c.parentId)
+              .trim()
+              .toLowerCase();
+
+          const mId =
+            String(tile.primary.id)
+              .trim()
+              .toLowerCase();
+
+          const spouseId =
+            tile.spouse
+              ? String(tile.spouse.id)
+                  .trim()
+                  .toLowerCase()
+              : null;
+
+          const isSpouse =
+            isSpouseRelation(
+              tile.primary,
+              c
+            );
+
+          return (
+            cParentId === mId ||
+            (
+              spouseId &&
+              cParentId === spouseId
+            )
+          ) &&
+          !isSpouse;
+        });
+
+      const hasChildren =
+        directChildren.length > 0;
+
+      const avatarRadius =
+        isCompactCanvas
+          ? 12
+          : 15;
+
+      const avatarCX =
+        pos.x +
+        18 +
+        avatarRadius;
+
+      const avatarCY =
+        pos.y +
+        pos.height / 2;
+
+      svgContent += `
+
+        <g
+          class="svg-node-group"
+          onclick="toggleExpandTile('${tile.primary.id}')"
+        >
+
+          <rect
+            x="${pos.x}"
+            y="${pos.y}"
+            width="${pos.width}"
+            height="${pos.height}"
+            class="svg-node-rect ${isExpanded ? 'is-expanded' : ''}"
+            style="stroke:${isExpanded ? levelColor : 'var(--node-stroke)'};"
+          />
+
+          <path
+            d="M ${pos.x + 4} ${pos.y}
+               A 4 4 0 0 0 ${pos.x} ${pos.y + 4}
+               L ${pos.x} ${pos.y + pos.height - 4}
+               A 4 4 0 0 0 ${pos.x + 4} ${pos.y + pos.height}
+               L ${pos.x + 4} ${pos.y} Z"
+            fill="${statusColor}"
+          />
+
+          <circle
+            cx="${avatarCX}"
+            cy="${avatarCY}"
+            r="${avatarRadius}"
+            fill="url(#${gradId})"
+          />
+
+          <text
+            x="${avatarCX}"
+            y="${avatarCY}"
+            class="svg-avatar-bg"
+          >
+            ${avatarData.initials}
+          </text>
+
+          <text
+            x="${avatarCX + avatarRadius + 10}"
+            y="${pos.y + (isCompactCanvas ? 26 : 28)}"
+            class="svg-text-name"
+          >
+            ${
+              tile.combinedName.length >
+              (isCompactCanvas ? 16 : 22)
+                ? tile.combinedName.substring(
+                    0,
+                    isCompactCanvas ? 14 : 20
+                  ) + '..'
+                : tile.combinedName
+            }
+          </text>
+
+          ${
+            !isCompactCanvas
+              ? `
+                <text
+                  x="${avatarCX + avatarRadius + 10}"
+                  y="${pos.y + 44}"
+                  class="svg-text-sub"
+                >
+                  ${
+                    tile.primary.dob
+                      ? (
+                          tile.primary.dob.includes('Lived')
+                            ? tile.primary.dob
+                            : tile.primary.dob + ' yrs'
+                        )
+                      : (
+                          tile.primary.location ||
+                          tile.primary.status
+                        )
+                  }
+                </text>
+              `
+              : ''
+          }
+
+          ${
+            hasChildren
+              ? `
+                <g
+                  transform="translate(
+                    ${pos.x + pos.width - 24},
+                    ${pos.y + (isCompactCanvas ? 12 : 18)}
+                  )"
+                >
+
+                  <rect
+                    x="-2"
+                    y="-10"
+                    width="22"
+                    height="18"
+                    rx="9"
+                    ry="9"
+                    fill="${levelColor}"
+                    opacity="0.18"
+                  />
+
+                  <text
+                    x="9"
+                    y="2"
+                    font-size="10"
+                    font-weight="800"
+                    fill="${levelColor}"
+                    text-anchor="middle"
+                  >
+                    ${isExpanded ? '−' : directChildren.length}
+                  </text>
+
+                </g>
+              `
+              : ''
+          }
+
+        </g>
+      `;
+    }
+  );
+
+  defsGradients += `</defs>`;
+
+  svgGroup.innerHTML =
+    defsGradients +
+    svgContent;
+
+  updateCanvasTransform();
+}
+
+
+function toggleExpandTile(id) {
+
+  if (
+    expandedNodeIds.has(id)
+  ) {
+
+    expandedNodeIds.delete(id);
+
+  } else {
+
+    expandedNodeIds.add(id);
   }
 
-  loadDirectoryScript();
+  renderSvgTreeCanvas();
+}
+
+
+function updateCanvasTransform() {
+
+  const svgGroup =
+    document.getElementById(
+      'svgGroup'
+    );
+
+  const container =
+    document.getElementById(
+      'canvasContainer'
+    );
+
+  const centerY =
+    container.clientHeight / 2;
+
+  svgGroup.setAttribute(
+    'transform',
+    `translate(
+      ${translateX + 30},
+      ${centerY + translateY}
+    ) scale(${scale})`
+  );
+}
+
+
+function zoomCanvas(factor) {
+
+  scale *= factor;
+
+  updateCanvasTransform();
+}
+
+
+function resetCanvasTransform() {
+
+  scale = 1;
+  translateX = 0;
+  translateY = 0;
+
+  updateCanvasTransform();
+}
+
+
+const canvasContainer =
+  document.getElementById(
+    'canvasContainer'
+  );
+
+canvasContainer.addEventListener(
+  'pointerdown',
+  e => {
+
+    isDragging = true;
+
+    startX =
+      e.clientX -
+      translateX;
+
+    startY =
+      e.clientY -
+      translateY;
+  }
+);
+
+window.addEventListener(
+  'pointermove',
+  e => {
+
+    if (!isDragging) return;
+
+    translateX =
+      e.clientX -
+      startX;
+
+    translateY =
+      e.clientY -
+      startY;
+
+    updateCanvasTransform();
+  }
+);
+
+window.addEventListener(
+  'pointerup',
+  () => {
+    isDragging = false;
+  }
+);
+
+
+/* ============================================================
+   DUPLICATE CHECK
+   ============================================================ */
+
+function checkForDuplicateName(val) {
+
+  const cleanName =
+    val
+      .trim()
+      .toLowerCase();
+
+  const promptBox =
+    document.getElementById(
+      'duplicatePrompt'
+    );
+
+  const action =
+    document.getElementById(
+      'modalAction'
+    ).value;
+
+  if (
+    action === 'edit' ||
+    cleanName.length < 3
+  ) {
+
+    promptBox.style.display =
+      'none';
+
+    matchedDuplicateMember =
+      null;
+
+    return;
+  }
+
+  const match =
+    rawTreeData.find(
+      m =>
+        m.name
+          .toLowerCase() ===
+        cleanName
+    );
+
+  if (match) {
+
+    matchedDuplicateMember =
+      match;
+
+    document.getElementById(
+      'dupPromptMsg'
+    ).innerText =
+      `"${match.name}" already exists in the tree (${match.location || 'No location'}). Link them as an inter-family marriage?`;
+
+    promptBox.style.display =
+      'block';
+
+  } else {
+
+    promptBox.style.display =
+      'none';
+
+    matchedDuplicateMember =
+      null;
+  }
+}
+
+
+function chooseLinkExisting() {
+
+  if (!matchedDuplicateMember) {
+    return;
+  }
+
+  document.getElementById(
+    'linkedExistingMemberId'
+  ).value =
+    matchedDuplicateMember.id;
+
+  document.getElementById(
+    'duplicatePrompt'
+  ).style.display =
+    'none';
+
+  document.getElementById(
+    'statusCategory'
+  ).value =
+    matchedDuplicateMember.status ||
+    'Living';
+
+  document.getElementById(
+    'locationField'
+  ).value =
+    matchedDuplicateMember.location ||
+    '';
+
+  document.getElementById(
+    'professionField'
+  ).value =
+    matchedDuplicateMember.profession ||
+    '';
+
+  document.getElementById(
+    'genderField'
+  ).value =
+    matchedDuplicateMember.gender ||
+    '';
+
+  document.getElementById(
+    'ageField'
+  ).value =
+    (
+      matchedDuplicateMember.dob ||
+      ''
+    ).replace(
+      /[^0-9]/g,
+      ''
+    );
+}
+
+
+function chooseCreateNewDuplicate() {
+
+  document.getElementById(
+    'linkedExistingMemberId'
+  ).value = '';
+
+  document.getElementById(
+    'duplicatePrompt'
+  ).style.display =
+    'none';
+}
+
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+
+function getGenderIcon(gender) {
+
+  const g =
+    String(gender || '')
+      .toLowerCase();
+
+  if (g === 'male') {
+    return '👨';
+  }
+
+  if (g === 'female') {
+    return '👩';
+  }
+
+  return '';
+}
+
+
+function getStatusBadge(status) {
+
+  const s =
+    String(status || '')
+      .toLowerCase();
+
+  if (
+    s.includes('deceased')
+  ) {
+
+    return `
+      <span class="status-badge badge-deceased">
+        🕊️ Deceased
+      </span>
+    `;
+  }
+
+  return `
+    <span class="status-badge badge-living">
+      🟢 Living
+    </span>
+  `;
+}
+
+
+/* ============================================================
+   STATISTICS
+   ============================================================ */
+
+function updateStats() {
+
+  const container =
+    document.getElementById(
+      'statsContainer'
+    );
+
+  if (
+    !rawTreeData ||
+    rawTreeData.length === 0
+  ) {
+
+    container.innerHTML = '';
+    return;
+  }
+
+  const total =
+    rawTreeData.length;
+
+  let deceasedCount = 0;
+
+  rawTreeData.forEach(
+    member => {
+
+      if (
+        String(member.status || '')
+          .toLowerCase()
+          .includes('deceased')
+      ) {
+        deceasedCount++;
+      }
+    }
+  );
+
+  container.innerHTML = `
+
+    <div class="stat-badge">
+      👥 Total Members
+      <span class="count">
+        ${total}
+      </span>
+    </div>
+
+    <div class="stat-badge">
+      🟢 Living
+      <span class="count">
+        ${total - deceasedCount}
+      </span>
+    </div>
+
+    <div class="stat-badge">
+      🕊️ Deceased
+      <span class="count">
+        ${deceasedCount}
+      </span>
+    </div>
+
+  `;
+}
+
+
+/* ============================================================
+   ADMIN PIN
+   ============================================================ */
+
+function triggerPinModal() {
+
+  if (lockoutTimer) {
+
+    alert(
+      "Too many failed attempts. Please try again later."
+    );
+
+    return;
+  }
+
+  if (!isAdminUnlocked) {
+
+    document.getElementById(
+      'pinInput'
+    ).value = '';
+
+    document.getElementById(
+      'pinError'
+    ).style.display =
+      'none';
+
+    document.getElementById(
+      'pinModal'
+    ).classList.add(
+      'show'
+    );
+
+    setTimeout(
+      () =>
+        document.getElementById(
+          'pinInput'
+        ).focus(),
+      100
+    );
+
+  } else {
+
+    isAdminUnlocked =
+      false;
+
+    userPin = "";
+
+    updateAdminButtonUI();
+
+    renderActiveView();
+  }
+}
+
+
+function closePinModal() {
+
+  document.getElementById(
+    'pinModal'
+  ).classList.remove(
+    'show'
+  );
+}
+
+
+function handlePinKeyPress(e) {
+
+  if (e.key === "Enter") {
+
+    e.preventDefault();
+
+    submitPin();
+  }
+}
+
+
+function submitPin() {
+
+  const inputVal =
+    document.getElementById(
+      'pinInput'
+    ).value.trim();
+
+  if (!inputVal) return;
+
+  /*
+   * IMPORTANT:
+   * The PIN is sent to Apps Script when
+   * an add/edit/delete request is made.
+   *
+   * The backend must validate it.
+   */
+
+  userPin = inputVal;
+
+  isAdminUnlocked = true;
+
+  closePinModal();
+
+  updateAdminButtonUI();
+
+  renderActiveView();
+}
+
+
+function updateAdminButtonUI() {
+
+  const btn =
+    document.getElementById(
+      'adminToggleBtn'
+    );
+
+  btn.innerHTML =
+    isAdminUnlocked
+      ? "🔓 Unlocked"
+      : "🔒 Unlock";
+
+  btn.classList.toggle(
+    'unlocked',
+    isAdminUnlocked
+  );
+}
+
+
+/* ============================================================
+   ADD MEMBER
+   ============================================================ */
+
+function openAddModal(
+  relationship,
+  overrideTargetId
+) {
+
+  if (!isAdminUnlocked) {
+    return;
+  }
+
+  let targetId =
+    overrideTargetId ||
+    navHistory[
+      navHistory.length - 1
+    ];
+
+  const currentMember =
+    rawTreeData.find(
+      m =>
+        String(m.id).trim() ===
+        String(targetId).trim()
+    );
+
+  if (
+    relationship === 'Child' &&
+    currentMember
+  ) {
+
+    if (
+      String(currentMember.relType)
+        .toLowerCase()
+        .includes('spouse') &&
+      currentMember.parentId &&
+      String(currentMember.parentId)
+        .toUpperCase() !== 'ROOT'
+    ) {
+
+      targetId =
+        currentMember.parentId;
+    }
+  }
+
+  document.getElementById(
+    'modalAction'
+  ).value = 'add';
+
+  document.getElementById(
+    'targetId'
+  ).value = targetId;
+
+  document.getElementById(
+    'editNodeId'
+  ).value = '';
+
+  document.getElementById(
+    'linkedExistingMemberId'
+  ).value = '';
+
+  document.getElementById(
+    'fullName'
+  ).value = '';
+
+  document.getElementById(
+    'contactNumber'
+  ).value = '';
+
+  document.getElementById(
+    'phoneError'
+  ).style.display =
+    'none';
+
+  document.getElementById(
+    'locationField'
+  ).value = '';
+
+  document.getElementById(
+    'professionField'
+  ).value = '';
+
+  document.getElementById(
+    'genderField'
+  ).value = '';
+
+  document.getElementById(
+    'ageField'
+  ).value = '';
+
+  document.getElementById(
+    'statusCategory'
+  ).value = 'Living';
+
+  document.getElementById(
+    'relTypeDisplay'
+  ).value =
+    relationship;
+
+  document.getElementById(
+    'relTypeGroup'
+  ).style.display =
+    'block';
+
+  document.getElementById(
+    'duplicatePrompt'
+  ).style.display =
+    'none';
+
+  document.getElementById(
+    'modalTitle'
+  ).innerText =
+    `Add ${relationship}`;
+
+  document.getElementById(
+    'addModal'
+  ).classList.add(
+    'show'
+  );
+}
+
+
+/* ============================================================
+   EDIT MEMBER
+   ============================================================ */
+
+function openEditModal(id) {
+
+  if (!isAdminUnlocked) {
+    return;
+  }
+
+  const member =
+    rawTreeData.find(
+      m =>
+        String(m.id).trim() ===
+        String(id).trim()
+    );
+
+  if (!member) return;
+
+  document.getElementById(
+    'modalAction'
+  ).value = 'edit';
+
+  document.getElementById(
+    'editNodeId'
+  ).value = id;
+
+  document.getElementById(
+    'linkedExistingMemberId'
+  ).value = '';
+
+  document.getElementById(
+    'fullName'
+  ).value =
+    member.name;
+
+  document.getElementById(
+    'contactNumber'
+  ).value = '';
+
+  document.getElementById(
+    'phoneError'
+  ).style.display =
+    'none';
+
+  document.getElementById(
+    'locationField'
+  ).value =
+    member.location || '';
+
+  document.getElementById(
+    'professionField'
+  ).value =
+    member.profession || '';
+
+  document.getElementById(
+    'genderField'
+  ).value =
+    member.gender || '';
+
+  document.getElementById(
+    'ageField'
+  ).value =
+    (
+      member.dob || ''
+    ).replace(
+      /[^0-9]/g,
+      ''
+    );
+
+  document.getElementById(
+    'statusCategory'
+  ).value =
+    member.status ||
+    'Living';
+
+  document.getElementById(
+    'relTypeGroup'
+  ).style.display =
+    'none';
+
+  document.getElementById(
+    'duplicatePrompt'
+  ).style.display =
+    'none';
+
+  document.getElementById(
+    'modalTitle'
+  ).innerText =
+    'Edit Profile';
+
+  document.getElementById(
+    'addModal'
+  ).classList.add(
+    'show'
+  );
+}
+
+
+function closeModal() {
+
+  document.getElementById(
+    'addModal'
+  ).classList.remove(
+    'show'
+  );
+
+  setTimeout(
+    () =>
+      document
+        .getElementById(
+          'familyForm'
+        )
+        .reset(),
+    300
+  );
+}
+
+
+/* ============================================================
+   DELETE
+   ============================================================ */
+
+function deleteMember(id) {
+
+  if (!isAdminUnlocked) {
+    return;
+  }
+
+  const targetId =
+    String(id).trim();
+
+  const targetMember =
+    rawTreeData.find(
+      m =>
+        String(m.id).trim() ===
+        targetId
+    );
+
+  if (!targetMember) {
+    return;
+  }
+
+  pendingDeleteId =
+    targetId;
+
+  document.getElementById(
+    'confirmMessage'
+  ).innerText =
+    `Are you sure you want to delete "${targetMember.name}"? This cannot be undone.`;
+
+  document.getElementById(
+    'confirmModal'
+  ).classList.add(
+    'show'
+  );
+}
+
+
+function closeConfirmModal() {
+
+  document.getElementById(
+    'confirmModal'
+  ).classList.remove(
+    'show'
+  );
+
+  pendingDeleteId = null;
+}
+
+
+/* ============================================================
+   DELETE -> APPS SCRIPT
+   ============================================================ */
+
+function executeDelete() {
+
+  if (!pendingDeleteId) {
+    return;
+  }
+
+  const targetId =
+    pendingDeleteId;
+
+  rawTreeData =
+    rawTreeData.filter(
+      m =>
+        String(m.id).trim() !==
+        targetId
+    );
+
+  rawTreeData.forEach(
+    m => {
+
+      if (
+        String(m.spouseId).trim() ===
+        targetId
+      ) {
+        m.spouseId = "";
+      }
+    }
+  );
+
+  navHistory =
+    navHistory.filter(
+      navId =>
+        String(navId).trim() !==
+        targetId
+    );
+
+  if (
+    navHistory.length === 0 &&
+    rawTreeData.length > 0
+  ) {
+
+    const root =
+      rawTreeData.find(
+        m =>
+          String(m.parentId)
+            .toUpperCase() ===
+            'ROOT' ||
+          String(m.relType)
+            .toLowerCase()
+            .includes('root ancestor')
+      );
+
+    if (root) {
+      navHistory.push(root.id);
+    } else {
+      navHistory.push(
+        rawTreeData[0].id
+      );
+    }
+  }
+
+  try {
+
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify(
+        rawTreeData
+      )
+    );
+
+  } catch(e) {}
+
+  closeConfirmModal();
+
+  populateDropdownOptions();
+
+  renderActiveView();
+
+  sendToAppsScript({
+    action: 'delete',
+    id: targetId,
+    pin: userPin
+  });
+}
+
+
+/* ============================================================
+   SEND DATA TO APPS SCRIPT
+   ============================================================ */
+
+function sendToAppsScript(payload) {
+
+  console.log(
+    "Sending request to Apps Script:",
+    payload.action
+  );
+
+  return fetch(
+    APPS_SCRIPT_URL,
+    {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type':
+          'text/plain;charset=utf-8'
+      },
+      body:
+        JSON.stringify(payload)
+    }
+  )
+  .then(() => {
+
+    console.log(
+      "Request sent to Apps Script."
+    );
+
+  })
+  .catch(error => {
+
+    console.error(
+      "Apps Script request failed:",
+      error
+    );
+  });
+}
+
+
+/* ============================================================
+   ADD / EDIT FORM
+   ============================================================ */
+
+function handleFormSubmit(e) {
+
+  e.preventDefault();
+
+  if (!isAdminUnlocked) {
+    return;
+  }
+
+  const contactInput =
+    document.getElementById(
+      'contactNumber'
+    ).value.trim();
+
+  if (
+    contactInput &&
+    !validatePhoneUI(
+      contactInput
+    )
+  ) {
+    return;
+  }
+
+  const action =
+    document.getElementById(
+      'modalAction'
+    ).value;
+
+  const newName =
+    document.getElementById(
+      'fullName'
+    ).value.trim();
+
+  const status =
+    document.getElementById(
+      'statusCategory'
+    ).value;
+
+  const location =
+    document.getElementById(
+      'locationField'
+    ).value.trim();
+
+  const profession =
+    document.getElementById(
+      'professionField'
+    ).value.trim();
+
+  const gender =
+    document.getElementById(
+      'genderField'
+    ).value;
+
+  const ageVal =
+    document.getElementById(
+      'ageField'
+    ).value.trim();
+
+  const ageDisplay =
+    ageVal
+      ? (
+          status.includes('Deceased')
+            ? `Lived ${ageVal} years`
+            : `${ageVal} years`
+        )
+      : "";
+
+  const targetId =
+    document.getElementById(
+      'targetId'
+    ).value;
+
+  const relType =
+    document.getElementById(
+      'relTypeDisplay'
+    ).value;
+
+  const editId =
+    document.getElementById(
+      'editNodeId'
+    ).value;
+
+  const linkedExistingId =
+    document.getElementById(
+      'linkedExistingMemberId'
+    ).value;
+
+  let payload = {
+    pin: userPin
+  };
+
+
+  /* =========================
+     EDIT
+     ========================= */
+
+  if (action === 'edit') {
+
+    const member =
+      rawTreeData.find(
+        m =>
+          String(m.id).trim() ===
+          String(editId).trim()
+      );
+
+    if (member) {
+
+      member.name =
+        newName;
+
+      member.status =
+        status;
+
+      if (contactInput) {
+        member.contact =
+          "HAS_CONTACT";
+      }
+
+      member.location =
+        location;
+
+      member.profession =
+        profession;
+
+      member.gender =
+        gender;
+
+      member.dob =
+        ageDisplay;
+    }
+
+    payload = {
+
+      action: 'edit',
+
+      id: editId,
+
+      name: newName,
+
+      status: status,
+
+      contact:
+        contactInput ||
+        "HAS_CONTACT",
+
+      location:
+        location,
+
+      profession:
+        profession,
+
+      gender:
+        gender,
+
+      dob:
+        ageDisplay,
+
+      pin:
+        userPin
+    };
+
+
+  /* =========================
+     ADD
+     ========================= */
+
+  } else {
+
+    /* INTER-FAMILY MARRIAGE */
+
+    if (linkedExistingId) {
+
+      const spouseA =
+        rawTreeData.find(
+          m =>
+            String(m.id).trim() ===
+            String(targetId).trim()
+        );
+
+      const spouseB =
+        rawTreeData.find(
+          m =>
+            String(m.id).trim() ===
+            String(linkedExistingId).trim()
+        );
+
+      if (spouseA) {
+        spouseA.spouseId =
+          linkedExistingId;
+      }
+
+      if (spouseB) {
+        spouseB.spouseId =
+          targetId;
+      }
+
+      payload = {
+
+        action: 'add',
+
+        isInterFamilyMarriage:
+          true,
+
+        parentId:
+          targetId,
+
+        linkedSpouseId:
+          linkedExistingId,
+
+        pin:
+          userPin
+      };
+
+
+    /* NEW MEMBER */
+
+    } else {
+
+      const newId =
+        'ID_' +
+        new Date().getTime();
+
+      let newSpouseId = "";
+
+      if (
+        relType === 'Spouse'
+      ) {
+
+        const parentPartner =
+          rawTreeData.find(
+            m =>
+              String(m.id).trim() ===
+              String(targetId).trim()
+          );
+
+        if (parentPartner) {
+
+          parentPartner.spouseId =
+            newId;
+
+          newSpouseId =
+            parentPartner.id;
+        }
+      }
+
+      const newMember = {
+
+        id:
+          newId,
+
+        name:
+          newName,
+
+        parentId:
+          targetId,
+
+        relType:
+          relType,
+
+        status:
+          status,
+
+        contact:
+          contactInput
+            ? "HAS_CONTACT"
+            : "",
+
+        location:
+          location,
+
+        profession:
+          profession,
+
+        spouseId:
+          newSpouseId,
+
+        gender:
+          gender,
+
+        dob:
+          ageDisplay
+      };
+
+      rawTreeData.push(
+        newMember
+      );
+
+      payload = {
+
+        action:
+          'add',
+
+        id:
+          newId,
+
+        name:
+          newName,
+
+        parentId:
+          targetId,
+
+        relType:
+          relType,
+
+        status:
+          status,
+
+        contact:
+          contactInput,
+
+        location:
+          location,
+
+        profession:
+          profession,
+
+        spouseId:
+          newSpouseId,
+
+        gender:
+          gender,
+
+        dob:
+          ageDisplay,
+
+        pin:
+          userPin
+      };
+    }
+  }
+
+
+  /* SAVE LOCAL CACHE */
+
+  try {
+
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify(
+        rawTreeData
+      )
+    );
+
+  } catch(e) {}
+
+
+  /* CLOSE FORM */
+
+  closeModal();
+
+  populateDropdownOptions();
+
+  renderActiveView();
+
+
+  /* SEND TO GOOGLE APPS SCRIPT */
+
+  sendToAppsScript(
+    payload
+  );
+}
+
+
+/* ============================================================
+   START APPLICATION
+   ============================================================ */
+
+loadDirectoryScript();
+
 </script>
 
 </body>
