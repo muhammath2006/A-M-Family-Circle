@@ -1124,7 +1124,7 @@ body {
    ============================================================ */
 
 const APPS_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbztzoRdLOQICgqHpMcL3ISSMYvh1DQS_CfQFM7cj0YAyVY-KJsQGwGJNb--YHQlI7Or1Q/exec';
+  'https://script.google.com/macros/s/AKfycbwcKfCPqh-Us2oBPLDqnLO-3z5YxBj40f6ACzfwQZPK8bfVD8SbxpgV__eKhGsX3qPV/exec';
 
 const CACHE_KEY = 'am_family_circle_v1';
 
@@ -1193,41 +1193,92 @@ function loadDirectoryScript() {
 
   console.log("Connecting to Google Apps Script...");
 
-  fetch(apiUrl(), {
-    method: 'GET',
-    cache: 'no-store'
-  })
-  .then(response => {
+  const callbackName =
+    "__amFamilyCallback_" + Date.now();
 
-    if (!response.ok) {
-      throw new Error(
-        'HTTP error: ' + response.status
-      );
+  let script = null;
+  let finished = false;
+
+  function finishWithCache(message) {
+
+    if (finished) {
+      return;
     }
 
-    return response.json();
-  })
-  .then(data => {
+    finished = true;
 
-    console.log("Google Apps Script connected.");
-    console.log("Backend data:", data);
+    if (window[callbackName]) {
+      try {
+        delete window[callbackName];
+      } catch (error) {
+        window[callbackName] = undefined;
+      }
+    }
 
-    window.handleScriptData(data);
-  })
-  .catch(error => {
+    if (script && script.parentNode) {
+      script.parentNode.removeChild(script);
+    }
 
-    console.error(
-      "Google Apps Script connection failed:",
-      error
-    );
-
+    console.error(message);
     console.log(
       "Using locally cached family data if available."
     );
 
     populateDropdownOptions();
     initializeDirectory();
-  });
+  }
+
+  const timeoutId = setTimeout(function() {
+
+    finishWithCache(
+      "Google Apps Script JSONP request timed out."
+    );
+
+  }, 15000);
+
+  window[callbackName] = function(data) {
+
+    if (finished) {
+      return;
+    }
+
+    clearTimeout(timeoutId);
+    finished = true;
+
+    try {
+      delete window[callbackName];
+    } catch (error) {
+      window[callbackName] = undefined;
+    }
+
+    if (script && script.parentNode) {
+      script.parentNode.removeChild(script);
+    }
+
+    console.log("Google Apps Script connected.");
+    console.log("Backend data:", data);
+
+    window.handleScriptData(data);
+  };
+
+  script = document.createElement("script");
+  script.async = true;
+  script.src =
+    apiUrl() +
+    "&callback=" +
+    encodeURIComponent(callbackName);
+
+  script.onerror = function() {
+
+    clearTimeout(timeoutId);
+
+    finishWithCache(
+      "Google Apps Script JSONP connection failed."
+    );
+
+  };
+
+  document.body.appendChild(script);
 }
 
 
