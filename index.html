@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -24,740 +23,797 @@
       --node-stroke: #cbd5e1;
     }
 
-```
-[data-theme="dark"] {
-  --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
-  --bg-radial-1: rgba(14, 165, 233, 0.15);
-  --bg-radial-2: rgba(168, 85, 247, 0.15);
-  --card-bg: rgba(30, 41, 59, 0.75);
-  --card-border: #334155;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --canvas-bg: #0b1329;
-  --canvas-dot: #1e293b;
-  --node-bg: #1e293b;
-  --node-stroke: #475569;
-}
-
-* {
-  box-sizing: border-box;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--text-main);
-  background-image:
-    radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
-    radial-gradient(circle at 90% 15%, var(--bg-radial-2) 0%, transparent 45%),
-    var(--bg-gradient);
-  background-attachment: fixed;
-  color: var(--text-main);
-  margin: 0;
-  padding: 32px 16px 48px 16px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-}
-
-.app-container {
-  width: 100%;
-  max-width: 580px;
-  margin: 0 auto;
-  padding: 12px 0;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.header h2 {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin: 0 0 6px 0;
-  letter-spacing: -0.02em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.header p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin: 0 0 16px 0;
-}
-
-.admin-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-.btn-theme-toggle,
-.btn-admin,
-.btn-nav-toggle,
-.btn-download {
-  background: var(--card-bg);
-  color: var(--text-main);
-  border: 1.5px solid var(--card-border);
-  padding: 6px 14px;
-  border-radius: 30px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-family: inherit;
-}
-
-.btn-theme-toggle:hover,
-.btn-nav-toggle:hover,
-.btn-download:hover {
-  border-color: #0ea5e9;
-  color: #0ea5e9;
-  transform: translateY(-1px);
-}
-
-.btn-admin {
-  color: #0ea5e9;
-  border-color: #0ea5e9;
-}
-
-.btn-admin.unlocked {
-  background: var(--success-color);
-  border-color: var(--success-color);
-  color: #ffffff;
-}
-
-.stats-bar {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.stat-badge {
-  background: var(--card-bg);
-  padding: 6px 12px;
-  border-radius: 14px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-main);
-  border: 1px solid var(--card-border);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.stat-badge .count {
-  background: rgba(14, 165, 233, 0.15);
-  color: #0ea5e9;
-  padding: 2px 8px;
-  border-radius: 8px;
-  font-weight: 800;
-}
-
-.search-box {
-  width: 100%;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 14px;
-  border: 1px solid var(--card-border);
-  font-size: 0.9rem;
-  font-family: inherit;
-  background: var(--card-bg);
-  color: var(--text-main);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-.dropdown-filters {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.filter-select {
-  flex: 1;
-  min-width: 110px;
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--card-border);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--text-main);
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  outline: none;
-  font-family: inherit;
-  cursor: pointer;
-  text-overflow: ellipsis;
-}
-
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
-}
-
-.badge-living {
-  background: rgba(14, 165, 233, 0.1);
-  color: #0284c7;
-  border: 1px solid rgba(14, 165, 233, 0.2);
-}
-
-.badge-deceased {
-  background: rgba(100, 116, 139, 0.15);
-  color: var(--text-muted);
-  border: 1px solid rgba(100, 116, 139, 0.2);
-}
-
-.badge-family-count {
-  background: rgba(99, 102, 241, 0.12);
-  color: #6366f1;
-  border: 1px solid rgba(99, 102, 241, 0.2);
-  font-weight: 700;
-}
-
-.card-actions {
-  display: none;
-  gap: 6px;
-  margin-top: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.btn-action {
-  background: var(--card-bg);
-  color: var(--text-muted);
-  border: 1px solid var(--card-border);
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
-
-.btn-action:hover {
-  background: #0ea5e9;
-  color: #ffffff;
-  border-color: #0ea5e9;
-}
-
-.btn-delete:hover {
-  background: var(--danger-color) !important;
-  border-color: var(--danger-color) !important;
-  color: #ffffff !important;
-}
-
-.avatar-circle {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.95rem;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  flex-shrink: 0;
-  margin: 0 auto;
-}
-
-.cards-view {
-  display: none;
-}
-
-.cards-view.active {
-  display: block;
-}
-
-.breadcrumb-wrapper {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 10px 14px;
-  margin-bottom: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.breadcrumb-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.crumb {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #0ea5e9;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background 0.2s ease;
-}
-
-.crumb-separator {
-  color: var(--text-muted);
-  font-weight: 700;
-  font-size: 0.8rem;
-}
-
-.crumb.active {
-  color: var(--text-main);
-  cursor: default;
-}
-
-.focus-card-wrapper {
-  background: var(--accent-gradient);
-  padding: 3px;
-  border-radius: 22px;
-  box-shadow: 0 15px 35px -10px rgba(14, 165, 233, 0.3);
-  margin-bottom: 20px;
-}
-
-.focus-card-main {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  border-radius: 19px;
-  padding: 16px;
-  text-align: center;
-}
-
-.focus-header-badge {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.partners-container {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.partner-col {
-  flex: 1;
-  min-width: 220px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 16px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.partner-top-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.partner-col.empty-spouse {
-  border: 2px dashed var(--card-border);
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 160px;
-}
-
-.partner-col .p-name {
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-main);
-  margin: 8px 0 4px 0;
-}
-
-.detail-list {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  text-align: left;
-  width: 100%;
-}
-
-.detail-item {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--card-bg);
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--card-border);
-}
-
-.hidden-check-badge {
-  color: var(--success-color);
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.rel-section {
-  margin-top: 24px;
-  padding-bottom: 12px;
-}
-
-.section-title {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.member-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-}
-
-.member-card:hover {
-  transform: translateY(-3px) scale(1.01);
-  border-color: #0ea5e9;
-  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
-}
-
-.member-info {
-  flex: 1;
-}
-
-.member-info .c-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.member-info .c-sub {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.canvas-view {
-  display: none;
-}
-
-.canvas-view.active {
-  display: block;
-}
-
-.canvas-wrapper {
-  width: 100%;
-  height: 620px;
-  background: var(--canvas-bg);
-  background-image: radial-gradient(var(--canvas-dot) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 2px 12px rgba(0,0,0,0.06);
-  touch-action: none;
-  margin-bottom: 16px;
-  cursor: grab;
-}
-
-.canvas-wrapper:active {
-  cursor: grabbing;
-}
-
-.canvas-controls {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  display: flex;
-  gap: 8px;
-  z-index: 10;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
-
-.btn-zoom {
-  padding: 0 12px;
-  height: 38px;
-  border-radius: 12px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: var(--text-main);
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  font-family: inherit;
-}
-
-.btn-zoom:hover {
-  background: #0ea5e9;
-  border-color: #0ea5e9;
-  color: #ffffff;
-}
-
-.svg-node-group {
-  cursor: pointer;
-}
-
-.svg-node-rect {
-  fill: var(--node-bg);
-  stroke: var(--node-stroke);
-  stroke-width: 1.5px;
-  rx: 14px;
-  ry: 14px;
-  filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.06));
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.svg-node-group:hover .svg-node-rect {
-  stroke: #0ea5e9 !important;
-  stroke-width: 2.5px;
-  filter: drop-shadow(0px 8px 22px rgba(14, 165, 233, 0.3));
-}
-
-.svg-node-rect.is-expanded {
-  stroke: #6366f1;
-  stroke-width: 2px;
-}
-
-.svg-line {
-  stroke: #94a3b8;
-  stroke-width: 2px;
-  fill: none;
-  opacity: 0.6;
-  transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
-}
-
-.svg-node-group:hover ~ .svg-line,
-.svg-node-group:hover .svg-line {
-  stroke: #0ea5e9;
-  stroke-width: 3px;
-  opacity: 1;
-}
-
-.svg-avatar-bg {
-  font-weight: 800;
-  font-size: 11px;
-  fill: #ffffff;
-  text-anchor: middle;
-  dominant-baseline: central;
-}
-
-.svg-text-name {
-  font-size: 12px;
-  font-weight: 800;
-  fill: var(--text-main);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.svg-text-sub {
-  font-size: 10px;
-  font-weight: 600;
-  fill: var(--text-muted);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-}
-
-.search-results-view {
-  display: none;
-}
-
-.search-results-view.active {
-  display: block;
-}
-
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(6px);
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.modal-overlay.show {
-  display: flex;
-  opacity: 1;
-}
-
-.modal-box {
-  background: var(--node-bg);
-  color: var(--text-main);
-  padding: 24px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 420px;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-box h3 {
-  margin: 0 0 16px 0;
-  color: var(--text-main);
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.form-group {
-  margin-bottom: 12px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  background: var(--card-bg);
-  color: var(--text-main);
-  border: 1px solid var(--card-border);
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-family: inherit;
-}
-
-.field-error {
-  color: var(--danger-color);
-  font-size: 0.75rem;
-  display: none;
-  margin-top: 4px;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.btn-submit {
-  flex: 1;
-  background: var(--accent-gradient);
-  color: #ffffff;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn-cancel {
-  background: var(--card-bg);
-  color: var(--text-muted);
-  border: 1px solid var(--card-border);
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.duplicate-prompt {
-  display: none;
-  background: rgba(14, 165, 233, 0.1);
-  border: 1px solid rgba(14, 165, 233, 0.3);
-  border-radius: 12px;
-  padding: 12px;
-  margin-top: 10px;
-  font-size: 0.85rem;
-  color: #0ea5e9;
-}
-
-.image-preview-modal {
-  text-align: center;
-  max-width: 500px;
-}
-
-.image-preview-modal img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin: 12px 0;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-```
-
+    [data-theme="dark"] {
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
+      --bg-radial-1: rgba(14, 165, 233, 0.15);
+      --bg-radial-2: rgba(168, 85, 247, 0.15);
+      --card-bg: rgba(30, 41, 59, 0.75);
+      --card-border: #334155;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --canvas-bg: #0b1329;
+      --canvas-dot: #1e293b;
+      --node-bg: #1e293b;
+      --node-stroke: #475569;
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--text-main);
+      background-image:
+        radial-gradient(circle at 10% 10%, var(--bg-radial-1) 0%, transparent 45%),
+        radial-gradient(circle at 90% 15%, var(--bg-radial-2) 0%, transparent 45%),
+        var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      margin: 0;
+      padding: 32px 16px 48px 16px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 12px 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .header h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.02em;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0 0 16px 0;
+    }
+
+    .admin-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-theme-toggle,
+    .btn-admin,
+    .btn-nav-toggle,
+    .btn-download {
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1.5px solid var(--card-border);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+    }
+
+    .btn-theme-toggle:hover,
+    .btn-nav-toggle:hover,
+    .btn-download:hover {
+      border-color: #0ea5e9;
+      color: #0ea5e9;
+      transform: translateY(-1px);
+    }
+
+    .btn-admin {
+      color: #0ea5e9;
+      border-color: #0ea5e9;
+    }
+
+    .btn-admin.unlocked {
+      background: var(--success-color);
+      border-color: var(--success-color);
+      color: #ffffff;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-badge {
+      background: var(--card-bg);
+      padding: 6px 12px;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stat-badge .count {
+      background: rgba(14, 165, 233, 0.15);
+      color: #0ea5e9;
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    .search-box {
+      width: 100%;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: var(--card-bg);
+      color: var(--text-main);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .dropdown-filters {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      flex: 1;
+      min-width: 110px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      outline: none;
+      font-family: inherit;
+      cursor: pointer;
+      text-overflow: ellipsis;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .badge-living {
+      background: rgba(14, 165, 233, 0.1);
+      color: #0284c7;
+      border: 1px solid rgba(14, 165, 233, 0.2);
+    }
+
+    .badge-deceased {
+      background: rgba(100, 116, 139, 0.15);
+      color: var(--text-muted);
+      border: 1px solid rgba(100, 116, 139, 0.2);
+    }
+
+    .badge-family-count {
+      background: rgba(99, 102, 241, 0.12);
+      color: #6366f1;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      font-weight: 700;
+    }
+
+    .card-actions {
+      display: none;
+      gap: 6px;
+      margin-top: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .btn-action {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-action:hover {
+      background: #0ea5e9;
+      color: #ffffff;
+      border-color: #0ea5e9;
+    }
+
+    .btn-delete:hover {
+      background: var(--danger-color) !important;
+      border-color: var(--danger-color) !important;
+      color: #ffffff !important;
+    }
+
+    .avatar-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      margin: 0 auto;
+    }
+
+    .cards-view {
+      display: none;
+    }
+
+    .cards-view.active {
+      display: block;
+    }
+
+    .breadcrumb-wrapper {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .breadcrumb-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .crumb {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0ea5e9;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+
+    .crumb-separator {
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .crumb.active {
+      color: var(--text-main);
+      cursor: default;
+    }
+
+    .focus-card-wrapper {
+      background: var(--accent-gradient);
+      padding: 3px;
+      border-radius: 22px;
+      box-shadow: 0 15px 35px -10px rgba(14, 165, 233, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .focus-card-main {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 19px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .focus-header-badge {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .partners-container {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .partner-col {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .partner-top-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .partner-col.empty-spouse {
+      border: 2px dashed var(--card-border);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 160px;
+    }
+
+    .partner-col .p-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 8px 0 4px 0;
+    }
+
+    .detail-list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .detail-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    .hidden-check-badge {
+      color: var(--success-color);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .rel-section {
+      margin-top: 24px;
+      padding-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .member-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    .member-card:hover {
+      transform: translateY(-3px) scale(1.01);
+      border-color: #0ea5e9;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.15);
+    }
+
+    .member-info {
+      flex: 1;
+    }
+
+    .member-info .c-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .member-info .c-sub {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .canvas-view {
+      display: none;
+    }
+
+    .canvas-view.active {
+      display: block;
+    }
+
+    .canvas-wrapper {
+      width: 100%;
+      height: 620px;
+      background: var(--canvas-bg);
+      background-image: radial-gradient(var(--canvas-dot) 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 2px 12px rgba(0,0,0,0.06);
+      touch-action: none;
+      margin-bottom: 16px;
+      cursor: grab;
+    }
+
+    .canvas-wrapper:active {
+      cursor: grabbing;
+    }
+
+    .canvas-controls {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn-zoom {
+      padding: 0 12px;
+      height: 38px;
+      border-radius: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-zoom:hover {
+      background: #0ea5e9;
+      border-color: #0ea5e9;
+      color: #ffffff;
+    }
+
+    .svg-node-group {
+      cursor: pointer;
+    }
+
+    .svg-node-rect {
+      fill: var(--node-bg);
+      stroke: var(--node-stroke);
+      stroke-width: 1.5px;
+      rx: 14px;
+      ry: 14px;
+      filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.06));
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .svg-node-group:hover .svg-node-rect {
+      stroke: #0ea5e9 !important;
+      stroke-width: 2.5px;
+      filter: drop-shadow(0px 8px 22px rgba(14, 165, 233, 0.3));
+    }
+
+    .svg-node-rect.is-expanded {
+      stroke: #6366f1;
+      stroke-width: 2px;
+    }
+
+    .svg-line {
+      stroke: #94a3b8;
+      stroke-width: 2px;
+      fill: none;
+      opacity: 0.6;
+      transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+    }
+
+    .svg-node-group:hover ~ .svg-line,
+    .svg-node-group:hover .svg-line {
+      stroke: #0ea5e9;
+      stroke-width: 3px;
+      opacity: 1;
+    }
+
+    .svg-avatar-bg {
+      font-weight: 800;
+      font-size: 11px;
+      fill: #ffffff;
+      text-anchor: middle;
+      dominant-baseline: central;
+    }
+
+    .svg-text-name {
+      font-size: 12px;
+      font-weight: 800;
+      fill: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .svg-text-sub {
+      font-size: 10px;
+      font-weight: 600;
+      fill: var(--text-muted);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .search-results-view {
+      display: none;
+    }
+
+    .search-results-view.active {
+      display: block;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-box {
+      background: var(--node-bg);
+      color: var(--text-main);
+      padding: 24px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 420px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-box h3 {
+      margin: 0 0 16px 0;
+      color: var(--text-main);
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      background: var(--card-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+
+    .field-error {
+      color: var(--danger-color);
+      font-size: 0.75rem;
+      display: none;
+      margin-top: 4px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn-submit {
+      flex: 1;
+      background: var(--accent-gradient);
+      color: #ffffff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-cancel {
+      background: var(--card-bg);
+      color: var(--text-muted);
+      border: 1px solid var(--card-border);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .duplicate-prompt {
+      display: none;
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px solid rgba(14, 165, 233, 0.3);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #0ea5e9;
+    }
+
+    .image-preview-modal {
+      text-align: center;
+      max-width: 500px;
+    }
+
+    .image-preview-modal img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      margin: 12px 0;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .lock-hint {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      border: 1px dashed var(--card-border);
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+    }
+
+    .toast-container {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 92%;
+      max-width: 420px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: var(--node-bg);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      border-left: 4px solid #0ea5e9;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: auto;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.toast-error {
+      border-left-color: var(--danger-color);
+    }
+
+    .toast.toast-success {
+      border-left-color: var(--success-color);
+    }
   </style>
 </head>
 
 <body>
+
+<div id="toastContainer" class="toast-container"></div>
 
 <div class="app-container">
 
@@ -765,50 +821,47 @@ body {
     <h2>💛 A&amp;M Family Circle</h2>
     <p>Mobile Family Directory</p>
 
-```
-<div class="admin-bar">
-  <button class="btn-theme-toggle" onclick="toggleTheme()">
-    <span id="themeIcon">🌙</span> Dark Mode
-  </button>
+    <div class="admin-bar">
+      <button class="btn-theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span> Dark Mode
+      </button>
 
-  <button class="btn-nav-toggle" id="viewToggleBtn" onclick="toggleViewMode()">
-    🌐 Canvas View
-  </button>
+      <button class="btn-nav-toggle" id="viewToggleBtn" onclick="toggleViewMode()">
+        🌐 Canvas View
+      </button>
 
-  <button id="adminToggleBtn" class="btn-admin" onclick="triggerPinModal()">
-    🔒 Unlock
-  </button>
-</div>
+      <button id="adminToggleBtn" class="btn-admin" onclick="triggerPinModal()">
+        🔒 Unlock
+      </button>
+    </div>
 
-<div id="statsContainer" class="stats-bar"></div>
+    <div id="statsContainer" class="stats-bar"></div>
 
-<div class="search-box">
-  <input
-    type="text"
-    id="searchInput"
-    class="search-input"
-    placeholder="🔍 Search member, city, profession, or age..."
-    oninput="handleSearch(this.value)"
-  >
-</div>
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="🔍 Search member, city, profession, or age..."
+        oninput="handleSearch(this.value)"
+      >
+    </div>
 
-<div class="dropdown-filters">
-  <select id="statusFilter" class="filter-select" onchange="handleDropdownFilter()">
-    <option value="ALL">⚪ All Statuses</option>
-    <option value="LIVING">🟢 Living</option>
-    <option value="DECEASED">🕊️ Deceased</option>
-  </select>
+    <div class="dropdown-filters">
+      <select id="statusFilter" class="filter-select" onchange="handleDropdownFilter()">
+        <option value="ALL">⚪ All Statuses</option>
+        <option value="LIVING">🟢 Living</option>
+        <option value="DECEASED">🕊️ Deceased</option>
+      </select>
 
-  <select id="locationFilter" class="filter-select" onchange="handleDropdownFilter()">
-    <option value="ALL">📍 All Locations</option>
-  </select>
+      <select id="locationFilter" class="filter-select" onchange="handleDropdownFilter()">
+        <option value="ALL">📍 All Locations</option>
+      </select>
 
-  <select id="professionFilter" class="filter-select" onchange="handleDropdownFilter()">
-    <option value="ALL">💼 All Professions</option>
-  </select>
-</div>
-```
-
+      <select id="professionFilter" class="filter-select" onchange="handleDropdownFilter()">
+        <option value="ALL">💼 All Professions</option>
+      </select>
+    </div>
   </div>
 
   <div id="searchResultsView" class="search-results-view">
@@ -818,54 +871,48 @@ body {
   <div id="cardsView" class="cards-view active">
     <div class="breadcrumb-wrapper" id="breadcrumbContainer"></div>
 
-```
-<div id="focusContainer"></div>
+    <div id="focusContainer"></div>
 
-<div class="rel-section">
-  <div class="section-title">
-    <span>Children / Next Gen</span>
+    <div class="rel-section">
+      <div class="section-title">
+        <span>Children / Next Gen</span>
 
-    <button
-      id="addChildBtn"
-      class="btn-action"
-      style="display:none; background:#0ea5e9; color:#fff;"
-      onclick="openAddModal('Child')"
-    >
-      + Add Child
-    </button>
-  </div>
+        <button
+          id="addChildBtn"
+          class="btn-action"
+          style="display:none; background:#0ea5e9; color:#fff;"
+          onclick="openAddModal('Child')"
+        >
+          + Add Child
+        </button>
+      </div>
 
-  <div id="childrenContainer"></div>
-</div>
-```
-
+      <div id="childrenContainer"></div>
+    </div>
   </div>
 
   <div id="canvasView" class="canvas-view">
     <div class="canvas-wrapper" id="canvasContainer">
 
-```
-  <div class="canvas-controls">
-    <button class="btn-zoom" onclick="downloadTreeAsImage()">🖼️ Download Image</button>
-    <button class="btn-zoom" id="compactToggleBtn" onclick="toggleCompactCanvas()">🎛️ Compact Mode</button>
-    <button class="btn-zoom" onclick="zoomCanvas(1.2)">+</button>
-    <button class="btn-zoom" onclick="zoomCanvas(0.8)">-</button>
-    <button class="btn-zoom" onclick="resetCanvasTransform()">🎯</button>
-  </div>
+      <div class="canvas-controls">
+        <button class="btn-zoom" onclick="downloadTreeAsImage()">🖼️ Download Image</button>
+        <button class="btn-zoom" id="compactToggleBtn" onclick="toggleCompactCanvas()">🎛️ Compact Mode</button>
+        <button class="btn-zoom" onclick="zoomCanvas(1.2)">+</button>
+        <button class="btn-zoom" onclick="zoomCanvas(0.8)">-</button>
+        <button class="btn-zoom" onclick="resetCanvasTransform()">🎯</button>
+      </div>
 
-  <svg id="svgTree" width="100%" height="100%">
-    <defs>
-      <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#0ea5e9" />
-        <stop offset="100%" stop-color="#6366f1" />
-      </linearGradient>
-    </defs>
+      <svg id="svgTree" width="100%" height="100%">
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#0ea5e9" />
+            <stop offset="100%" stop-color="#6366f1" />
+          </linearGradient>
+        </defs>
 
-    <g id="svgGroup"></g>
-  </svg>
-</div>
-```
-
+        <g id="svgGroup"></g>
+      </svg>
+    </div>
   </div>
 
 </div>
@@ -874,24 +921,21 @@ body {
   <div class="modal-box image-preview-modal">
     <h3>🖼️ Family Tree Ready</h3>
 
-```
-<p style="font-size:0.82rem; color:var(--text-muted); margin:0 0 8px 0;">
-  Press and hold the image below to save it to your photos or files:
-</p>
+    <p style="font-size:0.82rem; color:var(--text-muted); margin:0 0 8px 0;">
+      Press and hold the image below to save it to your photos or files:
+    </p>
 
-<div id="previewImageContainer"></div>
+    <div id="previewImageContainer"></div>
 
-<div class="modal-buttons" style="margin-top:12px;">
-  <button
-    type="button"
-    class="btn-submit"
-    onclick="closeMobilePreviewModal()"
-  >
-    Done
-  </button>
-</div>
-```
-
+    <div class="modal-buttons" style="margin-top:12px;">
+      <button
+        type="button"
+        class="btn-submit"
+        onclick="closeMobilePreviewModal()"
+      >
+        Done
+      </button>
+    </div>
   </div>
 </div>
 
@@ -899,226 +943,217 @@ body {
   <div class="modal-box">
     <h3>🔒 Security Check</h3>
 
-```
-<div class="form-group">
-  <input
-    type="password"
-    id="pinInput"
-    placeholder="Enter PIN"
-    autocomplete="off"
-    onkeypress="handlePinKeyPress(event)"
-  >
+    <div class="form-group">
+      <input
+        type="password"
+        id="pinInput"
+        placeholder="Enter PIN"
+        autocomplete="off"
+        onkeypress="handlePinKeyPress(event)"
+      >
 
-  <div
-    id="pinError"
-    style="color:var(--danger-color); font-size:0.8rem; display:none; margin-top:4px;"
-  >
-    ❌ Incorrect PIN
-  </div>
-</div>
+      <div
+        id="pinError"
+        style="color:var(--danger-color); font-size:0.8rem; display:none; margin-top:4px;"
+      >
+        ❌ Incorrect PIN
+      </div>
+    </div>
 
-<div class="modal-buttons">
-  <button type="button" class="btn-cancel" onclick="closePinModal()">
-    Cancel
-  </button>
+    <div class="modal-buttons">
+      <button type="button" class="btn-cancel" onclick="closePinModal()">
+        Cancel
+      </button>
 
-  <button type="button" class="btn-submit" onclick="submitPin()">
-    Unlock
-  </button>
-</div>
-```
-
+      <button type="button" class="btn-submit" id="pinSubmitBtn" onclick="submitPin()">
+        Unlock
+      </button>
+    </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="confirmModal">
   <div class="modal-box" style="text-align:center;">
 
-```
-<h3 id="confirmTitle">Delete Profile?</h3>
+    <h3 id="confirmTitle">Delete Profile?</h3>
 
-<p
-  id="confirmMessage"
-  style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;"
-></p>
+    <p
+      id="confirmMessage"
+      style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;"
+    ></p>
 
-<div class="modal-buttons">
-  <button type="button" class="btn-cancel" onclick="closeConfirmModal()">
-    Cancel
-  </button>
+    <div class="modal-buttons">
+      <button type="button" class="btn-cancel" onclick="closeConfirmModal()">
+        Cancel
+      </button>
 
-  <button
-    type="button"
-    class="btn-submit"
-    style="background:var(--danger-color);"
-    onclick="executeDelete()"
-  >
-    Delete
-  </button>
-</div>
-```
-
+      <button
+        type="button"
+        class="btn-submit"
+        id="confirmDeleteBtn"
+        style="background:var(--danger-color);"
+        onclick="executeDelete()"
+      >
+        Delete
+      </button>
+    </div>
   </div>
 </div>
 
 <div class="modal-overlay" id="addModal">
   <div class="modal-box">
 
-```
-<h3 id="modalTitle">Add Family Member</h3>
+    <h3 id="modalTitle">Add Family Member</h3>
 
-<form id="familyForm" onsubmit="handleFormSubmit(event)">
+    <form id="familyForm" onsubmit="handleFormSubmit(event)">
 
-  <input type="hidden" id="modalAction">
-  <input type="hidden" id="targetId">
-  <input type="hidden" id="editNodeId">
-  <input type="hidden" id="linkedExistingMemberId" value="">
+      <input type="hidden" id="modalAction">
+      <input type="hidden" id="targetId">
+      <input type="hidden" id="editNodeId">
+      <input type="hidden" id="linkedExistingMemberId" value="">
 
-  <div class="form-group">
-    <label>Full Name *</label>
+      <div class="form-group">
+        <label>Full Name *</label>
 
-    <input
-      type="text"
-      id="fullName"
-      required
-      placeholder="e.g. Ahmed Omer"
-      oninput="checkForDuplicateName(this.value)"
-    >
-  </div>
+        <input
+          type="text"
+          id="fullName"
+          required
+          placeholder="e.g. Ahmed Omer"
+          oninput="checkForDuplicateName(this.value)"
+        >
+      </div>
 
-  <div id="duplicatePrompt" class="duplicate-prompt">
+      <div id="duplicatePrompt" class="duplicate-prompt">
 
-    <div style="font-weight:700; margin-bottom:4px;">
-      Member already exists in directory
-    </div>
+        <div style="font-weight:700; margin-bottom:4px;">
+          Member already exists in directory
+        </div>
 
-    <div id="dupPromptMsg" style="margin-bottom:8px; font-size:0.8rem;"></div>
+        <div id="dupPromptMsg" style="margin-bottom:8px; font-size:0.8rem;"></div>
 
-    <div style="display:flex; gap:6px;">
+        <div style="display:flex; gap:6px;">
 
-      <button
-        type="button"
-        class="btn-action"
-        style="background:#0ea5e9; color:#fff;"
-        onclick="chooseLinkExisting()"
-      >
-        Link Existing Member
-      </button>
+          <button
+            type="button"
+            class="btn-action"
+            style="background:#0ea5e9; color:#fff;"
+            onclick="chooseLinkExisting()"
+          >
+            Link Existing Member
+          </button>
 
-      <button
-        type="button"
-        class="btn-action"
-        onclick="chooseCreateNewDuplicate()"
-      >
-        Create New Person
-      </button>
+          <button
+            type="button"
+            class="btn-action"
+            onclick="chooseCreateNewDuplicate()"
+          >
+            Create New Person
+          </button>
 
-    </div>
-  </div>
+        </div>
+      </div>
 
-  <div class="form-group" id="relTypeGroup" style="margin-top:10px;">
-    <label>Relationship Type</label>
+      <div class="form-group" id="relTypeGroup" style="margin-top:10px;">
+        <label>Relationship Type</label>
 
-    <input
-      type="text"
-      id="relTypeDisplay"
-      readonly
-      style="background:var(--card-bg); color:var(--text-muted);"
-    >
-  </div>
+        <input
+          type="text"
+          id="relTypeDisplay"
+          readonly
+          style="background:var(--card-bg); color:var(--text-muted);"
+        >
+      </div>
 
-  <div class="form-group">
-    <label>Gender *</label>
+      <div class="form-group">
+        <label>Gender *</label>
 
-    <select id="genderField" required>
-      <option value="">Select Gender</option>
-      <option value="Male">👨 Male</option>
-      <option value="Female">👩 Female</option>
-    </select>
-  </div>
+        <select id="genderField" required>
+          <option value="">Select Gender</option>
+          <option value="Male">👨 Male</option>
+          <option value="Female">👩 Female</option>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <label>Status *</label>
+      <div class="form-group">
+        <label>Status *</label>
 
-    <select id="statusCategory">
-      <option value="Living">🟢 Living</option>
-      <option value="Deceased">🕊️ Deceased</option>
-    </select>
-  </div>
+        <select id="statusCategory">
+          <option value="Living">🟢 Living</option>
+          <option value="Deceased">🕊️ Deceased</option>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <label>Age (Years)</label>
+      <div class="form-group">
+        <label>Age (Years)</label>
 
-    <input
-      type="number"
-      id="ageField"
-      placeholder="e.g. 28"
-    >
-  </div>
+        <input
+          type="number"
+          id="ageField"
+          placeholder="e.g. 28"
+        >
+      </div>
 
-  <div class="form-group">
-    <label>Current Location</label>
+      <div class="form-group">
+        <label>Current Location</label>
 
-    <input
-      type="text"
-      id="locationField"
-      placeholder="e.g. Colombo, Sri Lanka"
-    >
-  </div>
+        <input
+          type="text"
+          id="locationField"
+          placeholder="e.g. Colombo, Sri Lanka"
+        >
+      </div>
 
-  <div class="form-group">
-    <label>Profession / Occupation</label>
+      <div class="form-group">
+        <label>Profession / Occupation</label>
 
-    <input
-      type="text"
-      id="professionField"
-      placeholder="e.g. Software Engineer"
-    >
-  </div>
+        <input
+          type="text"
+          id="professionField"
+          placeholder="e.g. Software Engineer"
+        >
+      </div>
 
-  <div class="form-group">
-    <label>Contact Number (Protected/Masked)</label>
+      <div class="form-group">
+        <label>Contact Number (Protected/Masked)</label>
 
-    <input
-      type="tel"
-      id="contactNumber"
-      placeholder="e.g. +94771234567"
-      oninput="validatePhoneUI(this.value)"
-    >
+        <input
+          type="tel"
+          id="contactNumber"
+          placeholder="e.g. +94771234567"
+          oninput="validatePhoneUI(this.value)"
+        >
 
-    <div id="phoneError" class="field-error">
-      ⚠️ Invalid phone format (e.g., +94771234567 or 0771234567)
-    </div>
-  </div>
+        <div id="phoneError" class="field-error">
+          ⚠️ Invalid phone format (e.g., +94771234567 or 0771234567)
+        </div>
+      </div>
 
-  <div class="modal-buttons">
+      <div class="modal-buttons">
 
-    <button
-      type="button"
-      class="btn-cancel"
-      onclick="closeModal()"
-    >
-      Cancel
-    </button>
+        <button
+          type="button"
+          class="btn-cancel"
+          onclick="closeModal()"
+        >
+          Cancel
+        </button>
 
-    <button
-      type="submit"
-      class="btn-submit"
-      id="modalSubmitBtn"
-    >
-      Save Profile
-    </button>
+        <button
+          type="submit"
+          class="btn-submit"
+          id="modalSubmitBtn"
+        >
+          Save Profile
+        </button>
 
-  </div>
+      </div>
 
-</form>
-```
-
+    </form>
   </div>
 </div>
 
 <script>
-
 /* ============================================================
    GOOGLE APPS SCRIPT BACKEND CONNECTION
    ============================================================ */
@@ -1127,9 +1162,11 @@ const APPS_SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbwcKfCPqh-Us2oBPLDqnLO-3z5YxBj40f6ACzfwQZPK8bfVD8SbxpgV__eKhGsX3qPV/exec';
 
 const CACHE_KEY = 'am_family_circle_v1';
+const THEME_KEY = 'am_family_theme';
 
 let userPin = "";
 let lockoutTimer = null;
+let pinFailCount = 0;
 let isAdminUnlocked = false;
 let isCanvasActive = false;
 let isCompactCanvas = false;
@@ -1160,7 +1197,6 @@ const LEVEL_BORDER_COLORS = [
   '#14b8a6'
 ];
 
-
 /* ============================================================
    LOCAL CACHE
    ============================================================ */
@@ -1173,6 +1209,53 @@ try {
   rawTreeData = [];
 }
 
+/* ============================================================
+   THEME (persisted)
+   ============================================================ */
+
+function applyStoredTheme() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem(THEME_KEY);
+  } catch (e) {}
+
+  if (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    saved = 'dark';
+  }
+
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+
+  const icon = document.getElementById('themeIcon');
+  if (icon) {
+    icon.innerText = saved === 'dark' ? '☀️' : '🌙';
+  }
+}
+
+applyStoredTheme();
+
+function toggleTheme() {
+
+  const root = document.documentElement;
+  const currentTheme = root.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  if (newTheme === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+  } else {
+    root.removeAttribute('data-theme');
+  }
+
+  try {
+    localStorage.setItem(THEME_KEY, newTheme);
+  } catch (e) {}
+
+  document.getElementById('themeIcon').innerText =
+    newTheme === 'dark' ? '☀️' : '🌙';
+}
 
 /* ============================================================
    HELPER
@@ -1184,6 +1267,110 @@ function apiUrl() {
     'nocache=' + Date.now();
 }
 
+function randomToken() {
+  return Date.now() + '_' + Math.floor(Math.random() * 1000000);
+}
+
+/* ============================================================
+   TOAST NOTIFICATIONS
+   Google Sites embeds this page inside a sandboxed iframe, and
+   that sandbox frequently blocks window.alert()/confirm() outright
+   - the call just does nothing, with no console error either. So
+   every user-facing message in this app uses this instead.
+   ============================================================ */
+
+function showToast(message, type) {
+
+  const container = document.getElementById('toastContainer');
+  if (!container) {
+    console.log((type || 'info') + ': ' + message);
+    return;
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (type === 'error' ? ' toast-error' : type === 'success' ? ' toast-success' : '');
+  toast.innerText = message;
+
+  container.appendChild(toast);
+
+  requestAnimationFrame(function () {
+    toast.classList.add('show');
+  });
+
+  setTimeout(function () {
+    toast.classList.remove('show');
+    setTimeout(function () {
+      if (toast.parentNode) toast.parentNode.removeChild(toast);
+    }, 300);
+  }, 5000);
+}
+
+/* ============================================================
+   GENERIC JSONP CALL (works for both reads AND writes, since
+   Apps Script + fetch() cannot reliably expose response bodies
+   for cross-origin POST requests).
+   ============================================================ */
+
+function callAppsScriptJSONP(extraParams) {
+
+  return new Promise(function (resolve, reject) {
+
+    const callbackName = "__amFamilyCb_" + randomToken();
+    let script = null;
+    let finished = false;
+
+    function cleanup() {
+      if (window[callbackName]) {
+        try {
+          delete window[callbackName];
+        } catch (e) {
+          window[callbackName] = undefined;
+        }
+      }
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    }
+
+    const timeoutId = setTimeout(function () {
+      if (finished) return;
+      finished = true;
+      cleanup();
+      reject(new Error("Request timed out."));
+    }, 15000);
+
+    window[callbackName] = function (data) {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeoutId);
+      cleanup();
+      resolve(data);
+    };
+
+    const parts = [];
+    Object.keys(extraParams || {}).forEach(function (key) {
+      const val = extraParams[key] === undefined || extraParams[key] === null
+        ? ""
+        : String(extraParams[key]);
+      parts.push(encodeURIComponent(key) + "=" + encodeURIComponent(val));
+    });
+
+    script = document.createElement("script");
+    script.async = true;
+    script.src = apiUrl() + "&" + parts.join("&") +
+      "&callback=" + encodeURIComponent(callbackName);
+
+    script.onerror = function () {
+      if (finished) return;
+      finished = true;
+      clearTimeout(timeoutId);
+      cleanup();
+      reject(new Error("Connection to Google Apps Script failed."));
+    };
+
+    document.body.appendChild(script);
+  });
+}
 
 /* ============================================================
    LOAD DATA FROM GOOGLE APPS SCRIPT
@@ -1193,94 +1380,18 @@ function loadDirectoryScript() {
 
   console.log("Connecting to Google Apps Script...");
 
-  const callbackName =
-    "__amFamilyCallback_" + Date.now();
-
-  let script = null;
-  let finished = false;
-
-  function finishWithCache(message) {
-
-    if (finished) {
-      return;
-    }
-
-    finished = true;
-
-    if (window[callbackName]) {
-      try {
-        delete window[callbackName];
-      } catch (error) {
-        window[callbackName] = undefined;
-      }
-    }
-
-    if (script && script.parentNode) {
-      script.parentNode.removeChild(script);
-    }
-
-    console.error(message);
-    console.log(
-      "Using locally cached family data if available."
-    );
-
-    populateDropdownOptions();
-    initializeDirectory();
-  }
-
-  const timeoutId = setTimeout(function() {
-
-    finishWithCache(
-      "Google Apps Script JSONP request timed out."
-    );
-
-  }, 15000);
-
-  window[callbackName] = function(data) {
-
-    if (finished) {
-      return;
-    }
-
-    clearTimeout(timeoutId);
-    finished = true;
-
-    try {
-      delete window[callbackName];
-    } catch (error) {
-      window[callbackName] = undefined;
-    }
-
-    if (script && script.parentNode) {
-      script.parentNode.removeChild(script);
-    }
-
-    console.log("Google Apps Script connected.");
-    console.log("Backend data:", data);
-
-    window.handleScriptData(data);
-  };
-
-  script = document.createElement("script");
-  script.async = true;
-  script.src =
-    apiUrl() +
-    "&callback=" +
-    encodeURIComponent(callbackName);
-
-  script.onerror = function() {
-
-    clearTimeout(timeoutId);
-
-    finishWithCache(
-      "Google Apps Script JSONP connection failed."
-    );
-
-  };
-
-  document.body.appendChild(script);
+  callAppsScriptJSONP({})
+    .then(function (data) {
+      console.log("Google Apps Script connected.");
+      window.handleScriptData(data);
+    })
+    .catch(function (err) {
+      console.error(err.message);
+      console.log("Using locally cached family data if available.");
+      populateDropdownOptions();
+      initializeDirectory();
+    });
 }
-
 
 /* ============================================================
    RECEIVE DATA
@@ -1324,7 +1435,6 @@ window.handleScriptData = function(data) {
   initializeDirectory();
 };
 
-
 /* ============================================================
    FAMILY DATA HELPERS
    ============================================================ */
@@ -1355,7 +1465,6 @@ function getCombinedTileData(m) {
   };
 }
 
-
 function truncateCanvasText(ctx, text, maxWidth) {
 
   if (ctx.measureText(text).width <= maxWidth) {
@@ -1377,7 +1486,6 @@ function truncateCanvasText(ctx, text, maxWidth) {
   return truncated + '...';
 }
 
-
 /* ============================================================
    DOWNLOAD FAMILY TREE
    ============================================================ */
@@ -1385,7 +1493,7 @@ function truncateCanvasText(ctx, text, maxWidth) {
 function downloadTreeAsImage() {
 
   if (!rawTreeData || rawTreeData.length === 0) {
-    alert("No family tree data to download.");
+    showToast("No family tree data to download.", "error");
     return;
   }
 
@@ -1456,15 +1564,7 @@ function downloadTreeAsImage() {
     );
   }
 
-  const root =
-    rawTreeData.find(
-      m =>
-        String(m.parentId).toUpperCase() === 'ROOT' ||
-        String(m.relType)
-          .toLowerCase()
-          .includes('root ancestor')
-    ) ||
-    rawTreeData[0];
+  const root = findRootMember();
 
   if (root) {
     traverseFullTree(root.id, 0);
@@ -1715,7 +1815,7 @@ function downloadTreeAsImage() {
     canvas.toBlob(function(blob) {
 
       if (!blob) {
-        alert("Image generation failed.");
+        showToast("Image generation failed.", "error");
         return;
       }
 
@@ -1757,50 +1857,17 @@ function downloadTreeAsImage() {
 
   } else {
 
-    alert(
-      "Your browser does not support image exports."
+    showToast(
+      "Your browser does not support image exports.", "error"
     );
   }
 }
-
 
 function closeMobilePreviewModal() {
   document
     .getElementById('mobilePreviewModal')
     .classList.remove('show');
 }
-
-
-/* ============================================================
-   THEME
-   ============================================================ */
-
-function toggleTheme() {
-
-  const body =
-    document.documentElement;
-
-  const currentTheme =
-    body.getAttribute('data-theme');
-
-  const newTheme =
-    currentTheme === 'dark'
-      ? 'light'
-      : 'dark';
-
-  body.setAttribute(
-    'data-theme',
-    newTheme
-  );
-
-  document.getElementById(
-    'themeIcon'
-  ).innerText =
-    newTheme === 'dark'
-      ? '☀️'
-      : '🌙';
-}
-
 
 /* ============================================================
    AVATARS
@@ -1862,7 +1929,6 @@ function generateAvatarHTML(name) {
   `;
 }
 
-
 function getAvatarInitialsAndGradient(name) {
 
   if (!name) name = 'U';
@@ -1913,37 +1979,49 @@ function getAvatarInitialsAndGradient(name) {
   };
 }
 
-
 /* ============================================================
    INITIALIZE DIRECTORY
    ============================================================ */
+
+function findRootMember() {
+
+  if (!rawTreeData || rawTreeData.length === 0) {
+    return null;
+  }
+
+  // Preferred: someone explicitly marked as the root.
+  let root = rawTreeData.find(
+    m =>
+      String(m.parentId).toUpperCase() === 'ROOT' ||
+      String(m.relType).toLowerCase().includes('root ancestor')
+  );
+
+  if (root) return root;
+
+  // Fallback: someone whose ParentID is blank or points at nobody
+  // that actually exists in the sheet (covers trees that were
+  // started by hand without the ROOT convention).
+  root = rawTreeData.find(m => {
+    const pid = String(m.parentId || '').trim().toLowerCase();
+    if (!pid) return true;
+    return !rawTreeData.some(
+      other => String(other.id).trim().toLowerCase() === pid
+    );
+  });
+
+  return root || rawTreeData[0];
+}
 
 function initializeDirectory() {
 
   updateStats();
   populateDropdownOptions();
 
-  if (
-    !rawTreeData ||
-    rawTreeData.length === 0
-  ) {
-    return;
-  }
-
   if (navHistory.length === 0) {
 
-    const root =
-      rawTreeData.find(
-        m =>
-          String(m.parentId)
-            .toUpperCase() === 'ROOT' ||
-          String(m.relType)
-            .toLowerCase()
-            .includes('root ancestor')
-      );
+    const root = findRootMember();
 
     if (root) {
-
       navHistory.push(root.id);
       expandedNodeIds.add(root.id);
     }
@@ -1951,7 +2029,6 @@ function initializeDirectory() {
 
   renderActiveView();
 }
-
 
 /* ============================================================
    VIEW
@@ -1975,7 +2052,6 @@ function toggleViewMode() {
   renderActiveView();
 }
 
-
 function toggleCompactCanvas() {
 
   isCompactCanvas =
@@ -1990,7 +2066,6 @@ function toggleCompactCanvas() {
 
   renderSvgTreeCanvas();
 }
-
 
 /* ============================================================
    FILTERS
@@ -2052,7 +2127,6 @@ function populateDropdownOptions() {
       .join('');
 }
 
-
 function handleDropdownFilter() {
 
   activeStatusFilter =
@@ -2073,7 +2147,6 @@ function handleDropdownFilter() {
   renderActiveView();
 }
 
-
 function handleSearch(q) {
 
   searchQuery =
@@ -2081,7 +2154,6 @@ function handleSearch(q) {
 
   renderActiveView();
 }
-
 
 function isFilterActive() {
 
@@ -2092,7 +2164,6 @@ function isFilterActive() {
     activeProfessionFilter !== 'ALL'
   );
 }
-
 
 function renderActiveView() {
 
@@ -2162,7 +2233,6 @@ function renderActiveView() {
     renderCardsView();
   }
 }
-
 
 /* ============================================================
    RELATIONSHIP FUNCTIONS
@@ -2234,7 +2304,6 @@ function isSpouseRelation(m1, m2) {
     m1IsChildSpouseOfM2
   );
 }
-
 
 function getFamilyCount(memberId) {
 
@@ -2334,7 +2403,6 @@ function getFamilyCount(memberId) {
   return collectBranch(memberId);
 }
 
-
 /* ============================================================
    PHONE
    ============================================================ */
@@ -2350,7 +2418,6 @@ function isValidPhone(phone) {
     phone.trim()
   );
 }
-
 
 function validatePhoneUI(val) {
 
@@ -2377,7 +2444,6 @@ function validatePhoneUI(val) {
     return true;
   }
 }
-
 
 /* ============================================================
    AGE
@@ -2412,7 +2478,6 @@ function renderAgeOrLivedText(member) {
 
   return `⏳ Age: ${val}`;
 }
-
 
 /* ============================================================
    SEARCH
@@ -2537,7 +2602,6 @@ function renderSearchResults() {
     }).join('');
 }
 
-
 function jumpToSearchResult(targetId) {
 
   searchQuery = "";
@@ -2569,7 +2633,6 @@ function jumpToSearchResult(targetId) {
 
   renderActiveView();
 }
-
 
 function buildBreadcrumbTrail(id) {
 
@@ -2607,7 +2670,6 @@ function buildBreadcrumbTrail(id) {
 
   return trail;
 }
-
 
 /* ============================================================
    PROFILE CARDS
@@ -2710,10 +2772,44 @@ function renderPartnerColumn(member) {
   `;
 }
 
+function renderEmptyTreeState() {
+
+  document.getElementById('breadcrumbContainer').innerHTML = '';
+  document.getElementById('childrenContainer').innerHTML = '';
+  document.getElementById('addChildBtn').style.display = 'none';
+
+  document.getElementById('focusContainer').innerHTML = `
+    <div class="focus-card-wrapper">
+      <div class="focus-card-main">
+        <div style="padding:12px 0;">
+          <div style="font-size:1.05rem; font-weight:800; margin-bottom:8px;">
+            👋 Your family tree is empty
+          </div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:16px;">
+            Add the first person to get started. Everyone else gets
+            added as their spouse or child from here.
+          </div>
+          ${
+            isAdminUnlocked
+              ? `<button
+                  class="btn-action"
+                  style="background:#0ea5e9; color:#fff;"
+                  onclick="openAddModal('Root Ancestor','ROOT')"
+                >
+                  + Add First Person
+                </button>`
+              : `<div class="lock-hint">🔒 Tap Unlock above and enter the PIN to add the first person</div>`
+          }
+        </div>
+      </div>
+    </div>
+  `;
+}
 
 function renderCardsView() {
 
   if (navHistory.length === 0) {
+    renderEmptyTreeState();
     return;
   }
 
@@ -2729,7 +2825,10 @@ function renderCardsView() {
         String(focusId).trim()
     );
 
-  if (!member) return;
+  if (!member) {
+    renderEmptyTreeState();
+    return;
+  }
 
   const breadcrumbContainer =
     document.getElementById(
@@ -2800,13 +2899,17 @@ function renderCardsView() {
             No Spouse Linked
           </div>
 
-          <button
-            class="btn-action"
-            style="display:${isAdminUnlocked ? 'inline-block' : 'none'}; background:#ec4899; color:#fff;"
-            onclick="openAddModal('Spouse','${member.id}')"
-          >
-            + Add Spouse
-          </button>
+          ${
+            isAdminUnlocked
+              ? `<button
+                  class="btn-action"
+                  style="background:#ec4899; color:#fff;"
+                  onclick="openAddModal('Spouse','${member.id}')"
+                >
+                  + Add Spouse
+                </button>`
+              : `<div class="lock-hint">🔒 Tap Unlock above and enter the PIN to add a spouse</div>`
+          }
 
         </div>
 
@@ -2902,10 +3005,11 @@ function renderCardsView() {
 
   if (children.length === 0) {
 
-    childrenContainer.innerHTML =
-      `<div style="text-align:center; padding:12px; color:var(--text-muted); font-size:0.8rem;">
-        No children added yet.
-      </div>`;
+    childrenContainer.innerHTML = isAdminUnlocked
+      ? `<div style="text-align:center; padding:12px; color:var(--text-muted); font-size:0.8rem;">
+          No children added yet.
+        </div>`
+      : `<div class="lock-hint">🔒 Tap Unlock above and enter the PIN to add a child</div>`;
 
   } else {
 
@@ -2967,7 +3071,6 @@ function renderCardsView() {
   }
 }
 
-
 function focusOnMember(id) {
 
   navHistory.push(id);
@@ -2980,7 +3083,6 @@ function focusOnMember(id) {
   });
 }
 
-
 function navigateToBreadcrumb(index) {
 
   navHistory =
@@ -2991,7 +3093,6 @@ function navigateToBreadcrumb(index) {
 
   renderActiveView();
 }
-
 
 /* ============================================================
    SVG TREE
@@ -3136,15 +3237,7 @@ function renderSvgTreeCanvas() {
     }
   }
 
-  const root =
-    rawTreeData.find(
-      m =>
-        String(m.parentId)
-          .toUpperCase() === 'ROOT' ||
-        String(m.relType)
-          .toLowerCase()
-          .includes('root ancestor')
-    );
+  const root = findRootMember();
 
   if (root) {
     traverseVisibleTree(
@@ -3522,7 +3615,6 @@ function renderSvgTreeCanvas() {
   updateCanvasTransform();
 }
 
-
 function toggleExpandTile(id) {
 
   if (
@@ -3538,7 +3630,6 @@ function toggleExpandTile(id) {
 
   renderSvgTreeCanvas();
 }
-
 
 function updateCanvasTransform() {
 
@@ -3564,14 +3655,12 @@ function updateCanvasTransform() {
   );
 }
 
-
 function zoomCanvas(factor) {
 
   scale *= factor;
 
   updateCanvasTransform();
 }
-
 
 function resetCanvasTransform() {
 
@@ -3581,7 +3670,6 @@ function resetCanvasTransform() {
 
   updateCanvasTransform();
 }
-
 
 const canvasContainer =
   document.getElementById(
@@ -3628,7 +3716,6 @@ window.addEventListener(
     isDragging = false;
   }
 );
-
 
 /* ============================================================
    DUPLICATE CHECK
@@ -3696,7 +3783,6 @@ function checkForDuplicateName(val) {
   }
 }
 
-
 function chooseLinkExisting() {
 
   if (!matchedDuplicateMember) {
@@ -3749,7 +3835,6 @@ function chooseLinkExisting() {
     );
 }
 
-
 function chooseCreateNewDuplicate() {
 
   document.getElementById(
@@ -3761,7 +3846,6 @@ function chooseCreateNewDuplicate() {
   ).style.display =
     'none';
 }
-
 
 /* ============================================================
    BADGES
@@ -3783,7 +3867,6 @@ function getGenderIcon(gender) {
 
   return '';
 }
-
 
 function getStatusBadge(status) {
 
@@ -3808,7 +3891,6 @@ function getStatusBadge(status) {
     </span>
   `;
 }
-
 
 /* ============================================================
    STATISTICS
@@ -3874,17 +3956,17 @@ function updateStats() {
   `;
 }
 
-
 /* ============================================================
-   ADMIN PIN
+   ADMIN PIN  (now verified against the backend, not just
+   "did the user type something")
    ============================================================ */
 
 function triggerPinModal() {
 
   if (lockoutTimer) {
 
-    alert(
-      "Too many failed attempts. Please try again later."
+    showToast(
+      "Too many failed attempts. Please try again later.", "error"
     );
 
     return;
@@ -3928,7 +4010,6 @@ function triggerPinModal() {
   }
 }
 
-
 function closePinModal() {
 
   document.getElementById(
@@ -3937,7 +4018,6 @@ function closePinModal() {
     'show'
   );
 }
-
 
 function handlePinKeyPress(e) {
 
@@ -3949,35 +4029,68 @@ function handlePinKeyPress(e) {
   }
 }
 
-
 function submitPin() {
 
   const inputVal =
-    document.getElementById(
-      'pinInput'
-    ).value.trim();
+    document.getElementById('pinInput').value.trim();
 
   if (!inputVal) return;
 
-  /*
-   * IMPORTANT:
-   * The PIN is sent to Apps Script when
-   * an add/edit/delete request is made.
-   *
-   * The backend must validate it.
-   */
+  const submitBtn = document.getElementById('pinSubmitBtn');
+  const errorBox = document.getElementById('pinError');
 
-  userPin = inputVal;
+  errorBox.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.innerText = 'Checking...';
 
-  isAdminUnlocked = true;
+  callAppsScriptJSONP({
+    action: 'verifyPin',
+    pin: inputVal
+  })
+  .then(function (result) {
 
-  closePinModal();
+    submitBtn.disabled = false;
+    submitBtn.innerText = 'Unlock';
 
-  updateAdminButtonUI();
+    if (result && result.success) {
 
-  renderActiveView();
+      userPin = inputVal;
+      isAdminUnlocked = true;
+      pinFailCount = 0;
+
+      closePinModal();
+      updateAdminButtonUI();
+      renderActiveView();
+      showToast("Admin unlocked. You can now add, edit and delete members.", "success");
+
+    } else {
+
+      pinFailCount++;
+      errorBox.innerText = '❌ ' + (result && result.error ? result.error : 'Incorrect PIN');
+      errorBox.style.display = 'block';
+
+      if (pinFailCount >= 3) {
+
+        closePinModal();
+
+        lockoutTimer = setTimeout(function () {
+          lockoutTimer = null;
+          pinFailCount = 0;
+        }, 60000);
+
+        showToast("Too many failed attempts. Please wait 60 seconds before trying again.", "error");
+      }
+    }
+  })
+  .catch(function () {
+
+    submitBtn.disabled = false;
+    submitBtn.innerText = 'Unlock';
+
+    errorBox.innerText = '⚠️ Could not reach the server. Check your connection and try again.';
+    errorBox.style.display = 'block';
+  });
 }
-
 
 function updateAdminButtonUI() {
 
@@ -3996,7 +4109,6 @@ function updateAdminButtonUI() {
     isAdminUnlocked
   );
 }
-
 
 /* ============================================================
    ADD MEMBER
@@ -4119,7 +4231,6 @@ function openAddModal(
   );
 }
 
-
 /* ============================================================
    EDIT MEMBER
    ============================================================ */
@@ -4218,7 +4329,6 @@ function openEditModal(id) {
   );
 }
 
-
 function closeModal() {
 
   document.getElementById(
@@ -4237,7 +4347,6 @@ function closeModal() {
     300
   );
 }
-
 
 /* ============================================================
    DELETE
@@ -4278,7 +4387,6 @@ function deleteMember(id) {
   );
 }
 
-
 function closeConfirmModal() {
 
   document.getElementById(
@@ -4290,9 +4398,10 @@ function closeConfirmModal() {
   pendingDeleteId = null;
 }
 
-
 /* ============================================================
    DELETE -> APPS SCRIPT
+   Waits for a real confirmation before touching local state,
+   then re-syncs from the sheet so both sides always match.
    ============================================================ */
 
 function executeDelete() {
@@ -4301,128 +4410,52 @@ function executeDelete() {
     return;
   }
 
-  const targetId =
-    pendingDeleteId;
+  const targetId = pendingDeleteId;
+  const btn = document.getElementById('confirmDeleteBtn');
 
-  rawTreeData =
-    rawTreeData.filter(
-      m =>
-        String(m.id).trim() !==
-        targetId
-    );
+  btn.disabled = true;
+  btn.innerText = 'Deleting...';
 
-  rawTreeData.forEach(
-    m => {
-
-      if (
-        String(m.spouseId).trim() ===
-        targetId
-      ) {
-        m.spouseId = "";
-      }
-    }
-  );
-
-  navHistory =
-    navHistory.filter(
-      navId =>
-        String(navId).trim() !==
-        targetId
-    );
-
-  if (
-    navHistory.length === 0 &&
-    rawTreeData.length > 0
-  ) {
-
-    const root =
-      rawTreeData.find(
-        m =>
-          String(m.parentId)
-            .toUpperCase() ===
-            'ROOT' ||
-          String(m.relType)
-            .toLowerCase()
-            .includes('root ancestor')
-      );
-
-    if (root) {
-      navHistory.push(root.id);
-    } else {
-      navHistory.push(
-        rawTreeData[0].id
-      );
-    }
-  }
-
-  try {
-
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify(
-        rawTreeData
-      )
-    );
-
-  } catch(e) {}
-
-  closeConfirmModal();
-
-  populateDropdownOptions();
-
-  renderActiveView();
-
-  sendToAppsScript({
+  callAppsScriptJSONP({
     action: 'delete',
     id: targetId,
     pin: userPin
-  });
-}
-
-
-/* ============================================================
-   SEND DATA TO APPS SCRIPT
-   ============================================================ */
-
-function sendToAppsScript(payload) {
-
-  console.log(
-    "Sending request to Apps Script:",
-    payload.action
-  );
-
-  return fetch(
-    APPS_SCRIPT_URL,
-    {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type':
-          'text/plain;charset=utf-8'
-      },
-      body:
-        JSON.stringify(payload)
-    }
-  )
-  .then(() => {
-
-    console.log(
-      "Request sent to Apps Script."
-    );
-
   })
-  .catch(error => {
+  .then(function (result) {
 
-    console.error(
-      "Apps Script request failed:",
-      error
+    btn.disabled = false;
+    btn.innerText = 'Delete';
+
+    if (!result || !result.success) {
+      closeConfirmModal();
+      showToast('Could not delete: ' + (result && result.error ? result.error : 'Unknown error.'), 'error');
+      return;
+    }
+
+    navHistory = navHistory.filter(
+      navId => String(navId).trim() !== targetId
     );
+
+    closeConfirmModal();
+    showToast('Member deleted.', 'success');
+
+    // Re-fetch from the sheet so this browser and the sheet
+    // can never drift apart.
+    loadDirectoryScript();
+  })
+  .catch(function (err) {
+
+    btn.disabled = false;
+    btn.innerText = 'Delete';
+    closeConfirmModal();
+    showToast('Could not reach the server: ' + err.message, 'error');
   });
 }
-
 
 /* ============================================================
    ADD / EDIT FORM
+   Same pattern: send first, wait for a real success response,
+   only then refresh from the sheet.
    ============================================================ */
 
 function handleFormSubmit(e) {
@@ -4434,358 +4467,106 @@ function handleFormSubmit(e) {
   }
 
   const contactInput =
-    document.getElementById(
-      'contactNumber'
-    ).value.trim();
+    document.getElementById('contactNumber').value.trim();
 
-  if (
-    contactInput &&
-    !validatePhoneUI(
-      contactInput
-    )
-  ) {
+  if (contactInput && !validatePhoneUI(contactInput)) {
     return;
   }
 
-  const action =
-    document.getElementById(
-      'modalAction'
-    ).value;
-
-  const newName =
-    document.getElementById(
-      'fullName'
-    ).value.trim();
-
-  const status =
-    document.getElementById(
-      'statusCategory'
-    ).value;
-
-  const location =
-    document.getElementById(
-      'locationField'
-    ).value.trim();
-
-  const profession =
-    document.getElementById(
-      'professionField'
-    ).value.trim();
-
-  const gender =
-    document.getElementById(
-      'genderField'
-    ).value;
-
-  const ageVal =
-    document.getElementById(
-      'ageField'
-    ).value.trim();
+  const action = document.getElementById('modalAction').value;
+  const newName = document.getElementById('fullName').value.trim();
+  const status = document.getElementById('statusCategory').value;
+  const location = document.getElementById('locationField').value.trim();
+  const profession = document.getElementById('professionField').value.trim();
+  const gender = document.getElementById('genderField').value;
+  const ageVal = document.getElementById('ageField').value.trim();
 
   const ageDisplay =
     ageVal
-      ? (
-          status.includes('Deceased')
-            ? `Lived ${ageVal} years`
-            : `${ageVal} years`
-        )
+      ? (status.includes('Deceased') ? `Lived ${ageVal} years` : `${ageVal} years`)
       : "";
 
-  const targetId =
-    document.getElementById(
-      'targetId'
-    ).value;
+  const targetId = document.getElementById('targetId').value;
+  const relType = document.getElementById('relTypeDisplay').value;
+  const editId = document.getElementById('editNodeId').value;
+  const linkedExistingId = document.getElementById('linkedExistingMemberId').value;
 
-  const relType =
-    document.getElementById(
-      'relTypeDisplay'
-    ).value;
+  const submitBtn = document.getElementById('modalSubmitBtn');
+  submitBtn.disabled = true;
+  submitBtn.innerText = 'Saving...';
 
-  const editId =
-    document.getElementById(
-      'editNodeId'
-    ).value;
-
-  const linkedExistingId =
-    document.getElementById(
-      'linkedExistingMemberId'
-    ).value;
-
-  let payload = {
-    pin: userPin
-  };
-
-
-  /* =========================
-     EDIT
-     ========================= */
+  let payload;
 
   if (action === 'edit') {
 
-    const member =
-      rawTreeData.find(
-        m =>
-          String(m.id).trim() ===
-          String(editId).trim()
-      );
-
-    if (member) {
-
-      member.name =
-        newName;
-
-      member.status =
-        status;
-
-      if (contactInput) {
-        member.contact =
-          "HAS_CONTACT";
-      }
-
-      member.location =
-        location;
-
-      member.profession =
-        profession;
-
-      member.gender =
-        gender;
-
-      member.dob =
-        ageDisplay;
-    }
-
     payload = {
-
       action: 'edit',
-
       id: editId,
-
       name: newName,
-
       status: status,
-
-      contact:
-        contactInput ||
-        "HAS_CONTACT",
-
-      location:
-        location,
-
-      profession:
-        profession,
-
-      gender:
-        gender,
-
-      dob:
-        ageDisplay,
-
-      pin:
-        userPin
+      contact: contactInput || 'HAS_CONTACT',
+      location: location,
+      profession: profession,
+      gender: gender,
+      dob: ageDisplay,
+      pin: userPin
     };
 
+  } else if (linkedExistingId) {
 
-  /* =========================
-     ADD
-     ========================= */
+    // Inter-family marriage: link two existing people as spouses
+    payload = {
+      action: 'linkSpouse',
+      idA: targetId,
+      idB: linkedExistingId,
+      pin: userPin
+    };
 
   } else {
 
-    /* INTER-FAMILY MARRIAGE */
+    const newId = 'ID_' + randomToken();
 
-    if (linkedExistingId) {
-
-      const spouseA =
-        rawTreeData.find(
-          m =>
-            String(m.id).trim() ===
-            String(targetId).trim()
-        );
-
-      const spouseB =
-        rawTreeData.find(
-          m =>
-            String(m.id).trim() ===
-            String(linkedExistingId).trim()
-        );
-
-      if (spouseA) {
-        spouseA.spouseId =
-          linkedExistingId;
-      }
-
-      if (spouseB) {
-        spouseB.spouseId =
-          targetId;
-      }
-
-      payload = {
-
-        action: 'add',
-
-        isInterFamilyMarriage:
-          true,
-
-        parentId:
-          targetId,
-
-        linkedSpouseId:
-          linkedExistingId,
-
-        pin:
-          userPin
-      };
-
-
-    /* NEW MEMBER */
-
-    } else {
-
-      const newId =
-        'ID_' +
-        new Date().getTime();
-
-      let newSpouseId = "";
-
-      if (
-        relType === 'Spouse'
-      ) {
-
-        const parentPartner =
-          rawTreeData.find(
-            m =>
-              String(m.id).trim() ===
-              String(targetId).trim()
-          );
-
-        if (parentPartner) {
-
-          parentPartner.spouseId =
-            newId;
-
-          newSpouseId =
-            parentPartner.id;
-        }
-      }
-
-      const newMember = {
-
-        id:
-          newId,
-
-        name:
-          newName,
-
-        parentId:
-          targetId,
-
-        relType:
-          relType,
-
-        status:
-          status,
-
-        contact:
-          contactInput
-            ? "HAS_CONTACT"
-            : "",
-
-        location:
-          location,
-
-        profession:
-          profession,
-
-        spouseId:
-          newSpouseId,
-
-        gender:
-          gender,
-
-        dob:
-          ageDisplay
-      };
-
-      rawTreeData.push(
-        newMember
-      );
-
-      payload = {
-
-        action:
-          'add',
-
-        id:
-          newId,
-
-        name:
-          newName,
-
-        parentId:
-          targetId,
-
-        relType:
-          relType,
-
-        status:
-          status,
-
-        contact:
-          contactInput,
-
-        location:
-          location,
-
-        profession:
-          profession,
-
-        spouseId:
-          newSpouseId,
-
-        gender:
-          gender,
-
-        dob:
-          ageDisplay,
-
-        pin:
-          userPin
-      };
-    }
+    payload = {
+      action: 'add',
+      id: newId,
+      name: newName,
+      parentId: targetId,
+      relType: relType,
+      status: status,
+      contact: contactInput,
+      location: location,
+      profession: profession,
+      gender: gender,
+      dob: ageDisplay,
+      pin: userPin
+    };
   }
 
+  callAppsScriptJSONP(payload)
+    .then(function (result) {
 
-  /* SAVE LOCAL CACHE */
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Save Profile';
 
-  try {
+      if (!result || !result.success) {
+        showToast('Could not save: ' + (result && result.error ? result.error : 'Unknown error.'), 'error');
+        return;
+      }
 
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify(
-        rawTreeData
-      )
-    );
+      closeModal();
+      showToast('Saved successfully.', 'success');
 
-  } catch(e) {}
+      // Re-fetch from the sheet so this browser and the sheet
+      // can never drift apart.
+      loadDirectoryScript();
+    })
+    .catch(function (err) {
 
-
-  /* CLOSE FORM */
-
-  closeModal();
-
-  populateDropdownOptions();
-
-  renderActiveView();
-
-
-  /* SEND TO GOOGLE APPS SCRIPT */
-
-  sendToAppsScript(
-    payload
-  );
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Save Profile';
+      showToast('Could not reach the server: ' + err.message, 'error');
+    });
 }
-
 
 /* ============================================================
    START APPLICATION
